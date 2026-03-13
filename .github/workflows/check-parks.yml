@@ -50,6 +50,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add estado_parques.json estadisticas_parques.ndjson
+          git add estado_parques.json
+          git add estadisticas_parques.ndjson 2>/dev/null || true
           git diff --staged --quiet || git commit -m "Update park state $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git push

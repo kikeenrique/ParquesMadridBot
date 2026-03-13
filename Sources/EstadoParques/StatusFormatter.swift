@@ -16,9 +16,15 @@ enum StatusFormatter {
     }
 
     static func formatStatus(current: [String: Int], changes: Set<String>) -> String {
-        let sortedParks = current.keys.sorted()
-        var lines: [String] = []
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .short
+        formatter.locale = Locale(identifier: "es_ES")
+        let dateString = formatter.string(from: Date())
 
+        var lines: [String] = ["Estado de parques de Madrid a fecha \(dateString).", ""]
+
+        let sortedParks = current.keys.sorted()
         for park in sortedParks {
             let code = current[park]!
             let emoji = emojiForCode(code)
