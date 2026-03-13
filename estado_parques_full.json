@@ -1,0 +1,154 @@
+{
+    "displayFieldName": "ZONA_VERDE",
+    "fieldAliases": {
+        "ZONA_VERDE": "Nombre parque",
+        "ALERTA_DESCRIPCION": "Estado",
+        "FECHA_INCIDENCIA": "Fecha incidencia",
+        "HORARIO_INCIDENCIA": "Horario incidencia",
+        "PREVISION_APERTURA": "Previsión reapertura",
+        "OBSERVACIONES": "Observaciones",
+        "OBJECTID": "Id"
+    },
+    "fields": [
+        {
+            "name": "ZONA_VERDE",
+            "type": "esriFieldTypeString",
+            "alias": "Nombre parque",
+            "length": 50
+        },
+        {
+            "name": "ALERTA_DESCRIPCION",
+            "type": "esriFieldTypeSmallInteger",
+            "alias": "Estado"
+        },
+        {
+            "name": "FECHA_INCIDENCIA",
+            "type": "esriFieldTypeString",
+            "alias": "Fecha incidencia",
+            "length": 100
+        },
+        {
+            "name": "HORARIO_INCIDENCIA",
+            "type": "esriFieldTypeString",
+            "alias": "Horario incidencia",
+            "length": 50
+        },
+        {
+            "name": "PREVISION_APERTURA",
+            "type": "esriFieldTypeSmallInteger",
+            "alias": "Previsión reapertura"
+        },
+        {
+            "name": "OBSERVACIONES",
+            "type": "esriFieldTypeString",
+            "alias": "Observaciones",
+            "length": 500
+        },
+        {
+            "name": "OBJECTID",
+            "type": "esriFieldTypeOID",
+            "alias": "Id"
+        }
+    ],
+    "features": [
+        {
+            "attributes": {
+                "ZONA_VERDE": "Jardines del Buen Retiro",
+                "ALERTA_DESCRIPCION": 3,
+                "FECHA_INCIDENCIA": "13/03/2026",
+                "HORARIO_INCIDENCIA": "de 12:00 a 21:00",
+                "PREVISION_APERTURA": null,
+                "OBSERVACIONES": null,
+                "OBJECTID": 1
+            }
+        },
+        {
+            "attributes": {
+                "ZONA_VERDE": "Parque Juan Pablo II",
+                "ALERTA_DESCRIPCION": 3,
+                "FECHA_INCIDENCIA": "13/03/2026",
+                "HORARIO_INCIDENCIA": "de 12:00 a 21:00",
+                "PREVISION_APERTURA": null,
+                "OBSERVACIONES": null,
+                "OBJECTID": 6
+            }
+        },
+        {
+            "attributes": {
+                "ZONA_VERDE": "Parque Quinta de los Molinos",
+                "ALERTA_DESCRIPCION": 3,
+                "FECHA_INCIDENCIA": "13/03/2026",
+                "HORARIO_INCIDENCIA": "de 12:00 a 21:00",
+                "PREVISION_APERTURA": null,
+                "OBSERVACIONES": null,
+                "OBJECTID": 7
+            }
+        },
+        {
+            "attributes": {
+                "ZONA_VERDE": "Parque Quinta de Torre Arias",
+                "ALERTA_DESCRIPCION": 3,
+                "FECHA_INCIDENCIA": "13/03/2026",
+                "HORARIO_INCIDENCIA": "de 12:00 a 21:00",
+                "PREVISION_APERTURA": null,
+                "OBSERVACIONES": null,
+                "OBJECTID": 8
+            }
+        },
+        {
+            "attributes": {
+                "ZONA_VERDE": "Parque Juan Carlos I",
+                "ALERTA_DESCRIPCION": 3,
+                "FECHA_INCIDENCIA": "13/03/2026",
+                "HORARIO_INCIDENCIA": "de 12:00 a 21:00",
+                "PREVISION_APERTURA": null,
+                "OBSERVACIONES": null,
+                "OBJECTID": 9
+            }
+        },
+        {
+            "attributes": {
+                "ZONA_VERDE": "Jardín del Capricho de la Alameda de Osuna",
+                "ALERTA_DESCRIPCION": 3,
+                "FECHA_INCIDENCIA": "13/03/2026",
+                "HORARIO_INCIDENCIA": "de 12:00 a 21:00",
+                "PREVISION_APERTURA": null,
+                "OBSERVACIONES": null,
+                "OBJECTID": 10
+            }
+        },
+        {
+            "attributes": {
+                "ZONA_VERDE": "Rosaleda del Parque del Oeste",
+                "ALERTA_DESCRIPCION": 3,
+                "FECHA_INCIDENCIA": "13/03/2026",
+                "HORARIO_INCIDENCIA": "de 12:00 a 21:00",
+                "PREVISION_APERTURA": null,
+                "OBSERVACIONES": null,
+                "OBJECTID": 11
+            }
+        },
+        {
+            "attributes": {
+                "ZONA_VERDE": "Parque Quinta Fuente del Berro",
+                "ALERTA_DESCRIPCION": 3,
+                "FECHA_INCIDENCIA": "13/03/2026",
+                "HORARIO_INCIDENCIA": "de 12:00 a 21:00",
+                "PREVISION_APERTURA": null,
+                "OBSERVACIONES": null,
+                "OBJECTID": 1212
+            }
+        },
+        {
+            "attributes": {
+                "ZONA_VERDE": "Parque Lineal del Manzanares",
+                "ALERTA_DESCRIPCION": 3,
+                "FECHA_INCIDENCIA": "13/03/2026",
+                "HORARIO_INCIDENCIA": "de 12:00 a 21:00",
+                "PREVISION_APERTURA": null,
+                "OBSERVACIONES": null,
+                "OBJECTID": 1215
+            }
+        }
+    ]
+}

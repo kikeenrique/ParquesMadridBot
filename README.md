@@ -1,5 +1,7 @@
 # Estado Parques Madrid
 
+> **[@ParquesMadridBot@mastodon.social](https://mastodon.social/@ParquesMadridBot)** — Síguenos en Mastodon para recibir actualizaciones del estado de los parques de Madrid.
+
 Bot de Mastodon que comprueba cada 30 minutos el estado de apertura de los parques de Madrid.
 
 Inspirado en [estado-parques-madrid](https://github.com/juanalonso/estado-parques-madrid).

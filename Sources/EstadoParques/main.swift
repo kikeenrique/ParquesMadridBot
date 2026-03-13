@@ -14,7 +14,10 @@ do {
     var changeEvents: [ChangeEvent] = []
     let now = ISO8601DateFormatter().string(from: Date())
 
-    for (park, currentCode) in currentData {
+    let currentState = currentData.mapValues { $0.alertaDescripcion }
+
+    for (park, attrs) in currentData {
+        let currentCode = attrs.alertaDescripcion
         if let previousCode = previousData[park] {
             if previousCode != currentCode {
                 changedParks.insert(park)
@@ -32,11 +35,11 @@ do {
         }
     }
 
-    let statusText = StatusFormatter.formatStatus(current: currentData, changes: changedParks)
+    let statusText = StatusFormatter.formatStatus(current: currentData)
     print(statusText)
 
     if !changedParks.isEmpty {
-        try StateManager.saveState(currentData, to: "estado_parques.json")
+        try StateManager.saveState(currentState, to: "estado_parques.json")
         try StateManager.appendStatistics(changeEvents, to: "estadisticas_parques.ndjson")
 
         if isProduction {
