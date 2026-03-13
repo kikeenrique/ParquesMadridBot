@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: '*/30 * * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
 
 concurrency:
   group: park-check
@@ -14,16 +16,19 @@ permissions:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Swift
-        uses: swift-actions/setup-swift@v2
+      - name: Restore cached binary
+        id: binary-cache
+        uses: actions/cache@v4
         with:
-          swift-version: '5.10'
+          path: .build/release/EstadoParques
+          key: binary-${{ hashFiles('Sources/**', 'Package.swift', 'Package.resolved') }}
 
-      - name: Cache SPM dependencies
+      - name: Restore SPM build cache
+        if: steps.binary-cache.outputs.cache-hit != 'true'
         uses: actions/cache@v4
         with:
           path: .build
@@ -31,6 +36,7 @@ jobs:
           restore-keys: spm-${{ runner.os }}-
 
       - name: Build
+        if: steps.binary-cache.outputs.cache-hit != 'true'
         run: swift build -c release
 
       - name: Run park check
@@ -38,7 +44,7 @@ jobs:
           MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
           PRODUCTION: ${{ vars.PRODUCTION }}
-        run: swift run -c release EstadoParques
+        run: .build/release/EstadoParques
 
       - name: Commit state changes
         run: |

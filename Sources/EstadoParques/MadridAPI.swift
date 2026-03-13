@@ -10,12 +10,12 @@ enum MadridAPI {
         var request = URLRequest(url: url)
         request.timeoutInterval = 10
 
-        let (data, _) = try await URLSession.shared.data(for: request)
+        let (data, _): (Data, URLResponse) = try await URLSession.shared.data(for: request)
         let response = try JSONDecoder().decode(APIResponse.self, from: data)
 
         var parks: [String: Int] = [:]
         for feature in response.features {
-            let name = feature.attributes.zonaVerde.trimmingCharacters(in: .whitespaces)
+            let name = feature.attributes.zonaVerde.trimmingCharacters(in: CharacterSet.whitespaces)
             let code = feature.attributes.alertaDescripcion
             parks[name] = code
         }
