@@ -28,8 +28,8 @@ enum StatusFormatter {
 
         let groups: [AlertGroup] = [
             AlertGroup(emoji: "🟢", header: "Abiertos", showSchedule: false) { $0 < 3 },
-            AlertGroup(emoji: "🟡", header: "Amarilla", showSchedule: false) { $0 == 3 },
-            AlertGroup(emoji: "🟠", header: "Naranja", showSchedule: true) { $0 == 4 },
+            AlertGroup(emoji: "🟡", header: "Alerta amarilla", showSchedule: false) { $0 == 3 },
+            AlertGroup(emoji: "🟠", header: "Alerta naranja", showSchedule: true) { $0 == 4 },
             AlertGroup(emoji: "🔴", header: "Cerrados", showSchedule: true) { $0 >= 5 },
         ]
 
