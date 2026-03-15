@@ -21,10 +21,11 @@ enum StatusFormatter {
 
     static func formatStatus(current: [String: ParkAttributes]) -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .short
-        formatter.locale = Locale(identifier: "es_ES")
-        let dateString = formatter.string(from: Date())
+        formatter.dateFormat = "yyyy-MM-dd"
+        let datePart = formatter.string(from: Date())
+        formatter.dateFormat = "HH:mm"
+        let timePart = formatter.string(from: Date())
+        let dateString = "\(datePart) a las \(timePart)"
 
         let groups: [AlertGroup] = [
             AlertGroup(emoji: "🟢", header: "Abiertos", showSchedule: false) { $0 < 3 },
@@ -32,6 +33,10 @@ enum StatusFormatter {
             AlertGroup(emoji: "🟠", header: "Alerta naranja", showSchedule: true) { $0 == 4 },
             AlertGroup(emoji: "🔴", header: "Cerrados", showSchedule: true) { $0 >= 5 },
         ]
+
+        func shortName(_ name: String) -> String {
+            name.replacingOccurrences(of: "Parque ", with: "")
+        }
 
         var lines: [String] = ["Estado de parques de Madrid a fecha \(dateString)."]
 
@@ -45,13 +50,29 @@ enum StatusFormatter {
             lines.append("")
             lines.append("\(group.emoji) \(group.header):")
 
-            for (name, attrs) in parks {
-                lines.append("· \(name)")
-                if group.showSchedule, let horario = attrs.horarioIncidencia, !horario.isEmpty {
-                    let compact = horario
-                        .replacingOccurrences(of: "de ", with: "")
-                        .replacingOccurrences(of: " a ", with: "-")
-                    lines.append("  ⏰ \(compact)")
+            if group.showSchedule {
+                var bySchedule: [(String, [String])] = []
+                for (name, attrs) in parks {
+                    let schedule = attrs.horarioIncidencia
+                        .map { $0.replacingOccurrences(of: "de ", with: "").replacingOccurrences(of: " a ", with: "-") }
+                        ?? ""
+                    if let idx = bySchedule.firstIndex(where: { $0.0 == schedule }) {
+                        bySchedule[idx].1.append(name)
+                    } else {
+                        bySchedule.append((schedule, [name]))
+                    }
+                }
+                for (schedule, names) in bySchedule {
+                    if !schedule.isEmpty {
+                        lines.append("⏰ \(schedule)")
+                    }
+                    for name in names {
+                        lines.append("· \(shortName(name))")
+                    }
+                }
+            } else {
+                for (name, _) in parks {
+                    lines.append("· \(shortName(name))")
                 }
             }
         }
