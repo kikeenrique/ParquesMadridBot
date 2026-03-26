@@ -120,3 +120,8 @@
 {"detected_at":"2026-03-26T06:45:23Z","from_code":5,"from_open":false,"parque":"Rosaleda del Parque del Oeste","to_code":6,"to_open":false}
 {"detected_at":"2026-03-26T06:45:23Z","from_code":5,"from_open":false,"parque":"Parque Quinta de los Molinos","to_code":6,"to_open":false}
 {"detected_at":"2026-03-26T08:02:50Z","from_code":6,"from_open":false,"parque":"Parque Lineal del Manzanares","to_code":3,"to_open":true}
+{"detected_at":"2026-03-26T09:34:37Z","from_code":6,"from_open":false,"parque":"Jardines del Buen Retiro","to_code":3,"to_open":true}
+{"detected_at":"2026-03-26T09:34:37Z","from_code":6,"from_open":false,"parque":"Parque Quinta Fuente del Berro","to_code":3,"to_open":true}
+{"detected_at":"2026-03-26T09:34:37Z","from_code":6,"from_open":false,"parque":"Jardín del Capricho de la Alameda de Osuna","to_code":3,"to_open":true}
+{"detected_at":"2026-03-26T09:34:37Z","from_code":6,"from_open":false,"parque":"Parque Quinta de los Molinos","to_code":3,"to_open":true}
+{"detected_at":"2026-03-26T09:34:37Z","from_code":6,"from_open":false,"parque":"Parque Quinta de Torre Arias","to_code":3,"to_open":true}
