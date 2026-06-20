@@ -888,3 +888,4 @@
 {"detected_at":"2026-06-19T19:02:11Z","from_code":1,"from_open":true,"parque":"Parque Juan Pablo II","to_code":5,"to_open":false}
 {"detected_at":"2026-06-19T19:02:11Z","from_code":1,"from_open":true,"parque":"Jardines del Buen Retiro","to_code":5,"to_open":false}
 {"detected_at":"2026-06-19T19:02:11Z","from_code":1,"from_open":true,"parque":"Parque Quinta Fuente del Berro","to_code":5,"to_open":false}
+{"detected_at":"2026-06-20T07:51:49Z","from_code":5,"from_open":false,"parque":"Parque Lineal del Manzanares","to_code":1,"to_open":true}
