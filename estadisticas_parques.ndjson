@@ -1124,3 +1124,4 @@
 {"detected_at":"2026-07-08T11:47:09Z","from_code":1,"from_open":true,"parque":"Jardín del Capricho de la Alameda de Osuna","to_code":3,"to_open":true}
 {"detected_at":"2026-07-08T11:47:09Z","from_code":5,"from_open":false,"parque":"Parque Quinta de Torre Arias","to_code":3,"to_open":true}
 {"detected_at":"2026-07-08T11:47:09Z","from_code":5,"from_open":false,"parque":"Parque Quinta Fuente del Berro","to_code":3,"to_open":true}
+{"detected_at":"2026-07-08T14:13:13Z","from_code":1,"from_open":true,"parque":"Rosaleda del Parque del Oeste","to_code":3,"to_open":true}
