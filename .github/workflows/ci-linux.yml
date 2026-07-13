@@ -1,0 +1,32 @@
+name: CI (Linux)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Sources/**'
+      - 'Package.swift'
+      - 'Package.resolved'
+      - '.github/workflows/ci-linux.yml'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: swift:6.1
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Restore SPM build cache
+        uses: actions/cache@v6
+        with:
+          path: .build
+          key: spm-linux-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-linux-
+
+      - name: Build
+        run: swift build -c release
+
+      - name: Smoke run
+        run: .build/release/EstadoParques
