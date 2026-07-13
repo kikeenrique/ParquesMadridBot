@@ -6,8 +6,20 @@ import FoundationNetworking
 let isProduction = ProcessInfo.processInfo.environment["PRODUCTION"]?.lowercased() == "true"
 print("🔍 Iniciando bot. Modo producción: \(isProduction)")
 
+let apiStatusPath = "estado_api.json"
+
 do {
     let currentData = try await MadridAPI.fetchParkAlerts()
+
+    if StateManager.loadAPIDown(from: apiStatusPath) {
+        try StateManager.saveAPIDown(false, to: apiStatusPath)
+        let recoveryText = "✅ El servicio oficial de datos del Ayuntamiento de Madrid vuelve a estar disponible. Se reanuda la publicación del estado de los parques."
+        print(recoveryText)
+        if isProduction {
+            try await MastodonPoster.post(text: recoveryText)
+        }
+    }
+
     let previousData = StateManager.loadPreviousState(from: "estado_parques.json")
 
     var changedParks: Set<String> = []
@@ -47,6 +59,24 @@ do {
         }
     } else {
         print("ℹ️ Sin cambios detectados")
+    }
+} catch let error as MadridAPIError {
+    print("⚠️ \(error)")
+
+    if StateManager.loadAPIDown(from: apiStatusPath) {
+        print("ℹ️ Caída del servicio ya notificada anteriormente")
+    } else {
+        do {
+            try StateManager.saveAPIDown(true, to: apiStatusPath)
+            let outageText = "⚠️ El servicio oficial de datos del Ayuntamiento de Madrid no está disponible temporalmente. No se puede consultar el estado de los parques; se avisará cuando vuelva a funcionar."
+            print(outageText)
+            if isProduction {
+                try await MastodonPoster.post(text: outageText)
+            }
+        } catch {
+            print("❌ Error: \(error)")
+            exit(1)
+        }
     }
 } catch {
     print("❌ Error: \(error)")

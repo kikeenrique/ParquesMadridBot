@@ -6,6 +6,15 @@ struct APIResponse: Codable {
     let features: [Feature]
 }
 
+struct APIErrorResponse: Codable {
+    let error: APIError
+
+    struct APIError: Codable {
+        let code: Int
+        let message: String
+    }
+}
+
 struct Feature: Codable {
     let attributes: ParkAttributes
 }

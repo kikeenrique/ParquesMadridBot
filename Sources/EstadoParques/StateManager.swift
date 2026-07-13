@@ -19,6 +19,24 @@ enum StateManager {
         try data.write(to: URL(fileURLWithPath: path))
     }
 
+    static func loadAPIDown(from path: String) -> Bool {
+        let url = URL(fileURLWithPath: path)
+        guard FileManager.default.fileExists(atPath: path),
+              let data = try? Data(contentsOf: url),
+              let state = try? JSONDecoder().decode([String: Bool].self, from: data)
+        else {
+            return false
+        }
+        return state["down"] ?? false
+    }
+
+    static func saveAPIDown(_ down: Bool, to path: String) throws {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        let data = try encoder.encode(["down": down])
+        try data.write(to: URL(fileURLWithPath: path))
+    }
+
     static func appendStatistics(_ events: [ChangeEvent], to path: String) throws {
         guard !events.isEmpty else { return }
 
