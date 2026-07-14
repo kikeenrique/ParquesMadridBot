@@ -11,13 +11,10 @@ let apiStatusPath = "estado_api.json"
 do {
     let currentData = try await MadridAPI.fetchParkAlerts()
 
-    if StateManager.loadAPIDown(from: apiStatusPath) {
+    let wasAPIDown = StateManager.loadAPIDown(from: apiStatusPath)
+    if wasAPIDown {
         try StateManager.saveAPIDown(false, to: apiStatusPath)
-        let recoveryText = "✅ El servicio oficial de datos del Ayuntamiento de Madrid vuelve a estar disponible. Se reanuda la publicación del estado de los parques."
-        print(recoveryText)
-        if isProduction {
-            try await MastodonPoster.post(text: recoveryText)
-        }
+        print("✅ Servicio oficial recuperado; se publica el estado actual de los parques")
     }
 
     let previousData = StateManager.loadPreviousState(from: "estado_parques.json")
@@ -53,7 +50,9 @@ do {
     if !changedParks.isEmpty {
         try StateManager.saveState(currentState, to: "estado_parques.json")
         try StateManager.appendStatistics(changeEvents, to: "estadisticas_parques.ndjson")
+    }
 
+    if !changedParks.isEmpty || wasAPIDown {
         if isProduction {
             try await MastodonPoster.post(text: statusText)
         }
