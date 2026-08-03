@@ -1381,3 +1381,8 @@
 {"detected_at":"2026-08-03T10:24:15Z","from_code":1,"from_open":true,"parque":"Jardín del Capricho de la Alameda de Osuna","to_code":3,"to_open":true}
 {"detected_at":"2026-08-03T10:24:15Z","from_code":1,"from_open":true,"parque":"Parque Quinta de los Molinos","to_code":3,"to_open":true}
 {"detected_at":"2026-08-03T10:24:15Z","from_code":1,"from_open":true,"parque":"Parque Quinta Fuente del Berro","to_code":3,"to_open":true}
+{"detected_at":"2026-08-03T20:11:38Z","from_code":3,"from_open":true,"parque":"Parque Quinta Fuente del Berro","to_code":1,"to_open":true}
+{"detected_at":"2026-08-03T20:11:38Z","from_code":3,"from_open":true,"parque":"Jardín del Capricho de la Alameda de Osuna","to_code":1,"to_open":true}
+{"detected_at":"2026-08-03T20:11:38Z","from_code":3,"from_open":true,"parque":"Parque Quinta de los Molinos","to_code":1,"to_open":true}
+{"detected_at":"2026-08-03T20:11:38Z","from_code":3,"from_open":true,"parque":"Parque Quinta de Torre Arias","to_code":1,"to_open":true}
+{"detected_at":"2026-08-03T20:11:38Z","from_code":3,"from_open":true,"parque":"Jardines del Buen Retiro","to_code":1,"to_open":true}
