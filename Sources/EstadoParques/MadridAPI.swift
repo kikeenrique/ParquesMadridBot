@@ -21,7 +21,13 @@ enum MadridAPI {
         var request = URLRequest(url: url)
         request.timeoutInterval = 10
 
-        let (data, _): (Data, URLResponse) = try await URLSession.shared.data(for: request)
+        let data: Data
+        do {
+            (data, _) = try await URLSession.shared.data(for: request)
+        } catch {
+            // Timeouts and other network failures mean the service is unreachable
+            throw MadridAPIError.serviceUnavailable(detail: "fallo de red (\(error.localizedDescription))")
+        }
 
         let response: APIResponse
         do {
