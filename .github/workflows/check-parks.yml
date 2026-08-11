@@ -16,7 +16,8 @@ permissions:
 
 jobs:
   check:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
+    container: swift:6.1
     steps:
       - uses: actions/checkout@v7
 
@@ -25,15 +26,15 @@ jobs:
         uses: actions/cache@v6
         with:
           path: .build/release/EstadoParques
-          key: binary-${{ hashFiles('Sources/**', 'Package.swift', 'Package.resolved') }}
+          key: binary-linux-${{ hashFiles('Sources/**', 'Package.swift', 'Package.resolved') }}
 
       - name: Restore SPM build cache
         if: steps.binary-cache.outputs.cache-hit != 'true'
         uses: actions/cache@v6
         with:
           path: .build
-          key: spm-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
-          restore-keys: spm-${{ runner.os }}-
+          key: spm-linux-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-linux-
 
       - name: Build
         if: steps.binary-cache.outputs.cache-hit != 'true'
