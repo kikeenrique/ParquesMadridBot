@@ -1467,3 +1467,10 @@
 {"detected_at":"2026-08-14T16:54:28Z","from_code":1,"from_open":true,"parque":"Parque Juan Pablo II","to_code":4,"to_open":true}
 {"detected_at":"2026-08-14T16:54:28Z","from_code":3,"from_open":true,"parque":"Rosaleda del Parque del Oeste","to_code":5,"to_open":false}
 {"detected_at":"2026-08-14T16:54:28Z","from_code":3,"from_open":true,"parque":"Parque Quinta de los Molinos","to_code":4,"to_open":true}
+{"detected_at":"2026-08-15T07:32:22Z","from_code":4,"from_open":true,"parque":"Parque Juan Carlos I","to_code":1,"to_open":true}
+{"detected_at":"2026-08-15T07:32:22Z","from_code":5,"from_open":false,"parque":"Rosaleda del Parque del Oeste","to_code":3,"to_open":true}
+{"detected_at":"2026-08-15T07:32:22Z","from_code":7,"from_open":false,"parque":"Jardín del Capricho de la Alameda de Osuna","to_code":3,"to_open":true}
+{"detected_at":"2026-08-15T07:32:22Z","from_code":4,"from_open":true,"parque":"Parque Lineal del Manzanares","to_code":1,"to_open":true}
+{"detected_at":"2026-08-15T07:32:22Z","from_code":7,"from_open":false,"parque":"Jardines del Buen Retiro","to_code":3,"to_open":true}
+{"detected_at":"2026-08-15T07:32:22Z","from_code":4,"from_open":true,"parque":"Parque Juan Pablo II","to_code":1,"to_open":true}
+{"detected_at":"2026-08-15T07:32:22Z","from_code":4,"from_open":true,"parque":"Parque Quinta de los Molinos","to_code":7,"to_open":false}
