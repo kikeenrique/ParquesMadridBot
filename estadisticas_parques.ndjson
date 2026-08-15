@@ -1474,3 +1474,6 @@
 {"detected_at":"2026-08-15T07:32:22Z","from_code":7,"from_open":false,"parque":"Jardines del Buen Retiro","to_code":3,"to_open":true}
 {"detected_at":"2026-08-15T07:32:22Z","from_code":4,"from_open":true,"parque":"Parque Juan Pablo II","to_code":1,"to_open":true}
 {"detected_at":"2026-08-15T07:32:22Z","from_code":4,"from_open":true,"parque":"Parque Quinta de los Molinos","to_code":7,"to_open":false}
+{"detected_at":"2026-08-15T08:30:33Z","from_code":7,"from_open":false,"parque":"Parque Quinta de Torre Arias","to_code":3,"to_open":true}
+{"detected_at":"2026-08-15T08:30:33Z","from_code":7,"from_open":false,"parque":"Parque Quinta Fuente del Berro","to_code":3,"to_open":true}
+{"detected_at":"2026-08-15T08:30:33Z","from_code":7,"from_open":false,"parque":"Parque Quinta de los Molinos","to_code":3,"to_open":true}
