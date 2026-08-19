@@ -8,7 +8,7 @@ let package = Package(
         .macOS(.v12)
     ],
     dependencies: [
-        .package(url: "https://github.com/TootSDK/TootSDK.git", from: "0.20.0"),
+        .package(url: "https://github.com/TootSDK/TootSDK.git", from: "23.1.0"),
     ],
     targets: [
         .executableTarget(
