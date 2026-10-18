@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking  // HTTPURLResponse and URLError live here on Linux
+#endif
 import Testing
 import TootSDK
 @testable import EstadoParques
