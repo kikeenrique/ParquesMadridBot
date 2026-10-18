@@ -141,6 +141,19 @@ enum WebsiteGenerator {
         return formatter
     }
 
+    /// Card pictures in website/parks/
+    private static let parkImages: [String: String] = [
+        "Jardines del Buen Retiro": "retiro",
+        "Jardín del Capricho de la Alameda de Osuna": "capricho",
+        "Parque Juan Carlos I": "juan-carlos-i",
+        "Parque Juan Pablo II": "juan-pablo-ii",
+        "Parque Lineal del Manzanares": "lineal-manzanares",
+        "Parque Quinta Fuente del Berro": "fuente-del-berro",
+        "Parque Quinta de Torre Arias": "torre-arias",
+        "Parque Quinta de los Molinos": "quinta-molinos",
+        "Rosaleda del Parque del Oeste": "rosaleda",
+    ]
+
     /// "De 00:00 h a 18:00 h" → "00:00–18:00"
     private static func compactSchedule(_ horario: String) -> String {
         let times = horario.split { !$0.isNumber && $0 != ":" }.filter { $0.contains(":") }
@@ -174,8 +187,11 @@ enum WebsiteGenerator {
                 }
                 let level = levelName(park.endCode)
                 let name = escape(shortName(park.name))
+                let photo = parkImages[park.name].map {
+                    "<img class=\"photo\" src=\"parks/\($0).webp\" alt=\"\" width=\"144\" height=\"125\">"
+                } ?? ""
                 return """
-                <li class="card \(levelClass(park.endCode))">\
+                <li class="card \(levelClass(park.endCode))">\(photo)\
                 <span class="chip \(levelClass(park.endCode))">\(level.prefix(1).uppercased() + level.dropFirst())</span>\
                 <span class="name" title="\(name)">\(name)</span><span class="when">\(escape(schedule))</span></li>
                 """

@@ -136,7 +136,7 @@ header p, .history p { margin: .25rem 0; color: var(--muted); }
 /* Cards: a soft tint of the level, fixed layout so the park name never changes the look */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* pairs: room for a large picture beside the text */
   gap: .75rem;
   margin: 0;
   padding: 0;
@@ -145,9 +145,10 @@ header p, .history p { margin: .25rem 0; color: var(--muted); }
 .card {
   --tone: var(--l1);
   display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
   grid-template-rows: auto calc(2 * 1.3em) auto;
-  align-content: start;
-  gap: .5rem;
+  align-content: center;
+  gap: .5rem 1rem;
   padding: .875rem 1rem 1rem;
   background: color-mix(in srgb, var(--tone) 12%, var(--panel));
   border: 1px solid color-mix(in srgb, var(--tone) 35%, var(--panel));
@@ -156,7 +157,21 @@ header p, .history p { margin: .25rem 0; color: var(--muted); }
 .card.l3 { --tone: var(--l3); }
 .card.l4 { --tone: var(--l4); }
 .card.l5 { --tone: var(--l5); }
+.card > :not(.photo) { grid-column: 2; }
+/* The park's picture: the whole illustrated circle, cut flat at the bottom, transparent around it */
+.card .photo {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  align-self: center;
+  width: 9rem; /* 144px: the ~300px source covers 2x screens */
+  height: auto;
+}
 .card .chip { justify-self: start; background: var(--tone); }
+@media (max-width: 40rem) {
+  .cards { grid-template-columns: minmax(0, 1fr); }
+  .card { grid-template-columns: 7.5rem minmax(0, 1fr); }
+  .card .photo { width: 7.5rem; }
+}
 .card .name {
   display: -webkit-box;
   -webkit-box-orient: vertical;
