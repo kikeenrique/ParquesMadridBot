@@ -167,7 +167,7 @@ enum WebsiteGenerator {
             .map { park -> String in
                 // Every card has the same three lines: status, name, schedule
                 let schedule: String
-                if let horario = park.horario {
+                if let horario = park.horario, park.endCode >= 3 {
                     schedule = compactSchedule(horario)
                 } else {
                     schedule = park.endCode < 3 ? "Sin alertas" : "Horario no indicado"
@@ -198,9 +198,11 @@ enum WebsiteGenerator {
         """
     }
 
+    // Icons defined once and referenced with <use>: the buttons repeat in every day's footer.
+    // Zero-size and out of flow: SVG ignores `hidden`, and an unsized <svg> takes 300×150 px of the page.
     // Mastodon logo from Simple Icons (CC0)
-    private static let mastodonLogo = """
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004\
+    private static let iconSprite = """
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true"><symbol id="i-mastodon" viewBox="0 0 24 24"><path fill="currentColor" d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004\
     C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143\
     c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38\
     .265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041\
@@ -210,12 +212,19 @@ enum WebsiteGenerator {
     m-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663\
     c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12\
     .696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 \
-    1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></svg>
+    1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></symbol>\
+    <symbol id="i-install" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" \
+    stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></g></symbol></svg>
     """
 
-    private static let installIcon = """
-    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" \
-    stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg>
+    private static let actions = """
+    <nav class="actions">
+    <a class="btn mastodon" rel="me" href="https://mastodon.social/@ParquesMadridBot">\
+    <svg aria-hidden="true"><use href="#i-mastodon"/></svg>\
+    <span>Síguenos en Mastodon<small>@ParquesMadridBot@mastodon.social</small></span></a>
+    <button class="btn install" popovertarget="instalar"><svg aria-hidden="true"><use href="#i-install"/></svg>\
+    <span>Instalar como app<small>iPhone, iPad, Mac y Android</small></span></button>
+    </nav>
     """
 
     // The iOS share symbol (square with an up arrow), as Safari draws it
@@ -237,9 +246,9 @@ enum WebsiteGenerator {
         // Day blocks are out of the page flow, so each one carries the footer: only the visible day shows it
         // Repeated per day, but gzip on GitHub Pages makes the copies almost free
         let footer = """
-        <footer><p>Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. \
-        Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>. \
-        <a rel="me" href="https://mastodon.social/@ParquesMadridBot">Mastodon</a></p>
+        <footer>\(actions)
+        <p>Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. \
+        Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>.</p>
         <p class="cookies">🍪 Esta web no usa cookies: ni de las que te rastrean ni de las de chocolate. \
         Lamentamos profundamente no poder interrumpirte con un banner gigante pidiéndote permiso \
         para algo que no vamos a hacer.</p></footer>
@@ -288,16 +297,11 @@ enum WebsiteGenerator {
         <link rel="stylesheet" href="style.css">
         </head>
         <body>
+        \(iconSprite)
         <header>
         <img class="banner" src="parques.webp" alt="" width="1536" height="810">
         <h1>Parques de Madrid</h1>
         <p>Alertas meteorológicas de los parques vigilados por el Ayuntamiento de Madrid.</p>
-        <nav class="actions">
-        <a class="btn mastodon" rel="me" href="https://mastodon.social/@ParquesMadridBot">\(mastodonLogo)\
-        <span>Síguenos en Mastodon<small>@ParquesMadridBot@mastodon.social</small></span></a>
-        <button class="btn install" popovertarget="instalar">\(installIcon)<span>Instalar como app\
-        <small>iPhone, iPad, Mac y Android</small></span></button>
-        </nav>
         </header>
         <div id="instalar" popover>
         <h2>Instálala como app</h2>
@@ -311,7 +315,7 @@ enum WebsiteGenerator {
         </div>
         \(days.last.map { renderNow($0, lastChange: lastChange) } ?? "")
         <section class="history" aria-labelledby="history-title">
-        <h2 id="history-title">Día a día</h2>
+        <h2 id="history-title">Registro histórico</h2>
         <p class="legend"><span><i class="l1"></i>Abierto</span><span><i class="l3"></i>Alerta amarilla</span>\
         <span><i class="l4"></i>Alerta naranja</span><span><i class="l5"></i>Cerrado</span></p>
         <p class="hint">Elige un día en la línea de tiempo.</p>
@@ -343,7 +347,7 @@ enum WebsiteGenerator {
 
             let items = members.map { park -> String in
                 var item = escape(shortName(park.name))
-                if let horario = park.horario, park.endCode >= 4 {
+                if let horario = park.horario, park.endCode >= 3 {
                     item += " <span class=\"horario\">\(escape(compactSchedule(horario)))</span>"
                 }
                 // Codes 1 and 2 both read as "abierto": only list changes a reader can see
