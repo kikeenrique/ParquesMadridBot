@@ -122,10 +122,11 @@ a { color: inherit; }
 
 /* Level swatches */
 i { display: inline-block; width: var(--cell); height: var(--cell); border-radius: 3px; }
-.l1 { background: var(--l1); }
-.l3 { background: var(--l3); }
-.l4 { background: var(--l4); }
-.l5 { background: var(--l5); }
+/* Solid fills only for swatches and chips; cards use a tint (see .card) */
+:is(i, .chip).l1 { background: var(--l1); }
+:is(i, .chip).l3 { background: var(--l3); }
+:is(i, .chip).l4 { background: var(--l4); }
+:is(i, .chip).l5 { background: var(--l5); }
 
 .legend { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .875rem; }
 .legend i, h3 i { margin-right: .4rem; vertical-align: -2px; }
