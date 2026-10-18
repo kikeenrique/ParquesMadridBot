@@ -44,6 +44,14 @@ struct ParkAttributes: Codable {
 struct ParkState: Codable, Equatable {
     let code: Int
     let horario: String?
+    /// Date the schedule refers to ("18/10/2026"). It moves on every day, so it is saved but never
+    /// counts as a change worth posting
+    var fecha: String? = nil
+
+    /// What followers care about: the alert level and its hours
+    func sameAlert(as other: ParkState) -> Bool {
+        code == other.code && horario == other.horario
+    }
 }
 
 // MARK: - Statistics

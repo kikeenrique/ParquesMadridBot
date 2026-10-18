@@ -15,6 +15,8 @@ enum WebsiteGenerator {
         let startCode: Int
         let changes: [Change]
         let horario: String?
+        /// Date the hours refer to; known for today only
+        var fecha: String? = nil
 
         var endCode: Int { changes.last?.code ?? startCode }
         var worstCode: Int { changes.map(\.code).reduce(startCode, max) }
@@ -95,7 +97,8 @@ enum WebsiteGenerator {
                     name: park,
                     startCode: codes[park]!,
                     changes: changes,
-                    horario: isToday ? current[park]?.horario : horarios[park]
+                    horario: isToday ? current[park]?.horario : horarios[park],
+                    fecha: isToday ? current[park]?.fecha : nil
                 )
                 codes[park] = parkDay.endCode
                 return parkDay
@@ -160,6 +163,28 @@ enum WebsiteGenerator {
         return times.count == 2 ? "\(times[0])–\(times[1])" : horario
     }
 
+    /// "De 18:00 h a 09:00 h" on "18/10/2026" → ["Dom 18, 18:00", "lun 19, 09:00"]: an end at or before the
+    /// start runs into the next day. Same-day hours give one part, "Dom 18, 09:00–18:00". Without a usable
+    /// date, falls back to the bare hours.
+    private static func scheduleWithDays(_ horario: String, fecha: String?) -> [String] {
+        let times = horario.split { !$0.isNumber && $0 != ":" }.filter { $0.contains(":") }.map(String.init)
+        let parser = formatter("dd/MM/yyyy")
+        guard times.count == 2, let fecha, let start = parser.date(from: String(fecha.prefix(10))) else {
+            return [compactSchedule(horario)]
+        }
+        let dayFormat = formatter("EEE d")
+        // es_ES abbreviates "dom." with a dot; the comma that follows is enough
+        func day(_ date: Date) -> String { dayFormat.string(from: date).replacingOccurrences(of: ".", with: "") }
+        let startDay = day(start)
+        let label = startDay.prefix(1).uppercased() + startDay.dropFirst()
+        // "24:00" sorts after any other time, so 21:00–24:00 stays on one day
+        guard times[1] <= times[0] else { return ["\(label), \(times[0])–\(times[1])"] }
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = madrid
+        let end = calendar.date(byAdding: .day, value: 1, to: start)!
+        return ["\(label), \(times[0])", "\(day(end)), \(times[1])"]
+    }
+
     /// Today at a glance: a headline plus one full-colour card per park, most severe first.
     private static func renderNow(_ today: Day, lastChange: Date?) -> String {
         let groups: [(cls: String, singular: String, plural: String, matches: (Int) -> Bool)] = [
@@ -179,21 +204,22 @@ enum WebsiteGenerator {
             .sorted { ($0.endCode, shortName($1.name)) > ($1.endCode, shortName($0.name)) }
             .map { park -> String in
                 // Every card has the same three lines: status, name, schedule
-                let schedule: String
+                let schedule: [String]
                 if let horario = park.horario, park.endCode >= 3 {
-                    schedule = compactSchedule(horario)
+                    schedule = scheduleWithDays(horario, fecha: park.fecha)
                 } else {
-                    schedule = park.endCode < 3 ? "Sin alertas" : "Horario no indicado"
+                    schedule = [park.endCode < 3 ? "Sin alertas" : "Horario no indicado"]
                 }
+                let when = schedule.map { "<span>\(escape($0))</span>" }.joined(separator: " – ")
                 let level = levelName(park.endCode)
                 let name = escape(shortName(park.name))
                 let photo = parkImages[park.name].map {
                     "<img class=\"photo\" src=\"parks/\($0).webp\" alt=\"\" width=\"144\" height=\"125\">"
                 } ?? ""
                 return """
-                <li class="card \(levelClass(park.endCode))">\(photo)\
+                <li class="card \(levelClass(park.endCode))">\(photo)<div class="text">\
                 <span class="chip \(levelClass(park.endCode))">\(level.prefix(1).uppercased() + level.dropFirst())</span>\
-                <span class="name" title="\(name)">\(name)</span><span class="when">\(escape(schedule))</span></li>
+                <span class="name" title="\(name)">\(name)</span><span class="when">\(when)</span></div></li>
                 """
             }
             .joined(separator: "\n")
@@ -205,11 +231,11 @@ enum WebsiteGenerator {
         return """
         <section class="now" aria-labelledby="now-title">
         <h2 id="now-title">Ahora</h2>
+        \(since)
         <p class="summary">\(summary.joined())</p>
         <ul class="cards">
         \(cards)
         </ul>
-        \(since)
         </section>
         """
     }

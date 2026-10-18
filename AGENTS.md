@@ -52,8 +52,9 @@ Set `PRODUCTION=true`, `MASTODON_INSTANCE`, and `MASTODON_ACCESS_TOKEN` to post 
 
 ## State Files
 
-- `estado_parques.json` — Current park state (`[String: ParkState]`: alert code + schedule), committed to repo.
-  A change in either triggers a post; the legacy `[String: Int]` format is still read
+- `estado_parques.json` — Current park state (`[String: ParkState]`: alert code, schedule, and the date the
+  schedule refers to), committed to repo. A change in code or schedule triggers a post; the date changes daily,
+  so it is saved but never posted. The legacy `[String: Int]` format is still read
 - `estadisticas_parques.ndjson` — Append-only change log: one event per park whose level or schedule changed
   (`from_horario`/`to_horario` only on events logged since schedules were tracked, 2026-10-18)
 - `estado_api.json` — Whether the city API is down, so the outage is posted only once

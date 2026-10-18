@@ -35,13 +35,15 @@ do {
     var changeEvents: [ChangeEvent] = []
     let now = ISO8601DateFormatter().string(from: Date())
 
-    let currentState = currentData.mapValues { ParkState(code: $0.alertaDescripcion, horario: $0.horarioIncidencia) }
+    let currentState = currentData.mapValues {
+        ParkState(code: $0.alertaDescripcion, horario: $0.horarioIncidencia, fecha: $0.fechaIncidencia)
+    }
 
     for (park, state) in currentState {
         let currentCode = state.code
         if let previous = previousData[park] {
             // A schedule-only change is logged too (same from/to code), so the history keeps the hours
-            if previous != state {
+            if !previous.sameAlert(as: state) {
                 changedParks.insert(park)
                 let previousCode = previous.code
                 changeEvents.append(ChangeEvent(
@@ -63,8 +65,11 @@ do {
     let statusText = StatusFormatter.formatStatus(current: currentData)
     print(statusText)
 
-    if !changedParks.isEmpty {
+    // Saved on any difference, the schedule date included, so the website shows current dates
+    if currentState != previousData {
         try StateManager.saveState(currentState, to: "estado_parques.json")
+    }
+    if !changedParks.isEmpty {
         try StateManager.appendStatistics(changeEvents, to: "estadisticas_parques.ndjson")
     }
 
