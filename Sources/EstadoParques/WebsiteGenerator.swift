@@ -199,6 +199,11 @@ enum WebsiteGenerator {
         let timeFormat = formatter("HH:mm")
 
         let parkNames = days.last?.parks.map { "<li>\(escape(shortName($0.name)))</li>" }.joined() ?? ""
+        // Day blocks are out of the page flow, so each one carries the footer: only the visible day shows it
+        let footer = """
+        <footer>Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. \
+        Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>.</footer>
+        """
 
         var timeline: [String] = []
         // Newest first: the timeline scrolls right-to-left so today is visible without JavaScript
@@ -214,9 +219,12 @@ enum WebsiteGenerator {
             <input type="radio" name="dia" id="\(id)"\(isToday ? " checked" : "")>\
             <label for="\(id)" title="\(longDate)">\(month)<span class="vh">\(shortFormat.string(from: day.date))</span>\(cells)</label>
             <section class="day">
+            <div class="panel">
             <h2>\(longDate.prefix(1).uppercased() + longDate.dropFirst())</h2>
-            <p class="note">\(isToday ? "Estado actual." : "Estado al final del día.")</p>
+            \(isToday ? "" : "<p class=\"note\">Estado al final del día.</p>")
             \(renderGroups(day.parks, timeFormat: timeFormat))
+            </div>
+            \(footer)
             </section>
             """)
         }
@@ -244,8 +252,7 @@ enum WebsiteGenerator {
         <h2 id="history-title">Día a día</h2>
         <p class="legend"><span><i class="l1"></i>Abierto</span><span><i class="l3"></i>Alerta amarilla</span>\
         <span><i class="l4"></i>Alerta naranja</span><span><i class="l5"></i>Cerrado</span></p>
-        <p class="credits">Elige un día en la línea de tiempo. Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. \
-        Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>.</p>
+        <p class="hint">Elige un día en la línea de tiempo.</p>
         </section>
         <main class="viewer">
         <ol class="names" aria-hidden="true">\(parkNames)</ol>
@@ -275,7 +282,7 @@ enum WebsiteGenerator {
             let items = members.map { park -> String in
                 var item = escape(shortName(park.name))
                 if let horario = park.horario, park.endCode >= 4 {
-                    item += " <span class=\"horario\">\(escape(horario))</span>"
+                    item += " <span class=\"horario\">\(escape(compactSchedule(horario)))</span>"
                 }
                 // Codes 1 and 2 both read as "abierto": only list changes a reader can see
                 var lastLevel = levelName(park.startCode)

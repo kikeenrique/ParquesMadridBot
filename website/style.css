@@ -130,7 +130,7 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
 
 .legend { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .875rem; }
 .legend i, h3 i { margin-right: .4rem; vertical-align: -2px; }
-.credits { font-size: .8125rem; }
+.hint { font-size: .8125rem; }
 
 /* Timeline: park names on the left, one column of cells per day */
 .viewer {
@@ -196,7 +196,7 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
 .timeline input:checked + label { outline: 2px solid var(--fg); outline-offset: 2px; }
 .timeline input:focus-visible + label { outline: 3px solid var(--l4); outline-offset: 2px; }
 
-/* Day panels sit below the timeline; only the checked day shows */
+/* Day blocks sit below the timeline, out of flow; only the checked day shows, with the page footer */
 .day {
   display: none;
   position: absolute;
@@ -205,12 +205,23 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
   right: 0;
   direction: ltr;
   margin-top: 1rem;
+}
+.timeline input:checked + label + .day { display: block; }
+
+.panel {
   padding: 1rem 1.25rem;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 12px;
 }
-.timeline input:checked + label + .day { display: block; }
+
+footer {
+  margin-top: 2rem;
+  padding: 1rem 0 2rem; /* padding, not body padding: this block is out of flow */
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .8125rem;
+}
 
 .day h2 { margin: 0; font-size: 1.25rem; }
 .day .note { margin: 0 0 .5rem; color: var(--muted); font-size: .875rem; }
