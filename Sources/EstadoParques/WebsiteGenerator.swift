@@ -151,17 +151,25 @@ enum WebsiteGenerator {
         let summary = groups.compactMap { group -> String? in
             let count = today.parks.filter { group.matches($0.endCode) }.count
             guard count > 0 else { return nil }
-            return "<span class=\"\(group.cls)\">\(count) \(count == 1 ? group.singular : group.plural)</span>"
+            return "<span class=\"chip \(group.cls)\">\(count) \(count == 1 ? group.singular : group.plural)</span>"
         }
 
         let cards = today.parks
             .sorted { ($0.endCode, shortName($1.name)) > ($1.endCode, shortName($0.name)) }
             .map { park -> String in
-                let schedule = park.horario.map { "<span class=\"when\">\(escape(compactSchedule($0)))</span>" } ?? ""
+                // Every card has the same three lines: status, name, schedule
+                let schedule: String
+                if let horario = park.horario {
+                    schedule = compactSchedule(horario)
+                } else {
+                    schedule = park.endCode < 3 ? "Sin alertas" : "Horario no indicado"
+                }
                 let level = levelName(park.endCode)
+                let name = escape(shortName(park.name))
                 return """
-                <li class="card \(levelClass(park.endCode))"><span class="name">\(escape(shortName(park.name)))</span>\
-                <span class="level">\(level.prefix(1).uppercased() + level.dropFirst())</span>\(schedule)</li>
+                <li class="card \(levelClass(park.endCode))">\
+                <span class="chip \(levelClass(park.endCode))">\(level.prefix(1).uppercased() + level.dropFirst())</span>\
+                <span class="name" title="\(name)">\(name)</span><span class="when">\(escape(schedule))</span></li>
                 """
             }
             .joined(separator: "\n")
@@ -173,7 +181,7 @@ enum WebsiteGenerator {
         return """
         <section class="now" aria-labelledby="now-title">
         <h2 id="now-title">Ahora</h2>
-        <p class="summary">\(summary.joined(separator: " · "))</p>
+        <p class="summary">\(summary.joined())</p>
         <ul class="cards">
         \(cards)
         </ul>
