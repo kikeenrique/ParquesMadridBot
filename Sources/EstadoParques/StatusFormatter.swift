@@ -21,6 +21,8 @@ enum StatusFormatter {
 
     static func formatStatus(current: [String: ParkAttributes]) -> String {
         let formatter = DateFormatter()
+        // CI runners use UTC; posts must show Madrid local time
+        formatter.timeZone = TimeZone(identifier: "Europe/Madrid")
         formatter.dateFormat = "yyyy-MM-dd"
         let datePart = formatter.string(from: Date())
         formatter.dateFormat = "HH:mm"
