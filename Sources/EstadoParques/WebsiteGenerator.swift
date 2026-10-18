@@ -234,9 +234,16 @@ enum WebsiteGenerator {
         <html lang="es">
         <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
         <title>Parques de Madrid</title>
         <meta name="description" content="Estado de las alertas meteorológicas de los parques de Madrid, día a día.">
+        <meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)">
+        <meta name="theme-color" content="#161614" media="(prefers-color-scheme: dark)">
+        <meta name="apple-mobile-web-app-title" content="Parques">
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="manifest" href="manifest.webmanifest">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="icon" href="icon-192.png" type="image/png">
         <link rel="stylesheet" href="style.css">
         </head>
         <body>

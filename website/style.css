@@ -17,7 +17,12 @@
   --on-l4: #1d1d1b;
   --on-l5: #ffffff;
   --cell: 14px;
+  --cell-w: 14px; /* day column width; wider on touch screens */
   --gap: 2px;
+}
+
+@media (pointer: coarse) {
+  :root { --cell-w: 24px; }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,7 +43,9 @@
 body {
   margin: 0 auto;
   max-width: 52rem;
-  padding: 1.5rem 16px 3rem;
+  /* Safe areas keep content clear of the notch and home indicator when run as a web app */
+  padding: max(1.5rem, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+    3rem max(16px, env(safe-area-inset-left));
   background: var(--bg);
   color: var(--fg);
   font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -150,7 +157,7 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
   color: var(--muted);
 }
 .names li {
-  max-width: 9rem;
+  max-width: clamp(6rem, 28vw, 9rem); /* leaves room for more days on phones */
   margin-bottom: var(--gap);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -180,7 +187,7 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
   border-radius: 4px;
   cursor: pointer;
 }
-.timeline label i { display: block; border-radius: 2px; }
+.timeline label i { display: block; width: var(--cell-w); border-radius: 2px; }
 .timeline label:hover { outline: 2px solid var(--line); outline-offset: 2px; }
 .timeline label b {
   position: absolute;
@@ -217,7 +224,8 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
 
 footer {
   margin-top: 2rem;
-  padding: 1rem 0 2rem; /* padding, not body padding: this block is out of flow */
+  /* Own bottom padding (this block is out of flow), plus the home-indicator safe area */
+  padding: 1rem 0 calc(2rem + env(safe-area-inset-bottom));
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: .8125rem;
