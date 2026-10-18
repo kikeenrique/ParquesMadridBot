@@ -35,7 +35,7 @@ enum StatusFormatter {
         ]
 
         func shortName(_ name: String) -> String {
-            name.replacingOccurrences(of: "Parque ", with: "")
+            name.hasPrefix("Parque ") ? String(name.dropFirst("Parque ".count)) : name
         }
 
         var lines: [String] = ["Estado de parques de Madrid a fecha \(dateString)."]

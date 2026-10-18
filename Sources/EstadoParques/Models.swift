@@ -39,6 +39,13 @@ struct ParkAttributes: Codable {
     }
 }
 
+// MARK: - Persisted State
+
+struct ParkState: Codable, Equatable {
+    let code: Int
+    let horario: String?
+}
+
 // MARK: - Statistics
 
 struct ChangeEvent: Codable {

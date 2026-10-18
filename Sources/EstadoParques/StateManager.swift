@@ -1,18 +1,24 @@
 import Foundation
 
 enum StateManager {
-    static func loadPreviousState(from path: String) -> [String: Int] {
+    static func loadPreviousState(from path: String) -> [String: ParkState] {
         let url = URL(fileURLWithPath: path)
         guard FileManager.default.fileExists(atPath: path),
-              let data = try? Data(contentsOf: url),
-              let state = try? JSONDecoder().decode([String: Int].self, from: data)
+              let data = try? Data(contentsOf: url)
         else {
             return [:]
         }
-        return state
+        if let state = try? JSONDecoder().decode([String: ParkState].self, from: data) {
+            return state
+        }
+        // Legacy format: alert code only, no schedule
+        if let legacy = try? JSONDecoder().decode([String: Int].self, from: data) {
+            return legacy.mapValues { ParkState(code: $0, horario: nil) }
+        }
+        return [:]
     }
 
-    static func saveState(_ state: [String: Int], to path: String) throws {
+    static func saveState(_ state: [String: ParkState], to path: String) throws {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         let data = try encoder.encode(state)

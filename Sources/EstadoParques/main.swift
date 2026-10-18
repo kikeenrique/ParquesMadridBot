@@ -23,13 +23,16 @@ do {
     var changeEvents: [ChangeEvent] = []
     let now = ISO8601DateFormatter().string(from: Date())
 
-    let currentState = currentData.mapValues { $0.alertaDescripcion }
+    let currentState = currentData.mapValues { ParkState(code: $0.alertaDescripcion, horario: $0.horarioIncidencia) }
 
-    for (park, attrs) in currentData {
-        let currentCode = attrs.alertaDescripcion
-        if let previousCode = previousData[park] {
-            if previousCode != currentCode {
+    for (park, state) in currentState {
+        let currentCode = state.code
+        if let previous = previousData[park] {
+            if previous != state {
                 changedParks.insert(park)
+            }
+            let previousCode = previous.code
+            if previousCode != currentCode {
                 changeEvents.append(ChangeEvent(
                     detectedAt: now,
                     parque: park,

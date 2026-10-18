@@ -26,7 +26,7 @@ Set `PRODUCTION=true`, `MASTODON_INSTANCE`, and `MASTODON_ACCESS_TOKEN` to post 
 
 ## State Files
 
-- `estado_parques.json` — Current park alert state (`[String: Int]`), committed to repo
+- `estado_parques.json` — Current park state (`[String: ParkState]`: alert code + schedule), committed to repo. A change in either triggers a post; the legacy `[String: Int]` format is still read
 - `estadisticas_parques.ndjson` — Append-only change log
 
 ## GitHub Actions
