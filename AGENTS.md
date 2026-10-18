@@ -18,6 +18,10 @@ files (no API call, no post).
 
 - **Never open, launch or script a web browser** — Google Chrome above all, and not even headless for
   screenshots. Verify generated HTML/CSS by inspecting the output; the maintainer previews pages.
+- **Always use the latest major version of every GitHub Action** in `.github/workflows/`. Whenever you add or
+  touch a `uses:` line, check the current release first (`gh api repos/<owner>/<action>/releases/latest --jq
+  .tag_name`) and pin to its major tag (e.g. `@v5`); bump any other outdated action in the same workflow.
+  Never copy a version from memory or from older examples.
 
 ## Project Structure
 
