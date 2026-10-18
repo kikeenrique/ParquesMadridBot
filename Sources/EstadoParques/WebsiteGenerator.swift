@@ -31,8 +31,10 @@ enum WebsiteGenerator {
         now: Date = Date()
     ) throws {
         let current = StateManager.loadPreviousState(from: statePath)
-        let days = buildDays(current: current, history: loadHistory(from: historyPath), now: now)
-        let html = render(days: days)
+        let history = loadHistory(from: historyPath)
+        let days = buildDays(current: current, history: history, now: now)
+        let lastChange = history.last.flatMap { ISO8601DateFormatter().date(from: $0.detectedAt) }
+        let html = render(days: days, lastChange: lastChange)
         let url = URL(fileURLWithPath: directory).appendingPathComponent("index.html")
         try html.write(to: url, atomically: true, encoding: .utf8)
     }
@@ -131,7 +133,56 @@ enum WebsiteGenerator {
         return formatter
     }
 
-    private static func render(days: [Day]) -> String {
+    /// "De 00:00 h a 18:00 h" → "00:00–18:00"
+    private static func compactSchedule(_ horario: String) -> String {
+        let times = horario.split { !$0.isNumber && $0 != ":" }.filter { $0.contains(":") }
+        return times.count == 2 ? "\(times[0])–\(times[1])" : horario
+    }
+
+    /// Today at a glance: a headline plus one full-colour card per park, most severe first.
+    private static func renderNow(_ today: Day, lastChange: Date?) -> String {
+        let groups: [(cls: String, singular: String, plural: String, matches: (Int) -> Bool)] = [
+            ("l5", "cerrado", "cerrados", { $0 >= 5 }),
+            ("l4", "en alerta naranja", "en alerta naranja", { $0 == 4 }),
+            ("l3", "en alerta amarilla", "en alerta amarilla", { $0 == 3 }),
+            ("l1", "abierto", "abiertos", { $0 < 3 }),
+        ]
+
+        let summary = groups.compactMap { group -> String? in
+            let count = today.parks.filter { group.matches($0.endCode) }.count
+            guard count > 0 else { return nil }
+            return "<span class=\"\(group.cls)\">\(count) \(count == 1 ? group.singular : group.plural)</span>"
+        }
+
+        let cards = today.parks
+            .sorted { ($0.endCode, shortName($1.name)) > ($1.endCode, shortName($0.name)) }
+            .map { park -> String in
+                let schedule = park.horario.map { "<span class=\"when\">\(escape(compactSchedule($0)))</span>" } ?? ""
+                let level = levelName(park.endCode)
+                return """
+                <li class="card \(levelClass(park.endCode))"><span class="name">\(escape(shortName(park.name)))</span>\
+                <span class="level">\(level.prefix(1).uppercased() + level.dropFirst())</span>\(schedule)</li>
+                """
+            }
+            .joined(separator: "\n")
+
+        let since = lastChange.map {
+            "<p class=\"note\">Sin cambios desde el \(formatter("EEEE d 'de' MMMM, 'a las' HH:mm").string(from: $0)).</p>"
+        } ?? ""
+
+        return """
+        <section class="now" aria-labelledby="now-title">
+        <h2 id="now-title">Ahora</h2>
+        <p class="summary">\(summary.joined(separator: " · "))</p>
+        <ul class="cards">
+        \(cards)
+        </ul>
+        \(since)
+        </section>
+        """
+    }
+
+    private static func render(days: [Day], lastChange: Date?) -> String {
         let idFormat = formatter("yyyy-MM-dd")
         let longFormat = formatter("EEEE, d 'de' MMMM 'de' yyyy")
         let shortFormat = formatter("d MMM")
@@ -174,13 +225,18 @@ enum WebsiteGenerator {
         </head>
         <body>
         <header>
+        <img class="banner" src="parques.webp" alt="" width="1536" height="1024">
         <h1>Parques de Madrid</h1>
-        <p>Alertas meteorológicas de los parques vigilados por el Ayuntamiento. Elige un día en la línea de tiempo.</p>
+        <p>Alertas meteorológicas de los parques vigilados por el Ayuntamiento.</p>
+        </header>
+        \(days.last.map { renderNow($0, lastChange: lastChange) } ?? "")
+        <section class="history" aria-labelledby="history-title">
+        <h2 id="history-title">Día a día</h2>
         <p class="legend"><span><i class="l1"></i>Abierto</span><span><i class="l3"></i>Alerta amarilla</span>\
         <span><i class="l4"></i>Alerta naranja</span><span><i class="l5"></i>Cerrado</span></p>
-        <p class="credits">Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. \
+        <p class="credits">Elige un día en la línea de tiempo. Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. \
         Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>.</p>
-        </header>
+        </section>
         <main class="viewer">
         <ol class="names" aria-hidden="true">\(parkNames)</ol>
         <div class="timeline" role="radiogroup" aria-label="Día">

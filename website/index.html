@@ -9,11 +9,31 @@
 </head>
 <body>
 <header>
+<img class="banner" src="parques.webp" alt="" width="1536" height="1024">
 <h1>Parques de Madrid</h1>
-<p>Alertas meteorológicas de los parques vigilados por el Ayuntamiento. Elige un día en la línea de tiempo.</p>
-<p class="legend"><span><i class="l1"></i>Abierto</span><span><i class="l3"></i>Alerta amarilla</span><span><i class="l4"></i>Alerta naranja</span><span><i class="l5"></i>Cerrado</span></p>
-<p class="credits">Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>.</p>
+<p>Alertas meteorológicas de los parques vigilados por el Ayuntamiento.</p>
 </header>
+<section class="now" aria-labelledby="now-title">
+<h2 id="now-title">Ahora</h2>
+<p class="summary"><span class="l4">6 en alerta naranja</span> · <span class="l1">3 abiertos</span></p>
+<ul class="cards">
+<li class="card l4"><span class="name">Jardines del Buen Retiro</span><span class="level">Alerta naranja</span><span class="when">00:00–18:00</span></li>
+<li class="card l4"><span class="name">Jardín del Capricho de la Alameda de Osuna</span><span class="level">Alerta naranja</span><span class="when">00:00–18:00</span></li>
+<li class="card l4"><span class="name">Quinta Fuente del Berro</span><span class="level">Alerta naranja</span><span class="when">00:00–18:00</span></li>
+<li class="card l4"><span class="name">Quinta de Torre Arias</span><span class="level">Alerta naranja</span><span class="when">00:00–18:00</span></li>
+<li class="card l4"><span class="name">Quinta de los Molinos</span><span class="level">Alerta naranja</span><span class="when">00:00–18:00</span></li>
+<li class="card l4"><span class="name">Rosaleda del Parque del Oeste</span><span class="level">Alerta naranja</span><span class="when">00:00–18:00</span></li>
+<li class="card l1"><span class="name">Juan Carlos I</span><span class="level">Abierto</span></li>
+<li class="card l1"><span class="name">Juan Pablo II</span><span class="level">Abierto</span></li>
+<li class="card l1"><span class="name">Lineal del Manzanares</span><span class="level">Abierto</span></li>
+</ul>
+<p class="note">Sin cambios desde el sábado 17 de octubre, a las 21:03.</p>
+</section>
+<section class="history" aria-labelledby="history-title">
+<h2 id="history-title">Día a día</h2>
+<p class="legend"><span><i class="l1"></i>Abierto</span><span><i class="l3"></i>Alerta amarilla</span><span><i class="l4"></i>Alerta naranja</span><span><i class="l5"></i>Cerrado</span></p>
+<p class="credits">Elige un día en la línea de tiempo. Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>.</p>
+</section>
 <main class="viewer">
 <ol class="names" aria-hidden="true"><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ol>
 <div class="timeline" role="radiogroup" aria-label="Día">
@@ -22,7 +42,7 @@
 <h2>Domingo, 18 de octubre de 2026</h2>
 <p class="note">Estado actual.</p>
 <h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
-<h3><i class="l4"></i>Alerta naranja</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+<h3><i class="l4"></i>Alerta naranja</h3><ul><li>Jardines del Buen Retiro <span class="horario">De 00:00 h a 18:00 h</span></li><li>Jardín del Capricho de la Alameda de Osuna <span class="horario">De 00:00 h a 18:00 h</span></li><li>Quinta Fuente del Berro <span class="horario">De 00:00 h a 18:00 h</span></li><li>Quinta de Torre Arias <span class="horario">De 00:00 h a 18:00 h</span></li><li>Quinta de los Molinos <span class="horario">De 00:00 h a 18:00 h</span></li><li>Rosaleda del Parque del Oeste <span class="horario">De 00:00 h a 18:00 h</span></li></ul>
 </section>
 <input type="radio" name="dia" id="d-2026-10-17"><label for="d-2026-10-17" title="sábado, 17 de octubre de 2026"><span class="vh">17 oct</span><i class="l4"></i><i class="l4"></i><i class="l1"></i><i class="l1"></i><i class="l1"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
 <section class="day">
