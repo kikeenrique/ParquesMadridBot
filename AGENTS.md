@@ -43,7 +43,8 @@ files (no API call, no post).
 ## State Files
 
 - `estado_parques.json` — Current park state (`[String: ParkState]`: alert code + schedule), committed to repo. A change in either triggers a post; the legacy `[String: Int]` format is still read
-- `estadisticas_parques.ndjson` — Append-only change log
+- `estadisticas_parques.ndjson` — Append-only change log: one event per park whose level or schedule changed
+  (`from_horario`/`to_horario` only on events logged since schedules were tracked, 2026-10-18)
 
 ## GitHub Actions
 

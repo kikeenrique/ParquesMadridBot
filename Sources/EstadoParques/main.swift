@@ -40,18 +40,19 @@ do {
     for (park, state) in currentState {
         let currentCode = state.code
         if let previous = previousData[park] {
+            // A schedule-only change is logged too (same from/to code), so the history keeps the hours
             if previous != state {
                 changedParks.insert(park)
-            }
-            let previousCode = previous.code
-            if previousCode != currentCode {
+                let previousCode = previous.code
                 changeEvents.append(ChangeEvent(
                     detectedAt: now,
                     parque: park,
                     fromCode: previousCode,
                     toCode: currentCode,
                     fromOpen: StatusFormatter.isOpen(previousCode),
-                    toOpen: StatusFormatter.isOpen(currentCode)
+                    toOpen: StatusFormatter.isOpen(currentCode),
+                    fromHorario: previous.horario,
+                    toHorario: state.horario
                 ))
             }
         } else {

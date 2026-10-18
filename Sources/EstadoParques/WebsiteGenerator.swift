@@ -7,6 +7,7 @@ enum WebsiteGenerator {
     private struct Change {
         let date: Date
         let code: Int
+        let horario: String?
     }
 
     private struct ParkDay {
@@ -56,12 +57,16 @@ enum WebsiteGenerator {
 
         var changesByPark: [String: [Change]] = [:]
         var initialCode: [String: Int] = [:]
+        var initialHorario: [String: String] = [:]
         for event in history {
             guard current[event.parque] != nil, let date = iso.date(from: event.detectedAt) else { continue }
             if initialCode[event.parque] == nil {
                 initialCode[event.parque] = event.fromCode
+                initialHorario[event.parque] = event.fromHorario
             }
-            changesByPark[event.parque, default: []].append(Change(date: date, code: event.toCode))
+            changesByPark[event.parque, default: []].append(
+                Change(date: date, code: event.toCode, horario: event.toHorario)
+            )
         }
 
         let parks = current.keys.sorted { shortName($0) < shortName($1) }
@@ -69,6 +74,8 @@ enum WebsiteGenerator {
         let today = calendar.startOfDay(for: now)
 
         var codes = parks.reduce(into: [String: Int]()) { $0[$1] = initialCode[$1] ?? current[$1]!.code }
+        // Events logged before schedules were tracked carry none, so older days have no hours
+        var horarios = initialHorario
         var cursor = parks.reduce(into: [String: Int]()) { $0[$1] = 0 }
         var days: [Day] = []
         var day = calendar.startOfDay(for: firstDate)
@@ -81,13 +88,14 @@ enum WebsiteGenerator {
                 var changes: [Change] = []
                 while cursor[park]! < all.count, all[cursor[park]!].date < nextDay {
                     changes.append(all[cursor[park]!])
+                    horarios[park] = all[cursor[park]!].horario
                     cursor[park]! += 1
                 }
                 let parkDay = ParkDay(
                     name: park,
                     startCode: codes[park]!,
                     changes: changes,
-                    horario: isToday ? current[park]?.horario : nil
+                    horario: isToday ? current[park]?.horario : horarios[park]
                 )
                 codes[park] = parkDay.endCode
                 return parkDay

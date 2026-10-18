@@ -55,6 +55,9 @@ struct ChangeEvent: Codable {
     let toCode: Int
     let fromOpen: Bool
     let toOpen: Bool
+    // Absent in events logged before schedules were tracked
+    let fromHorario: String?
+    let toHorario: String?
 
     enum CodingKeys: String, CodingKey {
         case detectedAt = "detected_at"
@@ -63,5 +66,7 @@ struct ChangeEvent: Codable {
         case toCode = "to_code"
         case fromOpen = "from_open"
         case toOpen = "to_open"
+        case fromHorario = "from_horario"
+        case toHorario = "to_horario"
     }
 }
