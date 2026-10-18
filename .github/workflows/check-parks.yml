@@ -17,7 +17,8 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
-    container: swift:6.1
+    # Keep the image, the deploy job's image and the "swift6.4" cache-key prefixes below in sync
+    container: swift:6.4
     outputs:
       site-changed: ${{ steps.site-cache.outputs.cache-hit != 'true' }}
       site-key: ${{ steps.site-cache.outputs.cache-primary-key }}
@@ -29,15 +30,15 @@ jobs:
         uses: actions/cache@v6
         with:
           path: .build/release/EstadoParques
-          key: binary-linux-${{ hashFiles('Sources/**', 'Package.swift', 'Package.resolved') }}
+          key: binary-linux-swift6.4-${{ hashFiles('Sources/**', 'Package.swift', 'Package.resolved') }}
 
       - name: Restore SPM build cache
         if: steps.binary-cache.outputs.cache-hit != 'true'
         uses: actions/cache@v6
         with:
           path: .build
-          key: spm-linux-${{ hashFiles('Package.resolved') }}
-          restore-keys: spm-linux-
+          key: spm-linux-swift6.4-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-linux-swift6.4-
 
       - name: Build
         if: steps.binary-cache.outputs.cache-hit != 'true'
@@ -86,7 +87,7 @@ jobs:
     if: needs.check.outputs.site-changed == 'true'
     runs-on: ubuntu-latest
     # Same image as the check job: the cache version depends on the available compressor
-    container: swift:6.1
+    container: swift:6.4
     permissions:
       pages: write
       id-token: write

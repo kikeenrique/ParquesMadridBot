@@ -22,6 +22,9 @@ files (no API call, no post).
   touch a `uses:` line, check the current release first (`gh api repos/<owner>/<action>/releases/latest --jq
   .tag_name`) and pin to its major tag (e.g. `@v5`); bump any other outdated action in the same workflow.
   Never copy a version from memory or from older examples.
+- **The same goes for the CI Swift image** (`container: swift:X.Y` in both jobs): use the latest `X.Y` tag on
+  Docker Hub (`library/swift`), and bump the `swiftX.Y` prefix of the binary/SPM cache keys with it, or a
+  binary built by the old toolchain is restored against the new runtime.
 
 ## Project Structure
 
