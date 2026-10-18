@@ -1,18 +1,17 @@
 # Estado Parques Madrid
 
-Swift CLI bot that monitors Madrid park alert status and posts to Mastodon.
+Swift CLI bot that monitors the weather-alert status of Madrid's parks, posts every change to Mastodon
+(@ParquesMadridBot@mastodon.social) and publishes a static website (https://parques.lemambo.com).
 
 ## Build & Run
 
 ```bash
 swift build
-swift run EstadoParques
+swift run EstadoParques                    # fetch the API, update state files, print the post
+swift run EstadoParques --website website  # only regenerate website/index.html (no API call, no post)
 ```
 
 Set `PRODUCTION=true`, `MASTODON_INSTANCE`, and `MASTODON_ACCESS_TOKEN` to post to Mastodon.
-
-`swift run EstadoParques --website website` only regenerates `website/index.html` from the state and history
-files (no API call, no post).
 
 ## Rules for agents
 
@@ -25,19 +24,27 @@ files (no API call, no post).
 - **The same goes for the CI Swift image** (`container: swift:X.Y` in both jobs): use the latest `X.Y` tag on
   Docker Hub (`library/swift`), and bump the `swiftX.Y` prefix of the binary/SPM cache keys with it, or a
   binary built by the old toolchain is restored against the new runtime.
+- **Times shown to people are Madrid local time** (`Europe/Madrid`); CI runs in UTC. State and log
+  timestamps stay ISO 8601 UTC.
 
 ## Project Structure
 
-- `Sources/EstadoParques/main.swift` — Entry point, orchestration
+- `Sources/EstadoParques/main.swift` — Entry point, orchestration, `--website` mode
 - `Sources/EstadoParques/MadridAPI.swift` — Fetches park data from Madrid City Council ESRI API
-- `Sources/EstadoParques/Models.swift` — Codable structs for API response and change events
+- `Sources/EstadoParques/Models.swift` — Codable structs for API response, persisted state and change events
 - `Sources/EstadoParques/StateManager.swift` — JSON state persistence + NDJSON statistics
 - `Sources/EstadoParques/StatusFormatter.swift` — Emoji mapping and post text formatting
-- `Sources/EstadoParques/MastodonPoster.swift` — TootSDK wrapper for posting to Mastodon
-- `Sources/EstadoParques/WebsiteGenerator.swift` — Rebuilds per-day history and writes the static site
-- `website/` — Static site published to GitHub Pages: `style.css` is hand-written, `index.html` is generated
-  and committed by CI alongside the state files. Zero JavaScript: one radio button per day, and a single CSS rule
-  (`input:checked + label + .day`) shows the selected day
+- `Sources/EstadoParques/MastodonPoster.swift` — TootSDK wrapper for posting to Mastodon (retries transient
+  failures)
+- `Sources/EstadoParques/WebsiteGenerator.swift` — Rebuilds per-day history from the change log and writes the
+  static site
+- `website/` — Static site published to GitHub Pages:
+  - `index.html` — generated, and committed by CI alongside the state files
+  - `style.css`, `manifest.webmanifest`, icons, `parques.webp` — hand-made
+  - Zero JavaScript: an "Ahora" section of status cards, then a timeline with one radio button per day; a single
+    CSS rule (`input:checked + label + .day`) shows the selected day. Installable as a Home Screen web app
+- `resources/` — Source images: `parques madrid grande.png` (banner), `ParquesMadridBot.png` (app icons),
+  `ParquesMadridBot_avatar.png` (Mastodon avatar)
 
 ## Key Dependencies
 
@@ -45,15 +52,21 @@ files (no API call, no post).
 
 ## State Files
 
-- `estado_parques.json` — Current park state (`[String: ParkState]`: alert code + schedule), committed to repo. A change in either triggers a post; the legacy `[String: Int]` format is still read
+- `estado_parques.json` — Current park state (`[String: ParkState]`: alert code + schedule), committed to repo.
+  A change in either triggers a post; the legacy `[String: Int]` format is still read
 - `estadisticas_parques.ndjson` — Append-only change log: one event per park whose level or schedule changed
   (`from_horario`/`to_horario` only on events logged since schedules were tracked, 2026-10-18)
+- `estado_api.json` — Whether the city API is down, so the outage is posted only once
 
 ## GitHub Actions
 
-Workflow in `.github/workflows/check-parks.yml` runs every 30 minutes and commits state changes back to the repo.
-It also regenerates the website and, when its content hash is new (cache lookup), deploys it to GitHub Pages
-(repo Settings → Pages → Source: GitHub Actions).
+`.github/workflows/check-parks.yml` runs every 30 minutes (and on push) in the `swift` container:
+
+1. **check** — builds (binary and SPM caches), runs the park check, regenerates the website, and commits state
+   and `website/index.html` back to the repo. If the site's content hash has no deploy marker in the cache, it
+   uploads the Pages artifact.
+2. **deploy** — publishes to GitHub Pages (Settings → Pages → Source: GitHub Actions; custom domain
+   `parques.lemambo.com`) and only then saves the deploy marker, so a failed deploy is retried next run.
 
 ## AI Agents
 
@@ -61,8 +74,8 @@ This project was developed with the assistance of AI coding agents.
 
 ### Claude Code (Anthropic)
 
-- **Model**: Claude Opus 4.6
 - **Tool**: [Claude Code CLI](https://claude.com/claude-code)
-- **Role**: Code generation, architecture design, and implementation of the Swift CLI bot, GitHub Actions workflow, and project documentation.
+- **Role**: Code generation, architecture design, and implementation of the Swift CLI bot, the website,
+  the GitHub Actions workflow, and project documentation.
 
 All AI-generated code was reviewed and approved by a human maintainer.
