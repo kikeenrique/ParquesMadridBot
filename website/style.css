@@ -224,6 +224,7 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
 }
 .names li {
   max-width: clamp(6rem, 28vw, 9rem); /* leaves room for more days on phones */
+  height: var(--cell); /* same pitch as the cells, so names stay level with their rows */
   margin-bottom: var(--gap);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -231,6 +232,9 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
 }
 
 .timeline {
+  /* Not stretched to the names column's height: a visible scrollbar would then eat into it and squeeze
+     the rows of cells out of line with the names */
+  align-self: start;
   display: flex;
   gap: var(--gap);
   direction: rtl; /* starts scrolled to the newest day */
@@ -253,7 +257,8 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
   border-radius: 4px;
   cursor: pointer;
 }
-.timeline label i { display: block; width: var(--cell-w); border-radius: 2px; }
+/* flex: none: cells must not shrink, or their rows drift away from the park names */
+.timeline label i { display: block; flex: none; width: var(--cell-w); height: var(--cell); border-radius: 2px; }
 .timeline label:hover { outline: 2px solid var(--line); outline-offset: 2px; }
 .timeline label b {
   position: absolute;
