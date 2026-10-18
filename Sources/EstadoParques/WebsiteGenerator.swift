@@ -236,6 +236,8 @@ enum WebsiteGenerator {
         <img class="banner" src="parques.webp" alt="" width="1536" height="810">
         <h1>Parques de Madrid</h1>
         <p>Alertas meteorológicas de los parques vigilados por el Ayuntamiento de Madrid.</p>
+        <p>Recibe cada cambio en Mastodon: \
+        <a rel="me" href="https://mastodon.social/@ParquesMadridBot">@ParquesMadridBot@mastodon.social</a></p>
         </header>
         \(days.last.map { renderNow($0, lastChange: lastChange) } ?? "")
         <section class="history" aria-labelledby="history-title">

@@ -77,6 +77,9 @@ enum StatusFormatter {
             }
         }
 
+        lines.append("")
+        lines.append("🌐 Histórico: https://parques.lemambo.com")
+
         return lines.joined(separator: "\n")
     }
 }
