@@ -18,6 +18,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     container: swift:6.1
+    outputs:
+      site-changed: ${{ steps.site-cache.outputs.cache-hit != 'true' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -47,6 +49,31 @@ jobs:
           PRODUCTION: ${{ vars.PRODUCTION }}
         run: .build/release/EstadoParques
 
+      - name: Generate website
+        run: .build/release/EstadoParques --website website
+
+      # The page only changes with the state, the history or a new day: skip redeploying identical output
+      - name: Check whether the website changed
+        id: site-cache
+        uses: actions/cache/restore@v6
+        with:
+          path: website
+          key: site-${{ hashFiles('website/**') }}
+          lookup-only: true
+
+      - name: Upload website
+        if: steps.site-cache.outputs.cache-hit != 'true'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: website
+
+      - name: Remember published website
+        if: steps.site-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: website
+          key: site-${{ hashFiles('website/**') }}
+
       - name: Commit state changes
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -55,5 +82,21 @@ jobs:
           git add estado_parques.json
           git add estadisticas_parques.ndjson 2>/dev/null || true
           git add estado_api.json 2>/dev/null || true
+          git add website/index.html
           git diff --staged --quiet || git commit -m "Update park state $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git push
+
+  deploy:
+    needs: check
+    if: needs.check.outputs.site-changed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

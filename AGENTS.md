@@ -11,6 +11,14 @@ swift run EstadoParques
 
 Set `PRODUCTION=true`, `MASTODON_INSTANCE`, and `MASTODON_ACCESS_TOKEN` to post to Mastodon.
 
+`swift run EstadoParques --website website` only regenerates `website/index.html` from the state and history
+files (no API call, no post).
+
+## Rules for agents
+
+- **Never open, launch or script a web browser** — Google Chrome above all, and not even headless for
+  screenshots. Verify generated HTML/CSS by inspecting the output; the maintainer previews pages.
+
 ## Project Structure
 
 - `Sources/EstadoParques/main.swift` — Entry point, orchestration
@@ -19,6 +27,10 @@ Set `PRODUCTION=true`, `MASTODON_INSTANCE`, and `MASTODON_ACCESS_TOKEN` to post 
 - `Sources/EstadoParques/StateManager.swift` — JSON state persistence + NDJSON statistics
 - `Sources/EstadoParques/StatusFormatter.swift` — Emoji mapping and post text formatting
 - `Sources/EstadoParques/MastodonPoster.swift` — TootSDK wrapper for posting to Mastodon
+- `Sources/EstadoParques/WebsiteGenerator.swift` — Rebuilds per-day history and writes the static site
+- `website/` — Static site published to GitHub Pages: `style.css` is hand-written, `index.html` is generated
+  and committed by CI alongside the state files. Zero JavaScript: one radio button per day, and a single CSS rule
+  (`input:checked + label + .day`) shows the selected day
 
 ## Key Dependencies
 
@@ -32,6 +44,8 @@ Set `PRODUCTION=true`, `MASTODON_INSTANCE`, and `MASTODON_ACCESS_TOKEN` to post 
 ## GitHub Actions
 
 Workflow in `.github/workflows/check-parks.yml` runs every 30 minutes and commits state changes back to the repo.
+It also regenerates the website and, when its content hash is new (cache lookup), deploys it to GitHub Pages
+(repo Settings → Pages → Source: GitHub Actions).
 
 ## AI Agents
 

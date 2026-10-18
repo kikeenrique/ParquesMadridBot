@@ -1,0 +1,153 @@
+/* Parques de Madrid — no JavaScript: the checked radio picks the visible day. */
+
+:root {
+  color-scheme: light dark;
+  --bg: #f7f6f2;
+  --fg: #1d1d1b;
+  --muted: #6b6a64;
+  --line: #d9d7cf;
+  --panel: #ffffff;
+  --l1: #3f8f46;
+  --l3: #e2b714;
+  --l4: #e9822d;
+  --l5: #c8372d;
+  --cell: 14px;
+  --gap: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161614;
+    --fg: #ecebe6;
+    --muted: #a3a29b;
+    --line: #34332f;
+    --panel: #1f1f1c;
+    --l1: #57a85e;
+    --l3: #e8c540;
+    --l4: #f0954a;
+    --l5: #e0544a;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  max-width: 52rem;
+  padding: 1.5rem 16px 3rem;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+h1 { margin: 0 0 .25rem; font-size: 1.75rem; }
+header p { margin: .25rem 0; color: var(--muted); }
+a { color: inherit; }
+
+.vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Level swatches */
+i { display: inline-block; width: var(--cell); height: var(--cell); border-radius: 3px; }
+.l1 { background: var(--l1); }
+.l3 { background: var(--l3); }
+.l4 { background: var(--l4); }
+.l5 { background: var(--l5); }
+
+.legend { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .875rem; }
+.legend i, h3 i { margin-right: .4rem; vertical-align: -2px; }
+.credits { font-size: .8125rem; }
+
+/* Timeline: park names on the left, one column of cells per day */
+.viewer {
+  position: relative; /* containing block for the day panels */
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .5rem;
+  margin-top: 1.5rem;
+}
+
+.names {
+  margin: 0;
+  padding: 1.25rem 0 .75rem;
+  list-style: none;
+  font-size: .75rem;
+  line-height: var(--cell);
+  color: var(--muted);
+}
+.names li {
+  max-width: 9rem;
+  margin-bottom: var(--gap);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeline {
+  display: flex;
+  gap: var(--gap);
+  direction: rtl; /* starts scrolled to the newest day */
+  overflow-x: auto;
+  padding: 1.25rem 4px .75rem;
+}
+
+.timeline input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.timeline label {
+  position: relative;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: var(--gap);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.timeline label i { display: block; border-radius: 2px; }
+.timeline label:hover { outline: 2px solid var(--line); outline-offset: 2px; }
+.timeline label b {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  direction: ltr;
+  font-size: .6875rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.timeline input:checked + label { outline: 2px solid var(--fg); outline-offset: 2px; }
+.timeline input:focus-visible + label { outline: 3px solid var(--l4); outline-offset: 2px; }
+
+/* Day panels sit below the timeline; only the checked day shows */
+.day {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  direction: ltr;
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.timeline input:checked + label + .day { display: block; }
+
+.day h2 { margin: 0; font-size: 1.25rem; }
+.day .note { margin: 0 0 .5rem; color: var(--muted); font-size: .875rem; }
+.day h3 { margin: 1rem 0 .25rem; font-size: 1rem; }
+.day ul { margin: 0; padding-left: 1.5rem; }
+.day li { margin: .125rem 0; }
+.day small { color: var(--muted); }
+.horario { color: var(--muted); font-size: .875rem; }
