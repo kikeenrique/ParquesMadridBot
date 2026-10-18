@@ -20,8 +20,10 @@ swift test
 ```
 
 Swift Testing suites in `Tests/EstadoParquesTests/`, one per source file (`@testable import EstadoParques`).
-They cover post formatting and Madrid time, change detection, state and log files (legacy formats included),
-API parsing, and the website's hours, dates and history. `busiestPostFits` is a known issue: posts with many
+They cover the run sequence (posting, saving, API outages and recovery) with a fake API and fake Mastodon,
+Mastodon retries, post formatting and Madrid time, change detection, state and log files (legacy formats
+included), API parsing, and the website's hours, dates and history. Only the raw network calls are untested
+(`swift test --enable-code-coverage`, then `xcrun llvm-cov report` on the test bundle). `busiestPostFits` is a known issue: posts with many
 mixed schedules exceed Mastodon's 500 characters until posts are shortened to fit.
 
 ## Rules for agents
@@ -42,7 +44,9 @@ mixed schedules exceed Mastodon's 500 characters until posts are shortened to fi
 
 ## Project Structure
 
-- `Sources/EstadoParques/main.swift` — Entry point, orchestration, `--website` mode
+- `Sources/EstadoParques/main.swift` — Entry point: `--website` mode, production flag, exit code
+- `Sources/EstadoParques/Bot.swift` — One run: fetch, compare, save, post, and announcing an API outage once.
+  The API, Mastodon, file paths and clock are injected so tests can replace them
 - `Sources/EstadoParques/ChangeDetector.swift` — Which parks changed since the saved state, and their log events
 - `Sources/EstadoParques/MadridAPI.swift` — Fetches park data from Madrid City Council ESRI API
 - `Sources/EstadoParques/Models.swift` — Codable structs for API response, persisted state and change events

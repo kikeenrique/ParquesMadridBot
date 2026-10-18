@@ -18,64 +18,8 @@ if let flag = CommandLine.arguments.firstIndex(of: "--website"), flag + 1 < Comm
 let isProduction = ProcessInfo.processInfo.environment["PRODUCTION"]?.lowercased() == "true"
 print("🔍 Iniciando bot. Modo producción: \(isProduction)")
 
-let apiStatusPath = "estado_api.json"
-
 do {
-    let currentData = try await MadridAPI.fetchParkAlerts()
-
-    let wasAPIDown = StateManager.loadAPIDown(from: apiStatusPath)
-    if wasAPIDown {
-        try StateManager.saveAPIDown(false, to: apiStatusPath)
-        print("✅ Servicio oficial recuperado; se publica el estado actual de los parques")
-    }
-
-    let previousData = StateManager.loadPreviousState(from: "estado_parques.json")
-
-    let currentState = currentData.mapValues {
-        ParkState(code: $0.alertaDescripcion, horario: $0.horarioIncidencia, fecha: $0.fechaIncidencia)
-    }
-    let (changedParks, changeEvents) = ChangeDetector.detect(
-        previous: previousData,
-        current: currentState,
-        detectedAt: ISO8601DateFormatter().string(from: Date())
-    )
-
-    let statusText = StatusFormatter.formatStatus(current: currentData)
-    print(statusText)
-
-    // Saved on any difference, the schedule date included, so the website shows current dates
-    if currentState != previousData {
-        try StateManager.saveState(currentState, to: "estado_parques.json")
-    }
-    if !changedParks.isEmpty {
-        try StateManager.appendStatistics(changeEvents, to: "estadisticas_parques.ndjson")
-    }
-
-    if !changedParks.isEmpty || wasAPIDown {
-        if isProduction {
-            try await MastodonPoster.post(text: statusText)
-        }
-    } else {
-        print("ℹ️ Sin cambios detectados")
-    }
-} catch let error as MadridAPIError {
-    print("⚠️ \(error)")
-
-    if StateManager.loadAPIDown(from: apiStatusPath) {
-        print("ℹ️ Caída del servicio ya notificada anteriormente")
-    } else {
-        do {
-            try StateManager.saveAPIDown(true, to: apiStatusPath)
-            let outageText = "⚠️ El servicio oficial de datos del Ayuntamiento de Madrid no está disponible temporalmente. No se puede consultar el estado de los parques; se avisará cuando vuelva a funcionar."
-            print(outageText)
-            if isProduction {
-                try await MastodonPoster.post(text: outageText)
-            }
-        } catch {
-            print("❌ Error: \(error)")
-            exit(1)
-        }
-    }
+    try await Bot(isProduction: isProduction).run()
 } catch {
     print("❌ Error: \(error)")
     exit(1)
