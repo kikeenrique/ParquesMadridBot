@@ -210,7 +210,8 @@ enum WebsiteGenerator {
         // Day blocks are out of the page flow, so each one carries the footer: only the visible day shows it
         let footer = """
         <footer>Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. \
-        Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>.</footer>
+        Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>. \
+        <a rel="me" href="https://mastodon.social/@ParquesMadridBot">Mastodon</a></footer>
         """
 
         var timeline: [String] = []
