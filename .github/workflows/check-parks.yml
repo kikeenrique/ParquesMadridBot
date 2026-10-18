@@ -20,6 +20,7 @@ jobs:
     container: swift:6.1
     outputs:
       site-changed: ${{ steps.site-cache.outputs.cache-hit != 'true' }}
+      site-key: ${{ steps.site-cache.outputs.cache-primary-key }}
     steps:
       - uses: actions/checkout@v7
 
@@ -52,12 +53,13 @@ jobs:
       - name: Generate website
         run: .build/release/EstadoParques --website website
 
-      # The page only changes with the state, the history or a new day: skip redeploying identical output
-      - name: Check whether the website changed
+      # The page only changes with the state, the history or a new day: skip redeploying identical output.
+      # A marker cached under the site's hash records a deploy; the deploy job saves it only on success.
+      - name: Check whether this website was already deployed
         id: site-cache
         uses: actions/cache/restore@v6
         with:
-          path: website
+          path: .site-deployed
           key: site-${{ hashFiles('website/**') }}
           lookup-only: true
 
@@ -66,13 +68,6 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: website
-
-      - name: Remember published website
-        if: steps.site-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v6
-        with:
-          path: website
-          key: site-${{ hashFiles('website/**') }}
 
       - name: Commit state changes
         run: |
@@ -90,6 +85,8 @@ jobs:
     needs: check
     if: needs.check.outputs.site-changed == 'true'
     runs-on: ubuntu-latest
+    # Same image as the check job: the cache version depends on the available compressor
+    container: swift:6.1
     permissions:
       pages: write
       id-token: write
@@ -100,3 +97,12 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+      - name: Mark website as deployed
+        run: touch .site-deployed
+
+      - name: Remember deployed website
+        uses: actions/cache/save@v6
+        with:
+          path: .site-deployed
+          key: ${{ needs.check.outputs.site-key }}
