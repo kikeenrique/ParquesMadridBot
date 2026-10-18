@@ -1,11 +1,11 @@
 {
   "Jardines del Buen Retiro" : {
-    "code" : 4,
-    "horario" : "De 00:00 h a 18:00 h"
+    "code" : 3,
+    "horario" : "De 18:00 h a 09:00 h"
   },
   "Jardín del Capricho de la Alameda de Osuna" : {
-    "code" : 4,
-    "horario" : "De 00:00 h a 18:00 h"
+    "code" : 3,
+    "horario" : "De 18:00 h a 09:00 h"
   },
   "Parque Juan Carlos I" : {
     "code" : 1
@@ -17,19 +17,19 @@
     "code" : 1
   },
   "Parque Quinta Fuente del Berro" : {
-    "code" : 4,
-    "horario" : "De 00:00 h a 18:00 h"
+    "code" : 3,
+    "horario" : "De 18:00 h a 09:00 h"
   },
   "Parque Quinta de Torre Arias" : {
-    "code" : 4,
-    "horario" : "De 00:00 h a 18:00 h"
+    "code" : 3,
+    "horario" : "De 18:00 h a 09:00 h"
   },
   "Parque Quinta de los Molinos" : {
-    "code" : 4,
-    "horario" : "De 00:00 h a 18:00 h"
+    "code" : 3,
+    "horario" : "De 18:00 h a 09:00 h"
   },
   "Rosaleda del Parque del Oeste" : {
-    "code" : 4,
-    "horario" : "De 00:00 h a 18:00 h"
+    "code" : 3,
+    "horario" : "De 18:00 h a 09:00 h"
   }
 }
