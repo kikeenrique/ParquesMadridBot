@@ -28,7 +28,11 @@ enum MadridAPI {
             // Timeouts and other network failures mean the service is unreachable
             throw MadridAPIError.serviceUnavailable(detail: "fallo de red (\(error.localizedDescription))")
         }
+        return try parse(data)
+    }
 
+    /// Decodes a response body into park attributes keyed by park name
+    static func parse(_ data: Data) throws -> [String: ParkAttributes] {
         let response: APIResponse
         do {
             response = try JSONDecoder().decode(APIResponse.self, from: data)

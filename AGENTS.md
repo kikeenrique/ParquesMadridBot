@@ -13,7 +13,20 @@ swift run EstadoParques --website website  # only regenerate website/index.html 
 
 Set `PRODUCTION=true`, `MASTODON_INSTANCE`, and `MASTODON_ACCESS_TOKEN` to post to Mastodon.
 
+## Tests
+
+```bash
+swift test
+```
+
+Swift Testing suites in `Tests/EstadoParquesTests/`, one per source file (`@testable import EstadoParques`).
+They cover post formatting and Madrid time, change detection, state and log files (legacy formats included),
+API parsing, and the website's hours, dates and history. `busiestPostFits` is a known issue: posts with many
+mixed schedules exceed Mastodon's 500 characters until posts are shortened to fit.
+
 ## Rules for agents
+
+- **Add or update tests with every behaviour change**, and run `swift test` before committing.
 
 - **Never open, launch or script a web browser** — Google Chrome above all, and not even headless for
   screenshots. Verify generated HTML/CSS by inspecting the output; the maintainer previews pages.
@@ -30,6 +43,7 @@ Set `PRODUCTION=true`, `MASTODON_INSTANCE`, and `MASTODON_ACCESS_TOKEN` to post 
 ## Project Structure
 
 - `Sources/EstadoParques/main.swift` — Entry point, orchestration, `--website` mode
+- `Sources/EstadoParques/ChangeDetector.swift` — Which parks changed since the saved state, and their log events
 - `Sources/EstadoParques/MadridAPI.swift` — Fetches park data from Madrid City Council ESRI API
 - `Sources/EstadoParques/Models.swift` — Codable structs for API response, persisted state and change events
 - `Sources/EstadoParques/StateManager.swift` — JSON state persistence + NDJSON statistics
@@ -63,6 +77,8 @@ Set `PRODUCTION=true`, `MASTODON_INSTANCE`, and `MASTODON_ACCESS_TOKEN` to post 
 
 `.github/workflows/check-parks.yml` runs every 30 minutes (and on push) in the `swift` container:
 
+0. **test** — on push and manual runs only: `swift test` (own debug build cache). The other jobs wait for it
+   and don't run if it fails; on a schedule it is skipped and they run without it.
 1. **check** — builds (binary and SPM caches), runs the park check, regenerates the website, and commits state
    and `website/index.html` back to the repo. If the site's content hash has no deploy marker in the cache, it
    uploads the Pages artifact.

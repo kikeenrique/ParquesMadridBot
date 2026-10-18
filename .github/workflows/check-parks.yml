@@ -15,9 +15,30 @@ permissions:
   contents: write
 
 jobs:
-  check:
+  # New code is tested before the bot runs it; scheduled runs reuse code that already passed
+  test:
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
-    # Keep the image, the deploy job's image and the "swift6.4" cache-key prefixes below in sync
+    container: swift:6.4
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Restore SPM debug build cache
+        uses: actions/cache@v6
+        with:
+          path: .build
+          key: spm-debug-linux-swift6.4-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-debug-linux-swift6.4-
+
+      - name: Test
+        run: swift test
+
+  check:
+    needs: test
+    # Runs after passing tests, or without them on a schedule (the test job is skipped then)
+    if: ${{ !cancelled() && (needs.test.result == 'success' || needs.test.result == 'skipped') }}
+    runs-on: ubuntu-latest
+    # Keep the image, the test and deploy jobs' images and the "swift6.4" cache-key prefixes in sync
     container: swift:6.4
     outputs:
       site-changed: ${{ steps.site-cache.outputs.cache-hit != 'true' }}
@@ -84,7 +105,8 @@ jobs:
 
   deploy:
     needs: check
-    if: needs.check.outputs.site-changed == 'true'
+    # Spelled out: with the implicit success() check, a skipped test job upstream would skip this too
+    if: ${{ !cancelled() && needs.check.result == 'success' && needs.check.outputs.site-changed == 'true' }}
     runs-on: ubuntu-latest
     # Same image as the check job: the cache version depends on the available compressor
     container: swift:6.4

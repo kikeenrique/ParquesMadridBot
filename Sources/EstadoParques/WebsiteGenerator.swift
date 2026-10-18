@@ -158,7 +158,7 @@ enum WebsiteGenerator {
     ]
 
     /// "De 00:00 h a 18:00 h" → "00:00–18:00"
-    private static func compactSchedule(_ horario: String) -> String {
+    static func compactSchedule(_ horario: String) -> String {
         let times = horario.split { !$0.isNumber && $0 != ":" }.filter { $0.contains(":") }
         return times.count == 2 ? "\(times[0])–\(times[1])" : horario
     }
@@ -166,7 +166,7 @@ enum WebsiteGenerator {
     /// "De 18:00 h a 09:00 h" on "18/10/2026" → ["Dom 18, 18:00", "lun 19, 09:00"]: an end at or before the
     /// start runs into the next day. Same-day hours give one part, "Dom 18, 09:00–18:00". Without a usable
     /// date, falls back to the bare hours.
-    private static func scheduleWithDays(_ horario: String, fecha: String?) -> [String] {
+    static func scheduleWithDays(_ horario: String, fecha: String?) -> [String] {
         let times = horario.split { !$0.isNumber && $0 != ":" }.filter { $0.contains(":") }.map(String.init)
         let parser = formatter("dd/MM/yyyy")
         guard times.count == 2, let fecha, let start = parser.date(from: String(fecha.prefix(10))) else {

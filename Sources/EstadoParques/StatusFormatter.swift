@@ -19,14 +19,14 @@ enum StatusFormatter {
         let range: (Int) -> Bool
     }
 
-    static func formatStatus(current: [String: ParkAttributes]) -> String {
+    static func formatStatus(current: [String: ParkAttributes], now: Date = Date()) -> String {
         let formatter = DateFormatter()
         // CI runners use UTC; posts must show Madrid local time
         formatter.timeZone = TimeZone(identifier: "Europe/Madrid")
         formatter.dateFormat = "yyyy-MM-dd"
-        let datePart = formatter.string(from: Date())
+        let datePart = formatter.string(from: now)
         formatter.dateFormat = "HH:mm"
-        let timePart = formatter.string(from: Date())
+        let timePart = formatter.string(from: now)
         let dateString = "\(datePart) a las \(timePart)"
 
         let groups: [AlertGroup] = [

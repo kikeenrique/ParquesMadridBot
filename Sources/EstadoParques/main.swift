@@ -31,36 +31,14 @@ do {
 
     let previousData = StateManager.loadPreviousState(from: "estado_parques.json")
 
-    var changedParks: Set<String> = []
-    var changeEvents: [ChangeEvent] = []
-    let now = ISO8601DateFormatter().string(from: Date())
-
     let currentState = currentData.mapValues {
         ParkState(code: $0.alertaDescripcion, horario: $0.horarioIncidencia, fecha: $0.fechaIncidencia)
     }
-
-    for (park, state) in currentState {
-        let currentCode = state.code
-        if let previous = previousData[park] {
-            // A schedule-only change is logged too (same from/to code), so the history keeps the hours
-            if !previous.sameAlert(as: state) {
-                changedParks.insert(park)
-                let previousCode = previous.code
-                changeEvents.append(ChangeEvent(
-                    detectedAt: now,
-                    parque: park,
-                    fromCode: previousCode,
-                    toCode: currentCode,
-                    fromOpen: StatusFormatter.isOpen(previousCode),
-                    toOpen: StatusFormatter.isOpen(currentCode),
-                    fromHorario: previous.horario,
-                    toHorario: state.horario
-                ))
-            }
-        } else {
-            changedParks.insert(park)
-        }
-    }
+    let (changedParks, changeEvents) = ChangeDetector.detect(
+        previous: previousData,
+        current: currentState,
+        detectedAt: ISO8601DateFormatter().string(from: Date())
+    )
 
     let statusText = StatusFormatter.formatStatus(current: currentData)
     print(statusText)

@@ -18,5 +18,10 @@ let package = Package(
             ],
             path: "Sources/EstadoParques"
         ),
+        .testTarget(
+            name: "EstadoParquesTests",
+            dependencies: ["EstadoParques"],
+            path: "Tests/EstadoParquesTests"
+        ),
     ]
 )
