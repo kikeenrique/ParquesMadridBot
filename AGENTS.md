@@ -2,6 +2,7 @@
 
 Swift CLI bot that monitors the weather-alert status of Madrid's parks, posts every change to Mastodon
 (@ParquesMadridBot@mastodon.social) and publishes a static website (https://parques.lemambo.com).
+Done and pending work: [ROADMAP.md](ROADMAP.md).
 
 ## Build & Run
 
@@ -19,28 +20,33 @@ Set `PRODUCTION=true`, `MASTODON_INSTANCE`, and `MASTODON_ACCESS_TOKEN` to post 
 swift test
 ```
 
-Swift Testing suites in `Tests/EstadoParquesTests/`, one per source file (`@testable import EstadoParques`).
-They cover the run sequence (posting, saving, API outages and recovery) with a fake API and fake Mastodon,
-Mastodon retries, post formatting and Madrid time, change detection, state and log files (legacy formats
-included), API parsing, and the website's hours, dates and history. Only the raw network calls are untested
-(`swift test --enable-code-coverage`, then `xcrun llvm-cov report` on the test bundle). `busiestPostFits` is a known issue: posts with many
-mixed schedules exceed Mastodon's 500 characters until posts are shortened to fit.
+Swift Testing suites in `Tests/EstadoParquesTests/`, one per source file (`@testable import EstadoParques`), with
+shared helpers in `Fixtures.swift`. They cover the run sequence (posting, saving, API outages and recovery) with
+a fake API and fake Mastodon, Mastodon retries, post formatting and Madrid time, change detection, state and log
+files (legacy formats included), API parsing, and the website's hours, dates and history.
+
+- Only the raw network calls are untested. Coverage: `swift test --enable-code-coverage`, then
+  `xcrun llvm-cov report` on `.build/debug/EstadoParquesTests.xctest` with `.build/debug/codecov/default.profdata`.
+- `busiestPostFits` is a known issue: posts with many mixed schedules exceed Mastodon's 500 characters until
+  posts are shortened to fit (ROADMAP item 1).
+- Networking types (`HTTPURLResponse`, `URLError`) need `import FoundationNetworking` on Linux, behind
+  `#if canImport(FoundationNetworking)`; CI runs the tests on Linux.
 
 ## Rules for agents
 
 - **Add or update tests with every behaviour change**, and run `swift test` before committing.
-
 - **Never open, launch or script a web browser** — Google Chrome above all, and not even headless for
   screenshots. Verify generated HTML/CSS by inspecting the output; the maintainer previews pages.
 - **Always use the latest major version of every GitHub Action** in `.github/workflows/`. Whenever you add or
   touch a `uses:` line, check the current release first (`gh api repos/<owner>/<action>/releases/latest --jq
   .tag_name`) and pin to its major tag (e.g. `@v5`); bump any other outdated action in the same workflow.
   Never copy a version from memory or from older examples.
-- **The same goes for the CI Swift image** (`container: swift:X.Y` in both jobs): use the latest `X.Y` tag on
-  Docker Hub (`library/swift`), and bump the `swiftX.Y` prefix of the binary/SPM cache keys with it, or a
-  binary built by the old toolchain is restored against the new runtime.
+- **The same goes for the CI Swift image** (`container: swift:X.Y` in all three jobs): use the latest `X.Y` tag
+  on Docker Hub (`library/swift`), and bump the `swiftX.Y` prefix of the cache keys with it, or a binary built by
+  the old toolchain is restored against the new runtime.
 - **Times shown to people are Madrid local time** (`Europe/Madrid`); CI runs in UTC. State and log
   timestamps stay ISO 8601 UTC.
+- **Keep the website JavaScript-free** unless the maintainer asks otherwise.
 
 ## Project Structure
 
@@ -53,14 +59,17 @@ mixed schedules exceed Mastodon's 500 characters until posts are shortened to fi
 - `Sources/EstadoParques/StateManager.swift` — JSON state persistence + NDJSON statistics
 - `Sources/EstadoParques/StatusFormatter.swift` — Emoji mapping and post text formatting
 - `Sources/EstadoParques/MastodonPoster.swift` — TootSDK wrapper for posting to Mastodon (retries transient
-  failures)
+  failures; publishing and waiting injectable for tests)
 - `Sources/EstadoParques/WebsiteGenerator.swift` — Rebuilds per-day history from the change log and writes the
   static site
 - `website/` — Static site published to GitHub Pages:
   - `index.html` — generated, and committed by CI alongside the state files
-  - `style.css`, `manifest.webmanifest`, icons, `parques.webp` — hand-made
+  - `style.css`, `manifest.webmanifest`, icons, `parques.webp` (header banner) — hand-made
+  - `parks/*.webp` — one picture per park for the status cards: the whole illustrated circle, cut flat above
+    its name label, transparent around it (WebP with alpha)
   - Zero JavaScript: an "Ahora" section of status cards, then a timeline with one radio button per day; a single
-    CSS rule (`input:checked + label + .day`) shows the selected day. Installable as a Home Screen web app
+    CSS rule (`input:checked + label + .day`) shows the selected day. Each day block carries the page footer,
+    since day blocks sit outside the page flow. Installable as a Home Screen web app
 - `resources/` — Source images: `parques madrid grande.png` (banner), `ParquesMadridBot.png` (app icons),
   `ParquesMadridBot_avatar.png` (Mastodon avatar)
 
@@ -85,7 +94,7 @@ mixed schedules exceed Mastodon's 500 characters until posts are shortened to fi
    and don't run if it fails; on a schedule it is skipped and they run without it.
 1. **check** — builds (binary and SPM caches), runs the park check, regenerates the website, and commits state
    and `website/index.html` back to the repo. If the site's content hash has no deploy marker in the cache, it
-   uploads the Pages artifact.
+   uploads the Pages artifact. The page changes at least once a day (a new timeline day), so it deploys then.
 2. **deploy** — publishes to GitHub Pages (Settings → Pages → Source: GitHub Actions; custom domain
    `parques.lemambo.com`) and only then saves the deploy marker, so a failed deploy is retried next run.
 
@@ -97,6 +106,6 @@ This project was developed with the assistance of AI coding agents.
 
 - **Tool**: [Claude Code CLI](https://claude.com/claude-code)
 - **Role**: Code generation, architecture design, and implementation of the Swift CLI bot, the website,
-  the GitHub Actions workflow, and project documentation.
+  the GitHub Actions workflow, the test suite, and project documentation.
 
 All AI-generated code was reviewed and approved by a human maintainer.
