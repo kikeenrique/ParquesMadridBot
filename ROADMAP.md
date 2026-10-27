@@ -66,14 +66,39 @@ transparent around it, flat at 86%, 450 px).
 The banner (`website/parques.webp`) is the first illustration: several of its scenes match no park. It needs a new
 illustration; nothing to do in code until one exists.
 
-### 4. App icon
+### 3. App icon
 
 The Home Screen icon is a round scene on a white square, which stands out in dark mode. It needs a designed
-icon, ideally at 512 px or more; nothing to do in code until one exists.
+icon; nothing to do in code until one exists.
+
+**Findings (October 2026, iOS 26):**
+
+- iOS uses `apple-touch-icon.png` for the Home Screen; it overrides the manifest's icons. SVG icons work only
+  from the manifest and only without an `apple-touch-icon`, so this site's icon is a PNG.
+- A web app cannot provide dark, tinted or clear variants: there is no mechanism, and WebKit reads but ignores the
+  manifest's `maskable` and `monochrome` icon purposes.
+- iOS 26 still restyles it: users set Home Screen icons to Default, Dark, Clear or Tinted, and iOS applies its own
+  treatment to web app icons too. Developers report poor results in Clear and Tinted; Apple documents none of
+  it ([forum thread](https://developer.apple.com/forums/thread/787919),
+  [firt.dev notes](https://firt.dev/notes/pwa-ios/)).
+- iOS rounds the corners itself, so the image is a full opaque square; avoid transparency.
+- Since iOS 26 every site added to the Home Screen opens as a web app, manifest or not.
+- Android's Chrome does honour `maskable` icons: it crops them to its own shape, keeping the central 80%.
+
+**Proposal:** one icon that holds up in every mode, since only one can be given.
+
+- A 1024 px master: an opaque, full-bleed square, no text, no fine detail (it shows at about 60 px).
+- A mid-to-dark background, such as a deep park green (`#2f7a37` or darker): it sits well on light and dark
+  Home Screens.
+- One bold, light symbol (cream `#f7f6f2`), such as a tree crown, optionally with a small alert-yellow dot.
+  Strong light-against-dark contrast is what survives Tinted mode, which keeps only the brightness.
+- The symbol inside the central 80%, so the same image also serves as Android's maskable icon.
+- Exports: `apple-touch-icon.png` (180 px), `icon-192.png` and `icon-512.png`; the manifest lists the 512 px
+  file a second time with `"purpose": "maskable"`.
+- Optional: an SVG favicon with its own dark-mode colours for Chrome and Firefox tabs (Safari keeps the PNG).
+- Check on an iPhone in all four Home Screen modes, and on Android with a round icon shape.
 
 ### Optional ideas
 
 - **Map** of the parks and districts, as a precomputed SVG, keeping the site JavaScript-free.
-- **Refresh while open**: the installed web app only updates when reopened; reloading on return would need a
-  little JavaScript.
 - **Theme switch** inside the page (it follows the device today); remembering the choice needs JavaScript.
