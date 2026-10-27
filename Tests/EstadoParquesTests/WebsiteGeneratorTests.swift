@@ -219,6 +219,30 @@ struct WebsiteGeneratorTests {
         #expect(second[panel.upperBound...].prefix(200).contains("Estado al final del día."))
     }
 
+    @Test("The map sits right under the title, and its dots link to cards on the page")
+    func mapUnderTheTitle() throws {
+        let html = try GeneratedPage().html
+        #expect(html.contains("<h1>Parques de Madrid</h1>\n<figure class=\"map-figure\">"))
+        #expect(html.contains(##"<a href="#c-retiro" aria-label="Retiro: alerta naranja">"##))
+        #expect(html.contains(#"<span class="name" id="c-retiro" title="Jardines del Buen Retiro">"#))
+    }
+
+    @Test("The banner opens every page's footer, before the buttons")
+    func bannerInTheFooter() throws {
+        let site = try GeneratedSite()
+        for path in ["index.html", "historico/2026-2.html"] {
+            let page = try site.page(path)
+            #expect(page.components(separatedBy: "class=\"banner\"").count - 1 == 1)
+            #expect(page.contains("<footer><img class=\"banner\""))
+        }
+        #expect(try site.page("historico/2026-2.html").contains(#"<footer><img class="banner" src="../parques.webp""#))
+    }
+
+    @Test("Archive pages have no map: it shows today")
+    func noMapInArchives() throws {
+        #expect(try GeneratedSite().page("historico/2026-2.html").contains("class=\"map\"") == false)
+    }
+
     @Test func friday() throws {
         let friday = try GeneratedPage().day("2026-10-16")
         #expect(friday.contains(#"Jardines del Buen Retiro <span class="horario">18:00–09:00</span>"#))

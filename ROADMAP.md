@@ -27,6 +27,9 @@ What has been done and what is still open. Pending items are in recommended orde
 ### Website — [parques.lemambo.com](https://parques.lemambo.com)
 
 - Static site on GitHub Pages with the custom domain and HTTPS; **no JavaScript**, no cookies.
+- **Status map** under the title, in place of the banner: Madrid's districts from the city's open data, and one dot
+  per park in its alert colour that links to its card (5 KB, against the banner's 163 KB). The banner now opens
+  the footer.
 - **Ahora**: last-change note, summary chips, and one card per park, two per row (one on phones), with the park's
   picture, status, name and dated hours (e.g. "Dom 18, 18:00 – lun 19, 09:00").
 - A picture for each of the nine parks; eight are sharp 450 px cuts of one AI-generated illustration per park
@@ -47,7 +50,7 @@ What has been done and what is still open. Pending items are in recommended orde
 
 - GitHub Actions on the latest action versions and the `swift:6.4` image, with build caches keyed by toolchain.
 - Pages deploys only when the page changes (about once a day otherwise), and a failed deploy is retried.
-- **61 Swift Testing tests, 90% line coverage**; only the raw network calls are untested. CI prints the coverage
+- **71 Swift Testing tests, 90% line coverage**; only the raw network calls are untested. CI prints the coverage
   report in each test run and its summary.
 - Tests run on every push before the bot and the deploy; scheduled runs skip them and still deploy when the page
   changes (confirmed on 19 October).
@@ -61,12 +64,7 @@ The only park still on the old ~300 px picture from the shared illustration. It 
 the others in `resources/parks/` (its landmark: the Dama del Manzanares); then cut it the same way (whole circle,
 transparent around it, flat at 86%, 450 px).
 
-### 2. Header illustration
-
-The banner (`website/parques.webp`) is the first illustration: several of its scenes match no park. It needs a new
-illustration; nothing to do in code until one exists.
-
-### 3. App icon
+### 2. App icon
 
 The Home Screen icon is a round scene on a white square, which stands out in dark mode. It needs a designed
 icon; nothing to do in code until one exists.
@@ -100,5 +98,6 @@ icon; nothing to do in code until one exists.
 
 ### Optional ideas
 
-- **Map** of the parks and districts, as a precomputed SVG, keeping the site JavaScript-free.
+- **Footer banner**: the illustration (`website/parques.webp`) has several scenes that match no park; a new one
+  could show the nine.
 - **Theme switch** inside the page (it follows the device today); remembering the choice needs JavaScript.

@@ -186,14 +186,14 @@ enum WebsiteGenerator {
         name.hasPrefix("Parque ") ? String(name.dropFirst("Parque ".count)) : name
     }
 
-    private static func levelClass(_ code: Int) -> String {
+    static func levelClass(_ code: Int) -> String {
         if code >= 5 { return "l5" }
         if code == 4 { return "l4" }
         if code == 3 { return "l3" }
         return "l1"
     }
 
-    private static func levelName(_ code: Int) -> String {
+    static func levelName(_ code: Int) -> String {
         if code >= 5 { return "cerrado" }
         if code == 4 { return "alerta naranja" }
         if code == 3 { return "alerta amarilla" }
@@ -227,6 +227,9 @@ enum WebsiteGenerator {
         "Parque Quinta de los Molinos": "quinta-molinos",
         "Rosaleda del Parque del Oeste": "rosaleda",
     ]
+
+    /// Ids of the cards in "Ahora", which the map's dots link to
+    private static let cardIDs = parkImages.mapValues { "c-\($0)" }
 
     /// "De 00:00 h a 18:00 h" → "00:00–18:00"
     static func compactSchedule(_ horario: String) -> String {
@@ -290,7 +293,8 @@ enum WebsiteGenerator {
                 return """
                 <li class="card \(levelClass(park.endCode))">\(photo)<div class="text">\
                 <span class="chip \(levelClass(park.endCode))">\(level.prefix(1).uppercased() + level.dropFirst())</span>\
-                <span class="name" title="\(name)">\(name)</span><span class="when">\(when)</span></div></li>
+                <span class="name"\(cardIDs[park.name].map { " id=\"\($0)\"" } ?? "") title="\(name)">\(name)</span>\
+                <span class="when">\(when)</span></div></li>
                 """
             }
             .joined(separator: "\n")
@@ -396,6 +400,12 @@ enum WebsiteGenerator {
         let title = page.isHome ? "Parques de Madrid" : "Parques de Madrid · \(period(days))"
         let historyTitle = page.isHome ? "Registro histórico" : "Registro histórico: \(period(days))"
         let root = page.root
+        // Today's status map under the title, on the home page only
+        var map = ""
+        if page.isHome, let today = days.last {
+            let codes = Dictionary(uniqueKeysWithValues: today.parks.map { ($0.name, $0.endCode) })
+            map = ParkMap.render(codes: codes, cardIDs: cardIDs)
+        }
 
         return """
         <!doctype html>
@@ -420,8 +430,8 @@ enum WebsiteGenerator {
         </head>
         <body>
         <header>
-        <img class="banner" src="\(root)parques.webp" alt="" width="1536" height="810">
         <h1>\(page.isHome ? "Parques de Madrid" : "<a href=\"\(root)\">Parques de Madrid</a>")</h1>
+        \(map)
         <p>Alertas meteorológicas de los parques vigilados por el Ayuntamiento de Madrid.</p>
         </header>
         <div id="instalar" popover>
@@ -448,7 +458,8 @@ enum WebsiteGenerator {
         </div>
         </main>
         \(panels.joined(separator: "\n"))
-        <footer>\(actions)
+        <footer><img class="banner" src="\(root)parques.webp" alt="" width="1536" height="810">
+        \(actions)
         <p>Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. \
         Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>.</p>
         <p class="cookies">🍪 Esta web no usa cookies: ni de las que te rastrean ni de las de chocolate. \

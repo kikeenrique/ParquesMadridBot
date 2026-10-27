@@ -15,6 +15,7 @@
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="stylesheet" href="style.css">
 <style>
+body:has(#d-2026-10-28:checked) #p-2026-10-28{display:block}
 body:has(#d-2026-10-27:checked) #p-2026-10-27{display:block}
 body:has(#d-2026-10-26:checked) #p-2026-10-26{display:block}
 body:has(#d-2026-10-25:checked) #p-2026-10-25{display:block}
@@ -46,8 +47,22 @@ body:has(#d-2026-10-01:checked) #p-2026-10-01{display:block}
 </head>
 <body>
 <header>
-<img class="banner" src="parques.webp" alt="" width="1536" height="810">
 <h1>Parques de Madrid</h1>
+<figure class="map-figure">
+<svg class="map" viewBox="0 0 600 401" role="group" aria-label="Mapa de los parques">
+<rect class="outside" width="100%" height="100%"/><path class="districts" d="M203 316L166 313L158 395L180 415L184 427L219 431L225 437L254 419L274 423L287 412L300 412L286 372L275 367L274 356L249 323L227 314L203 316ZM406 252L375 241L369 265L311 282L306 298L281 318L249 323L274 356L275 367L286 372L300 412L317 400L357 435L379 439L397 453L425 459L467 454L471 451L455 449L452 441L458 419L479 399L517 335L424 287L420 280L426 272L418 257L406 252ZM170 216L157 201L116 249L99 261L86 261L93 275L80 286L80 307L60 327L89 334L167 311L173 256L201 229L170 216ZM246 313L248 299L236 287L233 265L201 229L173 256L166 313L227 314L249 323L246 313ZM257 324L285 315L306 298L311 282L369 265L375 241L331 228L305 202L284 198L275 222L247 258L232 265L236 287L248 299L249 323L257 324ZM163 184L163 168L122 190L103 193L75 217L51 215L39 232L22 237L24 232L-9 238L-43 225L-72 226L-22 316L-15 308L26 330L41 321L60 327L80 307L80 286L93 275L86 261L99 261L116 249L148 209L157 201L163 203L163 184ZM202 201L175 192L175 177L162 177L165 213L201 229L232 265L246 259L266 231L255 213L228 192L202 201ZM471 179L464 168L473 145L468 144L445 192L399 179L398 166L392 169L379 178L358 236L416 254L426 272L420 280L423 286L494 326L551 247L561 239L570 245L589 238L593 210L591 191L585 178L566 160L568 175L557 176L548 187L471 179ZM331 176L297 164L284 198L303 200L329 227L358 236L378 179L331 176ZM286 192L297 164L255 156L225 162L228 192L255 213L266 231L286 192ZM225 196L224 171L231 146L176 131L188 151L168 160L162 177L175 177L175 192L187 197L205 202L225 196ZM375 173L341 111L346 109L339 95L323 84L289 38L283 3L296 -14L266 -17L266 11L284 50L296 99L293 129L297 164L328 175L378 179L375 173ZM435 77L320 79L339 95L346 109L341 111L378 179L398 166L399 179L445 192L468 144L471 134L465 123L473 121L472 114L487 116L566 86L435 77ZM-2 24L-77 -4L-81 28L-72 38L-61 32L-9 41L15 66L24 89L21 98L32 93L61 94L61 134L44 148L39 167L53 215L75 217L90 200L122 190L188 151L173 124L169 92L193 85L183 69L193 43L181 24L119 10L106 12L105 22L102 -1L90 -5L88 15L40 9L-2 24ZM296 110L293 92L258 112L230 111L235 124L225 162L255 156L297 164L293 129L296 110ZM229 88L172 87L169 92L173 124L176 131L231 146L235 124L228 101L229 88ZM266 -12L266 -17L242 -12L233 33L230 111L258 112L293 92L284 50L266 11L266 -12ZM216 10L187 19L183 26L193 43L183 69L193 85L229 88L238 11L216 10ZM501 -92L480 -95L435 -65L417 -65L417 -19L388 -19L383 -12L367 -12L371 17L370 26L362 26L377 49L410 70L405 78L566 85L559 71L576 62L569 48L579 25L560 17L554 -23L545 -29L544 -45L521 -58L515 -70L517 -92L501 -92ZM311 -92L300 -93L297 -70L267 -29L266 -17L296 -14L283 3L291 40L320 79L405 78L412 72L377 49L362 26L370 26L371 17L367 -12L383 -12L388 -19L417 -19L417 -65L389 -91L351 -82L327 -83L311 -92ZM327 -443L304 -457L291 -447L277 -417L280 -392L237 -356L218 -309L199 -290L167 -288L132 -299L125 -311L46 -342L-7 -334L-1 -354L-20 -365L-27 -360L-13 -337L-30 -325L-58 -323L-79 -314L-91 -316L-116 -304L-142 -316L-160 -310L-176 -297L-176 -280L-187 -257L-176 -237L-179 -229L-155 -220L-133 -157L-113 -128L-115 -120L-108 -110L-114 -94L-111 -88L-78 -77L-83 -59L-72 -45L-70 -27L-77 -4L-0 24L40 9L88 15L90 -5L102 -1L105 22L104 14L111 10L152 14L183 26L186 19L210 9L238 11L242 -12L266 -17L270 -37L297 -71L300 -93L289 -116L282 -119L282 -129L259 -136L275 -156L249 -199L233 -256L230 -252L207 -278L228 -283L287 -316L303 -307L315 -275L368 -264L408 -296L417 -312L410 -328L387 -342L383 -369L373 -381L361 -386L359 -413L344 -439L327 -443Z"/>
+<a href="#c-retiro" aria-label="Retiro: abierto"><title>Retiro: abierto</title><circle class="l1" cx="245" cy="174" r="11"/><text x="245" y="200" text-anchor="middle">Retiro</text></a>
+<a href="#c-capricho" aria-label="El Capricho: abierto"><title>El Capricho: abierto</title><circle class="l1" cx="433" cy="68" r="11"/><text x="449" y="75" text-anchor="start">El Capricho</text></a>
+<a href="#c-juan-carlos-i" aria-label="Juan Carlos I: abierto"><title>Juan Carlos I: abierto</title><circle class="l1" cx="408" cy="47" r="11"/><text x="408" y="29" text-anchor="middle">Juan Carlos I</text></a>
+<a href="#c-juan-pablo-ii" aria-label="Juan Pablo II: abierto"><title>Juan Pablo II: abierto</title><circle class="l1" cx="365" cy="63" r="11"/><text x="349" y="63" text-anchor="end">Juan Pablo II</text></a>
+<a href="#c-lineal-manzanares" aria-label="Lineal del Manzanares: abierto"><title>Lineal del Manzanares: abierto</title><circle class="l1" cx="272" cy="355" r="11"/><text x="288" y="362" text-anchor="start">Lineal del Manzanares</text></a>
+<a href="#c-fuente-del-berro" aria-label="Fuente del Berro: abierto"><title>Fuente del Berro: abierto</title><circle class="l1" cx="284" cy="150" r="11"/><text x="300" y="157" text-anchor="start">Fuente del Berro</text></a>
+<a href="#c-torre-arias" aria-label="Torre Arias: abierto"><title>Torre Arias: abierto</title><circle class="l1" cx="378" cy="89" r="11"/><text x="394" y="101" text-anchor="start">Torre Arias</text></a>
+<a href="#c-quinta-molinos" aria-label="Quinta de los Molinos: abierto"><title>Quinta de los Molinos: abierto</title><circle class="l1" cx="363" cy="101" r="11"/><text x="347" y="117" text-anchor="end">Quinta de los Molinos</text></a>
+<a href="#c-rosaleda" aria-label="Rosaleda: abierto"><title>Rosaleda: abierto</title><circle class="l1" cx="165" cy="143" r="11"/><text x="149" y="150" text-anchor="end">Rosaleda</text></a>
+</svg>
+<figcaption>Localizaciones en el mapa de Madrid</figcaption>
+</figure>
 <p>Alertas meteorológicas de los parques vigilados por el Ayuntamiento de Madrid.</p>
 </header>
 <div id="instalar" popover>
@@ -65,15 +80,15 @@ body:has(#d-2026-10-01:checked) #p-2026-10-01{display:block}
 <p class="note">Sin cambios desde el sábado 24 de octubre, a las 10:43.</p>
 <p class="summary"><span class="chip l1">9 abiertos</span></p>
 <ul class="cards">
-<li class="card l1"><img class="photo" src="parks/retiro.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" title="Jardines del Buen Retiro">Jardines del Buen Retiro</span><span class="when"><span>Sin alertas</span></span></div></li>
-<li class="card l1"><img class="photo" src="parks/capricho.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" title="Jardín del Capricho de la Alameda de Osuna">Jardín del Capricho de la Alameda de Osuna</span><span class="when"><span>Sin alertas</span></span></div></li>
-<li class="card l1"><img class="photo" src="parks/juan-carlos-i.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" title="Juan Carlos I">Juan Carlos I</span><span class="when"><span>Sin alertas</span></span></div></li>
-<li class="card l1"><img class="photo" src="parks/juan-pablo-ii.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" title="Juan Pablo II">Juan Pablo II</span><span class="when"><span>Sin alertas</span></span></div></li>
-<li class="card l1"><img class="photo" src="parks/lineal-manzanares.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" title="Lineal del Manzanares">Lineal del Manzanares</span><span class="when"><span>Sin alertas</span></span></div></li>
-<li class="card l1"><img class="photo" src="parks/fuente-del-berro.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" title="Quinta Fuente del Berro">Quinta Fuente del Berro</span><span class="when"><span>Sin alertas</span></span></div></li>
-<li class="card l1"><img class="photo" src="parks/torre-arias.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" title="Quinta de Torre Arias">Quinta de Torre Arias</span><span class="when"><span>Sin alertas</span></span></div></li>
-<li class="card l1"><img class="photo" src="parks/quinta-molinos.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" title="Quinta de los Molinos">Quinta de los Molinos</span><span class="when"><span>Sin alertas</span></span></div></li>
-<li class="card l1"><img class="photo" src="parks/rosaleda.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" title="Rosaleda del Parque del Oeste">Rosaleda del Parque del Oeste</span><span class="when"><span>Sin alertas</span></span></div></li>
+<li class="card l1"><img class="photo" src="parks/retiro.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" id="c-retiro" title="Jardines del Buen Retiro">Jardines del Buen Retiro</span><span class="when"><span>Sin alertas</span></span></div></li>
+<li class="card l1"><img class="photo" src="parks/capricho.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" id="c-capricho" title="Jardín del Capricho de la Alameda de Osuna">Jardín del Capricho de la Alameda de Osuna</span><span class="when"><span>Sin alertas</span></span></div></li>
+<li class="card l1"><img class="photo" src="parks/juan-carlos-i.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" id="c-juan-carlos-i" title="Juan Carlos I">Juan Carlos I</span><span class="when"><span>Sin alertas</span></span></div></li>
+<li class="card l1"><img class="photo" src="parks/juan-pablo-ii.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" id="c-juan-pablo-ii" title="Juan Pablo II">Juan Pablo II</span><span class="when"><span>Sin alertas</span></span></div></li>
+<li class="card l1"><img class="photo" src="parks/lineal-manzanares.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" id="c-lineal-manzanares" title="Lineal del Manzanares">Lineal del Manzanares</span><span class="when"><span>Sin alertas</span></span></div></li>
+<li class="card l1"><img class="photo" src="parks/fuente-del-berro.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" id="c-fuente-del-berro" title="Quinta Fuente del Berro">Quinta Fuente del Berro</span><span class="when"><span>Sin alertas</span></span></div></li>
+<li class="card l1"><img class="photo" src="parks/torre-arias.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" id="c-torre-arias" title="Quinta de Torre Arias">Quinta de Torre Arias</span><span class="when"><span>Sin alertas</span></span></div></li>
+<li class="card l1"><img class="photo" src="parks/quinta-molinos.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" id="c-quinta-molinos" title="Quinta de los Molinos">Quinta de los Molinos</span><span class="when"><span>Sin alertas</span></span></div></li>
+<li class="card l1"><img class="photo" src="parks/rosaleda.webp" alt="" width="144" height="125"><div class="text"><span class="chip l1">Abierto</span><span class="name" id="c-rosaleda" title="Rosaleda del Parque del Oeste">Rosaleda del Parque del Oeste</span><span class="when"><span>Sin alertas</span></span></div></li>
 </ul>
 <p class="credit">Ilustraciones generadas con IA, con licencia <a href="https://github.com/kikeenrique/ParquesMadridBot/blob/main/resources/parks/LICENSE.md" rel="license">CC BY-SA 4.0</a>.</p>
 </section>
@@ -85,7 +100,8 @@ body:has(#d-2026-10-01:checked) #p-2026-10-01{display:block}
 <main class="viewer">
 <ol class="names" aria-hidden="true"><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ol>
 <div class="timeline" role="radiogroup" aria-label="Día">
-<input type="radio" name="dia" id="d-2026-10-27" checked><label for="d-2026-10-27" title="martes, 27 de octubre de 2026"><span class="vh">27 oct</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-10-28" checked><label for="d-2026-10-28" title="miércoles, 28 de octubre de 2026"><span class="vh">28 oct</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-10-27"><label for="d-2026-10-27" title="martes, 27 de octubre de 2026"><span class="vh">27 oct</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
 <input type="radio" name="dia" id="d-2026-10-26"><label for="d-2026-10-26" title="lunes, 26 de octubre de 2026"><span class="vh">26 oct</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
 <input type="radio" name="dia" id="d-2026-10-25"><label for="d-2026-10-25" title="domingo, 25 de octubre de 2026"><span class="vh">25 oct</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
 <input type="radio" name="dia" id="d-2026-10-24"><label for="d-2026-10-24" title="sábado, 24 de octubre de 2026"><span class="vh">24 oct</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
@@ -115,9 +131,14 @@ body:has(#d-2026-10-01:checked) #p-2026-10-01{display:block}
 <a class="more" href="historico/2026-2.html" title="julio–septiembre de 2026">‹ Antes</a>
 </div>
 </main>
+<section class="day panel" id="p-2026-10-28">
+<h2>Miércoles, 28 de octubre de 2026</h2>
+
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
 <section class="day panel" id="p-2026-10-27">
 <h2>Martes, 27 de octubre de 2026</h2>
-
+<p class="note">Estado al final del día.</p>
 <h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
 </section>
 <section class="day panel" id="p-2026-10-26">
@@ -253,7 +274,8 @@ body:has(#d-2026-10-01:checked) #p-2026-10-01{display:block}
 <h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
 <h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (21:43)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (21:43)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (21:43)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (21:43)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (21:43)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (21:43)</small></li></ul>
 </section>
-<footer><nav class="actions">
+<footer><img class="banner" src="parques.webp" alt="" width="1536" height="810">
+<nav class="actions">
 <a class="btn mastodon" rel="me" href="https://mastodon.social/@ParquesMadridBot"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></svg><span>Síguenos en Mastodon<small>@ParquesMadridBot@mastodon.social</small></span></a>
 <button class="btn install" popovertarget="instalar"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></g></svg><span>Instalar como app<small>iPhone, iPad, Mac y Android</small></span></button>
 </nav>

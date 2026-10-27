@@ -115,6 +115,46 @@ header p, .history p { margin: .25rem 0; color: var(--muted); }
   border-radius: 16px;
 }
 
+/* Status map under the title: districts, and one dot per park that links to its card */
+.map-figure { margin: .75rem 0 1rem; }
+.map-figure figcaption { margin-top: .375rem; color: var(--muted); font-size: .8125rem; text-align: center; }
+.map {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.map .outside { fill: var(--bg); }
+.map .districts { fill: var(--panel); stroke: var(--line); stroke-width: 1.2; stroke-linejoin: round; }
+.map circle {
+  stroke: var(--panel);
+  stroke-width: 3;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform .15s;
+}
+.map circle.l1 { fill: var(--l1); }
+.map circle.l3 { fill: var(--l3); }
+.map circle.l4 { fill: var(--l4); }
+.map circle.l5 { fill: var(--l5); }
+/* Labels in user units: 19 of 600 reads at about 11px on a phone */
+.map text {
+  font: 600 19px system-ui, -apple-system, "Segoe UI", sans-serif;
+  fill: var(--fg);
+  paint-order: stroke;
+  stroke: var(--panel);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.map a:is(:hover, :focus-visible) circle { transform: scale(1.35); }
+.map a:is(:hover, :focus-visible) text { text-decoration: underline; }
+.map a:focus { outline: none; }
+/* The card a map dot links to: scrolled clear of the top edge, and outlined */
+.card .name { scroll-margin-top: 40vh; }
+.card:has(.name:target) { outline: 3px solid var(--fg); outline-offset: 2px; }
+
 /* "Ahora": the current state, readable at a glance */
 /* Status chip: solid level colour, used in the summary and on every card */
 .chip {

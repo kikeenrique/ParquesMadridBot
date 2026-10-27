@@ -23,7 +23,7 @@ swift test
 Swift Testing suites in `Tests/EstadoParquesTests/`, one per source file (`@testable import EstadoParques`), with
 shared helpers in `Fixtures.swift`. They cover the run sequence (posting, saving, API outages and recovery) with
 a fake API and fake Mastodon, Mastodon retries, post formatting and Madrid time, change detection, state and log
-files (legacy formats included), API parsing, and the website's hours, dates and history.
+files (legacy formats included), API parsing, the website's hours, dates, history and pages, and the status map.
 
 - Only the raw network calls are untested. Coverage: `swift test --enable-code-coverage`, then
   `xcrun llvm-cov report` on `.build/debug/EstadoParquesTests.xctest` with `.build/debug/codecov/default.profdata`.
@@ -63,14 +63,18 @@ files (legacy formats included), API parsing, and the website's hours, dates and
   failures; publishing and waiting injectable for tests)
 - `Sources/EstadoParques/WebsiteGenerator.swift` — Rebuilds per-day history from the change log and writes the
   static site
+- `Sources/EstadoParques/ParkMap.swift` — The status map under the title: the city's districts (precomputed path
+  from the city's open data) and one dot per park in its alert colour, linking to its card. Park positions and
+  label placements are a hand-tuned table: a new park needs an entry there
 - `website/` — Static site published to GitHub Pages:
   - `index.html` (this month) and `historico/<year>-<1|2>.html` (earlier days, one page per half-year:
     January–June, July–December) — generated, and committed by CI alongside the state files. Closed half-years
     never change; the open one changes once a month. Each timeline ends in links to the neighbouring pages
-  - `style.css`, `manifest.webmanifest`, icons, `parques.webp` (header banner) — hand-made
+  - `style.css`, `manifest.webmanifest`, icons, `parques.webp` (banner, at the top of the footer) — hand-made
   - `parks/*.webp` — one picture per park for the status cards: the whole illustrated circle, cut flat above
     its name label, transparent around it (WebP with alpha)
-  - Zero JavaScript: an "Ahora" section of status cards (home page only), then a timeline with one radio button
+  - Zero JavaScript: on the home page, the status map under the title and an "Ahora" section of status cards; then
+    a timeline with one radio button
     per day. Day panels follow the timeline in the page flow, and each page's `<style>` has one rule per day
     (`body:has(#d-…:checked) #p-…`) that shows the checked day's panel, so the footer appears once. Installable
     as a Home Screen web app
