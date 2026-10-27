@@ -8,6 +8,9 @@ What has been done and what is still open. Pending items are in recommended orde
 
 - Posts when a park's alert **hours** change, not only its level (e.g. orange 21:00–24:00 → orange 00:00–18:00).
 - Hours shown for every alert level, yellow included.
+- **Posts fit Mastodon's 500 characters**: one line per park with its hours (`· Retiro ⏰ 18:00–09:00`), alerts
+  first, and a dated header (`Parques de Madrid, 2026-10-18 dom a las 18:27`). Even all nine parks on alert fit.
+  Hours carry no day: parks close at night, and the next morning's run posts the new forecast.
 - Times in **Madrid local time** (CI runs in UTC).
 - Only a leading "Parque " is dropped from names ("Rosaleda del Parque del Oeste" stays whole).
 - Every post ends with a link to the website.
@@ -52,20 +55,13 @@ What has been done and what is still open. Pending items are in recommended orde
 
 ## Pending
 
-### 1. Posts that fit Mastodon's 500 characters
-
-A day with several alert levels, each with different hours, makes a post over 500 characters, which Mastodon
-rejects (the run then fails). The `busiestPostFits` test records it as a known issue. Fix: count the post as
-Mastodon does and shorten it when needed (e.g. a shorter header line). Once that guard exists, posts can also show
-dates with the hours, like the website cards.
-
-### 2. Lineal del Manzanares picture
+### 1. Lineal del Manzanares picture
 
 The only park still on the old ~300 px picture from the shared illustration. It needs its own illustration like
-the others in `resources/parks/` (its landmark: the Dama del Manzanares); then cut it the same way (whole circle, transparent around it, flat at 86%,
-450 px).
+the others in `resources/parks/` (its landmark: the Dama del Manzanares); then cut it the same way (whole circle,
+transparent around it, flat at 86%, 450 px).
 
-### 3. Header illustration
+### 2. Header illustration
 
 The banner (`website/parques.webp`) is the first illustration: several of its scenes match no park. It needs a new
 illustration; nothing to do in code until one exists.

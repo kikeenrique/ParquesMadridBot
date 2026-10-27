@@ -63,7 +63,7 @@ struct BotTests {
         try await bot(outbox: outbox).run()
 
         #expect(outbox.posts.count == 1)
-        #expect(outbox.posts.first?.contains("Estado de parques de Madrid a fecha 2026-10-18 a las 18:27.") == true)
+        #expect(outbox.posts.first?.contains("Parques de Madrid, 2026-10-18 dom a las 18:27") == true)
         #expect(savedState().count == Fixtures.parkNames.count)
         #expect(try loggedEvents().isEmpty)
     }
@@ -81,7 +81,7 @@ struct BotTests {
         try await bot(parks: Fixtures.parks(alerts: Self.yellowRetiro), outbox: outbox).run()
 
         #expect(outbox.posts.count == 2)
-        #expect(outbox.posts.last?.contains("🟡 Alerta amarilla:\n⏰ De 18:00 h-09:00 h\n· Jardines del Buen Retiro") == true)
+        #expect(outbox.posts.last?.contains("🟡 Alerta amarilla\n· Jardines del Buen Retiro ⏰ 18:00–09:00") == true)
         let events = try loggedEvents()
         #expect(events.map(\.parque) == ["Jardines del Buen Retiro"])
         #expect(savedState()["Jardines del Buen Retiro"]?.code == 3)
@@ -132,7 +132,7 @@ struct BotTests {
         try await bot(outbox: outbox).run()
 
         #expect(outbox.posts.count == 3)
-        #expect(outbox.posts.last?.hasPrefix("Estado de parques de Madrid") == true)
+        #expect(outbox.posts.last?.hasPrefix("Parques de Madrid, ") == true)
         #expect(StateManager.loadAPIDown(from: paths.apiStatus) == false)
     }
 

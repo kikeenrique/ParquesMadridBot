@@ -19,28 +19,29 @@ enum StatusFormatter {
         let range: (Int) -> Bool
     }
 
+    /// One line per park, alerts first, each with its hours ("18:00–09:00"). Hours carry no day: parks close
+    /// at night, and the next morning's run posts the new forecast.
     static func formatStatus(current: [String: ParkAttributes], now: Date = Date()) -> String {
         let formatter = DateFormatter()
         // CI runners use UTC; posts must show Madrid local time
         formatter.timeZone = TimeZone(identifier: "Europe/Madrid")
-        formatter.dateFormat = "yyyy-MM-dd"
-        let datePart = formatter.string(from: now)
-        formatter.dateFormat = "HH:mm"
-        let timePart = formatter.string(from: now)
-        let dateString = "\(datePart) a las \(timePart)"
+        formatter.locale = Locale(identifier: "es_ES")
+        // es_ES abbreviates "dom." with a dot: "2026-10-18 dom a las 18:27"
+        formatter.dateFormat = "yyyy-MM-dd EEE 'a las' HH:mm"
+        let dateString = formatter.string(from: now).replacingOccurrences(of: ".", with: "")
 
         let groups: [AlertGroup] = [
-            AlertGroup(emoji: "🟢", header: "Abiertos", showSchedule: false) { $0 < 3 },
             AlertGroup(emoji: "🟡", header: "Alerta amarilla", showSchedule: true) { $0 == 3 },
             AlertGroup(emoji: "🟠", header: "Alerta naranja", showSchedule: true) { $0 == 4 },
             AlertGroup(emoji: "🔴", header: "Cerrados", showSchedule: true) { $0 >= 5 },
+            AlertGroup(emoji: "🟢", header: "Abiertos", showSchedule: false) { $0 < 3 },
         ]
 
         func shortName(_ name: String) -> String {
             name.hasPrefix("Parque ") ? String(name.dropFirst("Parque ".count)) : name
         }
 
-        var lines: [String] = ["Estado de parques de Madrid a fecha \(dateString)."]
+        var lines: [String] = ["Parques de Madrid, \(dateString)"]
 
         for group in groups {
             let parks = current
@@ -50,32 +51,10 @@ enum StatusFormatter {
             guard !parks.isEmpty else { continue }
 
             lines.append("")
-            lines.append("\(group.emoji) \(group.header):")
-
-            if group.showSchedule {
-                var bySchedule: [(String, [String])] = []
-                for (name, attrs) in parks {
-                    let schedule = attrs.horarioIncidencia
-                        .map { $0.replacingOccurrences(of: "de ", with: "").replacingOccurrences(of: " a ", with: "-") }
-                        ?? ""
-                    if let idx = bySchedule.firstIndex(where: { $0.0 == schedule }) {
-                        bySchedule[idx].1.append(name)
-                    } else {
-                        bySchedule.append((schedule, [name]))
-                    }
-                }
-                for (schedule, names) in bySchedule {
-                    if !schedule.isEmpty {
-                        lines.append("⏰ \(schedule)")
-                    }
-                    for name in names {
-                        lines.append("· \(shortName(name))")
-                    }
-                }
-            } else {
-                for (name, _) in parks {
-                    lines.append("· \(shortName(name))")
-                }
+            lines.append("\(group.emoji) \(group.header)")
+            for (name, attrs) in parks {
+                let hours = group.showSchedule ? attrs.horarioIncidencia.map(WebsiteGenerator.compactSchedule) : nil
+                lines.append("· \(shortName(name))" + (hours.map { " ⏰ \($0)" } ?? ""))
             }
         }
 

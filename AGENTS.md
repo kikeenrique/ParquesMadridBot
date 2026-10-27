@@ -28,8 +28,8 @@ files (legacy formats included), API parsing, and the website's hours, dates and
 - Only the raw network calls are untested. Coverage: `swift test --enable-code-coverage`, then
   `xcrun llvm-cov report` on `.build/debug/EstadoParquesTests.xctest` with `.build/debug/codecov/default.profdata`.
   CI prints the same report (without `Tests/` and `.build/`) in the log and the run summary.
-- `busiestPostFits` is a known issue: posts with many mixed schedules exceed Mastodon's 500 characters until
-  posts are shortened to fit (ROADMAP item 1).
+- Posts must fit Mastodon's 500 characters: `allParksOnAlertFit` checks the worst case (all nine parks on alert,
+  full names). Keep it passing when changing the post format or adding a park.
 - Networking types (`HTTPURLResponse`, `URLError`) need `import FoundationNetworking` on Linux, behind
   `#if canImport(FoundationNetworking)`; CI runs the tests on Linux.
 
