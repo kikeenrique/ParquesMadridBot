@@ -52,6 +52,7 @@ body {
 }
 
 h1 { margin: 0 0 .25rem; font-size: 1.75rem; }
+h1 a { text-decoration: none; }
 h2 { margin: 2rem 0 .5rem; font-size: 1.375rem; }
 header p, .history p { margin: .25rem 0; color: var(--muted); }
 
@@ -216,7 +217,6 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
 
 /* Timeline: park names on the left, one column of cells per day */
 .viewer {
-  position: relative; /* containing block for the day panels */
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: .5rem;
@@ -267,7 +267,14 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
   cursor: pointer;
 }
 /* flex: none: cells must not shrink, or their rows drift away from the park names */
-.timeline label i { display: block; flex: none; width: var(--cell-w); height: var(--cell); border-radius: 2px; }
+.timeline label i {
+  display: block;
+  flex: none;
+  width: var(--cell-w);
+  height: var(--cell);
+  border-radius: 2px;
+  background: var(--l1); /* open: cells without a level class */
+}
 .timeline label:hover { outline: 2px solid var(--line); outline-offset: 2px; }
 .timeline label b {
   position: absolute;
@@ -283,17 +290,19 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
 .timeline input:checked + label { outline: 2px solid var(--fg); outline-offset: 2px; }
 .timeline input:focus-visible + label { outline: 3px solid var(--l4); outline-offset: 2px; }
 
-/* Day blocks sit below the timeline, out of flow; only the checked day shows, with the page footer */
-.day {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+/* Links to the neighbouring pages, at either end of the timeline */
+.timeline .more {
+  flex: none;
+  align-self: center;
+  padding: 0 .5rem;
   direction: ltr;
-  margin-top: 1rem;
+  font-size: .8125rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
-.timeline input:checked + label + .day { display: block; }
+
+/* Day panels follow the timeline; the page's per-day rules show only the checked day's */
+.day { display: none; margin-top: 1rem; }
 
 .panel {
   padding: 1rem 1.25rem;
@@ -304,8 +313,7 @@ i { display: inline-block; width: var(--cell); height: var(--cell); border-radiu
 
 footer {
   margin-top: 2rem;
-  /* Own bottom padding (this block is out of flow), plus the home-indicator safe area */
-  padding: 1rem 0 calc(2rem + env(safe-area-inset-bottom));
+  padding: 1rem 0 env(safe-area-inset-bottom); /* clear of the home indicator */
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: .8125rem;

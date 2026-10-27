@@ -31,6 +31,9 @@ What has been done and what is still open. Pending items are in recommended orde
 - **Registro histórico**: a timeline with one column per day since March 2026; choosing a day shows that day's
   status, hours and changes. Past days show the hours recorded in the change log (confirmed with real data on
   18 October).
+- **Pages that stay small**: the home page shows this month; earlier days live in one page per half-year
+  (`historico/2026-1.html`, `2026-2.html`, …), linked from the ends of each timeline. The footer appears once per
+  page instead of once per day: the home page went from 443 KB to 32 KB (4 KB compressed).
 - Footer with the Mastodon and "Instalar como app" buttons, data and code credits, and a no-cookies note.
 - Light and dark mode, following the device.
 - Installable as a web app (iPhone, iPad, Mac, Android): manifest, icons, safe areas for the notch and home
@@ -41,7 +44,8 @@ What has been done and what is still open. Pending items are in recommended orde
 
 - GitHub Actions on the latest action versions and the `swift:6.4` image, with build caches keyed by toolchain.
 - Pages deploys only when the page changes (about once a day otherwise), and a failed deploy is retried.
-- **56 Swift Testing tests, 90% line coverage**; only the raw network calls are untested.
+- **61 Swift Testing tests, 90% line coverage**; only the raw network calls are untested. CI prints the coverage
+  report in each test run and its summary.
 - Tests run on every push before the bot and the deploy; scheduled runs skip them and still deploy when the page
   changes (confirmed on 19 October).
 - Project documentation: README, AGENTS.md and this roadmap.
@@ -77,6 +81,3 @@ icon, ideally at 512 px or more; nothing to do in code until one exists.
 - **Refresh while open**: the installed web app only updates when reopened; reloading on return would need a
   little JavaScript.
 - **Theme switch** inside the page (it follows the device today); remembering the choice needs JavaScript.
-- **Page size**: the page grows by about 2 KB a day (16 KB compressed today); after a few years, show fewer days
-  or slim the repeated footer.
-- **Coverage in CI**: print the coverage summary in each test run.

@@ -23,15 +23,25 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # Coverage instrumentation changes the build, so its cache has its own key
       - name: Restore SPM debug build cache
         uses: actions/cache@v6
         with:
           path: .build
-          key: spm-debug-linux-swift6.4-${{ hashFiles('Package.resolved') }}
-          restore-keys: spm-debug-linux-swift6.4-
+          key: spm-debug-coverage-linux-swift6.4-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-debug-coverage-linux-swift6.4-
 
       - name: Test
-        run: swift test
+        run: swift test --enable-code-coverage
+
+      # Coverage of the bot's own sources, in the log and the run summary
+      - name: Coverage
+        run: |
+          bin_path="$(swift build --show-bin-path)"
+          report="$(llvm-cov report "$(ls -d "$bin_path"/*.xctest)" \
+            -instr-profile="$bin_path/codecov/default.profdata" -ignore-filename-regex='(\.build|Tests)/')"
+          echo "$report"
+          printf '### Coverage\n\n```\n%s\n```\n' "$report" >> "$GITHUB_STEP_SUMMARY"
 
   check:
     needs: test
@@ -99,7 +109,7 @@ jobs:
           git add estado_parques.json
           git add estadisticas_parques.ndjson 2>/dev/null || true
           git add estado_api.json 2>/dev/null || true
-          git add website/index.html
+          git add website/index.html website/historico
           git diff --staged --quiet || git commit -m "Update park state $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git push
 

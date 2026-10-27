@@ -15,7 +15,7 @@ Requiere Swift 6 (CI usa Swift 6.4).
 
 ```bash
 swift run EstadoParques                    # consulta la API e imprime el estado (no publica)
-swift run EstadoParques --website website  # regenera website/index.html
+swift run EstadoParques --website website  # regenera las páginas de la web
 swift test                                 # ejecuta los tests
 ```
 

@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Parques de Madrid · julio–septiembre de 2026</title>
+<meta name="description" content="Estado de las alertas meteorológicas de los parques de Madrid, día a día.">
+<meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161614" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-title" content="Parques">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="me" href="https://mastodon.social/@ParquesMadridBot">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="icon" href="../icon-192.png" type="image/png">
+<link rel="stylesheet" href="../style.css">
+<style>
+body:has(#d-2026-09-30:checked) #p-2026-09-30{display:block}
+body:has(#d-2026-09-29:checked) #p-2026-09-29{display:block}
+body:has(#d-2026-09-28:checked) #p-2026-09-28{display:block}
+body:has(#d-2026-09-27:checked) #p-2026-09-27{display:block}
+body:has(#d-2026-09-26:checked) #p-2026-09-26{display:block}
+body:has(#d-2026-09-25:checked) #p-2026-09-25{display:block}
+body:has(#d-2026-09-24:checked) #p-2026-09-24{display:block}
+body:has(#d-2026-09-23:checked) #p-2026-09-23{display:block}
+body:has(#d-2026-09-22:checked) #p-2026-09-22{display:block}
+body:has(#d-2026-09-21:checked) #p-2026-09-21{display:block}
+body:has(#d-2026-09-20:checked) #p-2026-09-20{display:block}
+body:has(#d-2026-09-19:checked) #p-2026-09-19{display:block}
+body:has(#d-2026-09-18:checked) #p-2026-09-18{display:block}
+body:has(#d-2026-09-17:checked) #p-2026-09-17{display:block}
+body:has(#d-2026-09-16:checked) #p-2026-09-16{display:block}
+body:has(#d-2026-09-15:checked) #p-2026-09-15{display:block}
+body:has(#d-2026-09-14:checked) #p-2026-09-14{display:block}
+body:has(#d-2026-09-13:checked) #p-2026-09-13{display:block}
+body:has(#d-2026-09-12:checked) #p-2026-09-12{display:block}
+body:has(#d-2026-09-11:checked) #p-2026-09-11{display:block}
+body:has(#d-2026-09-10:checked) #p-2026-09-10{display:block}
+body:has(#d-2026-09-09:checked) #p-2026-09-09{display:block}
+body:has(#d-2026-09-08:checked) #p-2026-09-08{display:block}
+body:has(#d-2026-09-07:checked) #p-2026-09-07{display:block}
+body:has(#d-2026-09-06:checked) #p-2026-09-06{display:block}
+body:has(#d-2026-09-05:checked) #p-2026-09-05{display:block}
+body:has(#d-2026-09-04:checked) #p-2026-09-04{display:block}
+body:has(#d-2026-09-03:checked) #p-2026-09-03{display:block}
+body:has(#d-2026-09-02:checked) #p-2026-09-02{display:block}
+body:has(#d-2026-09-01:checked) #p-2026-09-01{display:block}
+body:has(#d-2026-08-31:checked) #p-2026-08-31{display:block}
+body:has(#d-2026-08-30:checked) #p-2026-08-30{display:block}
+body:has(#d-2026-08-29:checked) #p-2026-08-29{display:block}
+body:has(#d-2026-08-28:checked) #p-2026-08-28{display:block}
+body:has(#d-2026-08-27:checked) #p-2026-08-27{display:block}
+body:has(#d-2026-08-26:checked) #p-2026-08-26{display:block}
+body:has(#d-2026-08-25:checked) #p-2026-08-25{display:block}
+body:has(#d-2026-08-24:checked) #p-2026-08-24{display:block}
+body:has(#d-2026-08-23:checked) #p-2026-08-23{display:block}
+body:has(#d-2026-08-22:checked) #p-2026-08-22{display:block}
+body:has(#d-2026-08-21:checked) #p-2026-08-21{display:block}
+body:has(#d-2026-08-20:checked) #p-2026-08-20{display:block}
+body:has(#d-2026-08-19:checked) #p-2026-08-19{display:block}
+body:has(#d-2026-08-18:checked) #p-2026-08-18{display:block}
+body:has(#d-2026-08-17:checked) #p-2026-08-17{display:block}
+body:has(#d-2026-08-16:checked) #p-2026-08-16{display:block}
+body:has(#d-2026-08-15:checked) #p-2026-08-15{display:block}
+body:has(#d-2026-08-14:checked) #p-2026-08-14{display:block}
+body:has(#d-2026-08-13:checked) #p-2026-08-13{display:block}
+body:has(#d-2026-08-12:checked) #p-2026-08-12{display:block}
+body:has(#d-2026-08-11:checked) #p-2026-08-11{display:block}
+body:has(#d-2026-08-10:checked) #p-2026-08-10{display:block}
+body:has(#d-2026-08-09:checked) #p-2026-08-09{display:block}
+body:has(#d-2026-08-08:checked) #p-2026-08-08{display:block}
+body:has(#d-2026-08-07:checked) #p-2026-08-07{display:block}
+body:has(#d-2026-08-06:checked) #p-2026-08-06{display:block}
+body:has(#d-2026-08-05:checked) #p-2026-08-05{display:block}
+body:has(#d-2026-08-04:checked) #p-2026-08-04{display:block}
+body:has(#d-2026-08-03:checked) #p-2026-08-03{display:block}
+body:has(#d-2026-08-02:checked) #p-2026-08-02{display:block}
+body:has(#d-2026-08-01:checked) #p-2026-08-01{display:block}
+body:has(#d-2026-07-31:checked) #p-2026-07-31{display:block}
+body:has(#d-2026-07-30:checked) #p-2026-07-30{display:block}
+body:has(#d-2026-07-29:checked) #p-2026-07-29{display:block}
+body:has(#d-2026-07-28:checked) #p-2026-07-28{display:block}
+body:has(#d-2026-07-27:checked) #p-2026-07-27{display:block}
+body:has(#d-2026-07-26:checked) #p-2026-07-26{display:block}
+body:has(#d-2026-07-25:checked) #p-2026-07-25{display:block}
+body:has(#d-2026-07-24:checked) #p-2026-07-24{display:block}
+body:has(#d-2026-07-23:checked) #p-2026-07-23{display:block}
+body:has(#d-2026-07-22:checked) #p-2026-07-22{display:block}
+body:has(#d-2026-07-21:checked) #p-2026-07-21{display:block}
+body:has(#d-2026-07-20:checked) #p-2026-07-20{display:block}
+body:has(#d-2026-07-19:checked) #p-2026-07-19{display:block}
+body:has(#d-2026-07-18:checked) #p-2026-07-18{display:block}
+body:has(#d-2026-07-17:checked) #p-2026-07-17{display:block}
+body:has(#d-2026-07-16:checked) #p-2026-07-16{display:block}
+body:has(#d-2026-07-15:checked) #p-2026-07-15{display:block}
+body:has(#d-2026-07-14:checked) #p-2026-07-14{display:block}
+body:has(#d-2026-07-13:checked) #p-2026-07-13{display:block}
+body:has(#d-2026-07-12:checked) #p-2026-07-12{display:block}
+body:has(#d-2026-07-11:checked) #p-2026-07-11{display:block}
+body:has(#d-2026-07-10:checked) #p-2026-07-10{display:block}
+body:has(#d-2026-07-09:checked) #p-2026-07-09{display:block}
+body:has(#d-2026-07-08:checked) #p-2026-07-08{display:block}
+body:has(#d-2026-07-07:checked) #p-2026-07-07{display:block}
+body:has(#d-2026-07-06:checked) #p-2026-07-06{display:block}
+body:has(#d-2026-07-05:checked) #p-2026-07-05{display:block}
+body:has(#d-2026-07-04:checked) #p-2026-07-04{display:block}
+body:has(#d-2026-07-03:checked) #p-2026-07-03{display:block}
+body:has(#d-2026-07-02:checked) #p-2026-07-02{display:block}
+body:has(#d-2026-07-01:checked) #p-2026-07-01{display:block}
+</style>
+</head>
+<body>
+<header>
+<img class="banner" src="../parques.webp" alt="" width="1536" height="810">
+<h1><a href="../">Parques de Madrid</a></h1>
+<p>Alertas meteorológicas de los parques vigilados por el Ayuntamiento de Madrid.</p>
+</header>
+<div id="instalar" popover>
+<h2>Instálala como app</h2>
+<ol>
+<li><b>iPhone y iPad (Safari):</b> pulsa <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M8 10H6.5A1.5 1.5 0 0 0 5 11.5v8A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 17.5 10H16"/></svg> <b>Compartir</b> y luego <b>Añadir a pantalla de inicio</b>.</li>
+<li><b>Mac (Safari):</b> menú <b>Archivo → Añadir al Dock</b>.</li>
+<li><b>Android (Chrome):</b> menú ⋮ → <b>Instalar aplicación</b>.</li>
+</ol>
+<p>Sin tienda, sin cuenta y sin permisos: es esta misma web, a pantalla completa y con su icono.</p>
+<button class="btn install" popovertarget="instalar" popovertargetaction="hide">Entendido</button>
+</div>
+
+<section class="history" aria-labelledby="history-title">
+<h2 id="history-title">Registro histórico: julio–septiembre de 2026</h2>
+<p class="legend"><span><i class="l1"></i>Abierto</span><span><i class="l3"></i>Alerta amarilla</span><span><i class="l4"></i>Alerta naranja</span><span><i class="l5"></i>Cerrado</span></p>
+<p class="hint">Elige un día en la línea de tiempo.</p>
+</section>
+<main class="viewer">
+<ol class="names" aria-hidden="true"><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ol>
+<div class="timeline" role="radiogroup" aria-label="Día">
+<a class="more" href="../" title="octubre de 2026">Hoy ›</a>
+<input type="radio" name="dia" id="d-2026-09-30" checked><label for="d-2026-09-30" title="miércoles, 30 de septiembre de 2026"><span class="vh">30 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-29"><label for="d-2026-09-29" title="martes, 29 de septiembre de 2026"><span class="vh">29 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-28"><label for="d-2026-09-28" title="lunes, 28 de septiembre de 2026"><span class="vh">28 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-27"><label for="d-2026-09-27" title="domingo, 27 de septiembre de 2026"><span class="vh">27 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-26"><label for="d-2026-09-26" title="sábado, 26 de septiembre de 2026"><span class="vh">26 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-25"><label for="d-2026-09-25" title="viernes, 25 de septiembre de 2026"><span class="vh">25 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-24"><label for="d-2026-09-24" title="jueves, 24 de septiembre de 2026"><span class="vh">24 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-23"><label for="d-2026-09-23" title="miércoles, 23 de septiembre de 2026"><span class="vh">23 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-22"><label for="d-2026-09-22" title="martes, 22 de septiembre de 2026"><span class="vh">22 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-21"><label for="d-2026-09-21" title="lunes, 21 de septiembre de 2026"><span class="vh">21 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-20"><label for="d-2026-09-20" title="domingo, 20 de septiembre de 2026"><span class="vh">20 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-19"><label for="d-2026-09-19" title="sábado, 19 de septiembre de 2026"><span class="vh">19 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-18"><label for="d-2026-09-18" title="viernes, 18 de septiembre de 2026"><span class="vh">18 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-17"><label for="d-2026-09-17" title="jueves, 17 de septiembre de 2026"><span class="vh">17 sept</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-09-16"><label for="d-2026-09-16" title="miércoles, 16 de septiembre de 2026"><span class="vh">16 sept</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-09-15"><label for="d-2026-09-15" title="martes, 15 de septiembre de 2026"><span class="vh">15 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-14"><label for="d-2026-09-14" title="lunes, 14 de septiembre de 2026"><span class="vh">14 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-13"><label for="d-2026-09-13" title="domingo, 13 de septiembre de 2026"><span class="vh">13 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-12"><label for="d-2026-09-12" title="sábado, 12 de septiembre de 2026"><span class="vh">12 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-11"><label for="d-2026-09-11" title="viernes, 11 de septiembre de 2026"><span class="vh">11 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-10"><label for="d-2026-09-10" title="jueves, 10 de septiembre de 2026"><span class="vh">10 sept</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-09-09"><label for="d-2026-09-09" title="miércoles, 9 de septiembre de 2026"><span class="vh">9 sept</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-09-08"><label for="d-2026-09-08" title="martes, 8 de septiembre de 2026"><span class="vh">8 sept</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-09-07"><label for="d-2026-09-07" title="lunes, 7 de septiembre de 2026"><span class="vh">7 sept</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-09-06"><label for="d-2026-09-06" title="domingo, 6 de septiembre de 2026"><span class="vh">6 sept</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-09-05"><label for="d-2026-09-05" title="sábado, 5 de septiembre de 2026"><span class="vh">5 sept</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-09-04"><label for="d-2026-09-04" title="viernes, 4 de septiembre de 2026"><span class="vh">4 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-03"><label for="d-2026-09-03" title="jueves, 3 de septiembre de 2026"><span class="vh">3 sept</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-09-02"><label for="d-2026-09-02" title="miércoles, 2 de septiembre de 2026"><span class="vh">2 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-09-01"><label for="d-2026-09-01" title="martes, 1 de septiembre de 2026"><b>sept</b><span class="vh">1 sept</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-31"><label for="d-2026-08-31" title="lunes, 31 de agosto de 2026"><span class="vh">31 ago</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-30"><label for="d-2026-08-30" title="domingo, 30 de agosto de 2026"><span class="vh">30 ago</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-29"><label for="d-2026-08-29" title="sábado, 29 de agosto de 2026"><span class="vh">29 ago</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-28"><label for="d-2026-08-28" title="viernes, 28 de agosto de 2026"><span class="vh">28 ago</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-27"><label for="d-2026-08-27" title="jueves, 27 de agosto de 2026"><span class="vh">27 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-26"><label for="d-2026-08-26" title="miércoles, 26 de agosto de 2026"><span class="vh">26 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-25"><label for="d-2026-08-25" title="martes, 25 de agosto de 2026"><span class="vh">25 ago</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-08-24"><label for="d-2026-08-24" title="lunes, 24 de agosto de 2026"><span class="vh">24 ago</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-08-23"><label for="d-2026-08-23" title="domingo, 23 de agosto de 2026"><span class="vh">23 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-22"><label for="d-2026-08-22" title="sábado, 22 de agosto de 2026"><span class="vh">22 ago</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-21"><label for="d-2026-08-21" title="viernes, 21 de agosto de 2026"><span class="vh">21 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-20"><label for="d-2026-08-20" title="jueves, 20 de agosto de 2026"><span class="vh">20 ago</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-08-19"><label for="d-2026-08-19" title="miércoles, 19 de agosto de 2026"><span class="vh">19 ago</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-08-18"><label for="d-2026-08-18" title="martes, 18 de agosto de 2026"><span class="vh">18 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-17"><label for="d-2026-08-17" title="lunes, 17 de agosto de 2026"><span class="vh">17 ago</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-16"><label for="d-2026-08-16" title="domingo, 16 de agosto de 2026"><span class="vh">16 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-15"><label for="d-2026-08-15" title="sábado, 15 de agosto de 2026"><span class="vh">15 ago</span><i class="l5"></i><i class="l5"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l5"></i><i class="l5"></i><i class="l5"></i><i class="l5"></i></label>
+<input type="radio" name="dia" id="d-2026-08-14"><label for="d-2026-08-14" title="viernes, 14 de agosto de 2026"><span class="vh">14 ago</span><i class="l5"></i><i class="l5"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l5"></i><i class="l5"></i><i class="l4"></i><i class="l5"></i></label>
+<input type="radio" name="dia" id="d-2026-08-13"><label for="d-2026-08-13" title="jueves, 13 de agosto de 2026"><span class="vh">13 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-12"><label for="d-2026-08-12" title="miércoles, 12 de agosto de 2026"><span class="vh">12 ago</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-11"><label for="d-2026-08-11" title="martes, 11 de agosto de 2026"><span class="vh">11 ago</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-10"><label for="d-2026-08-10" title="lunes, 10 de agosto de 2026"><span class="vh">10 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-09"><label for="d-2026-08-09" title="domingo, 9 de agosto de 2026"><span class="vh">9 ago</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-08-08"><label for="d-2026-08-08" title="sábado, 8 de agosto de 2026"><span class="vh">8 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-07"><label for="d-2026-08-07" title="viernes, 7 de agosto de 2026"><span class="vh">7 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-06"><label for="d-2026-08-06" title="jueves, 6 de agosto de 2026"><span class="vh">6 ago</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-05"><label for="d-2026-08-05" title="miércoles, 5 de agosto de 2026"><span class="vh">5 ago</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-04"><label for="d-2026-08-04" title="martes, 4 de agosto de 2026"><span class="vh">4 ago</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-08-03"><label for="d-2026-08-03" title="lunes, 3 de agosto de 2026"><span class="vh">3 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-02"><label for="d-2026-08-02" title="domingo, 2 de agosto de 2026"><span class="vh">2 ago</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-08-01"><label for="d-2026-08-01" title="sábado, 1 de agosto de 2026"><b>ago</b><span class="vh">1 ago</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-07-31"><label for="d-2026-07-31" title="viernes, 31 de julio de 2026"><span class="vh">31 jul</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-07-30"><label for="d-2026-07-30" title="jueves, 30 de julio de 2026"><span class="vh">30 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-29"><label for="d-2026-07-29" title="miércoles, 29 de julio de 2026"><span class="vh">29 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-28"><label for="d-2026-07-28" title="martes, 28 de julio de 2026"><span class="vh">28 jul</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-07-27"><label for="d-2026-07-27" title="lunes, 27 de julio de 2026"><span class="vh">27 jul</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-07-26"><label for="d-2026-07-26" title="domingo, 26 de julio de 2026"><span class="vh">26 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-25"><label for="d-2026-07-25" title="sábado, 25 de julio de 2026"><span class="vh">25 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-24"><label for="d-2026-07-24" title="viernes, 24 de julio de 2026"><span class="vh">24 jul</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-07-23"><label for="d-2026-07-23" title="jueves, 23 de julio de 2026"><span class="vh">23 jul</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-07-22"><label for="d-2026-07-22" title="miércoles, 22 de julio de 2026"><span class="vh">22 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-21"><label for="d-2026-07-21" title="martes, 21 de julio de 2026"><span class="vh">21 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-20"><label for="d-2026-07-20" title="lunes, 20 de julio de 2026"><span class="vh">20 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-19"><label for="d-2026-07-19" title="domingo, 19 de julio de 2026"><span class="vh">19 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-18"><label for="d-2026-07-18" title="sábado, 18 de julio de 2026"><span class="vh">18 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-17"><label for="d-2026-07-17" title="viernes, 17 de julio de 2026"><span class="vh">17 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-16"><label for="d-2026-07-16" title="jueves, 16 de julio de 2026"><span class="vh">16 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-15"><label for="d-2026-07-15" title="miércoles, 15 de julio de 2026"><span class="vh">15 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-14"><label for="d-2026-07-14" title="martes, 14 de julio de 2026"><span class="vh">14 jul</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-07-13"><label for="d-2026-07-13" title="lunes, 13 de julio de 2026"><span class="vh">13 jul</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></label>
+<input type="radio" name="dia" id="d-2026-07-12"><label for="d-2026-07-12" title="domingo, 12 de julio de 2026"><span class="vh">12 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-11"><label for="d-2026-07-11" title="sábado, 11 de julio de 2026"><span class="vh">11 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-10"><label for="d-2026-07-10" title="viernes, 10 de julio de 2026"><span class="vh">10 jul</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-07-09"><label for="d-2026-07-09" title="jueves, 9 de julio de 2026"><span class="vh">9 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-08"><label for="d-2026-07-08" title="miércoles, 8 de julio de 2026"><span class="vh">8 jul</span><i class="l5"></i><i class="l5"></i><i></i><i></i><i></i><i class="l5"></i><i class="l5"></i><i class="l5"></i><i class="l5"></i></label>
+<input type="radio" name="dia" id="d-2026-07-07"><label for="d-2026-07-07" title="martes, 7 de julio de 2026"><span class="vh">7 jul</span><i class="l5"></i><i class="l5"></i><i></i><i></i><i></i><i class="l5"></i><i class="l5"></i><i class="l5"></i><i class="l5"></i></label>
+<input type="radio" name="dia" id="d-2026-07-06"><label for="d-2026-07-06" title="lunes, 6 de julio de 2026"><span class="vh">6 jul</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-05"><label for="d-2026-07-05" title="domingo, 5 de julio de 2026"><span class="vh">5 jul</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-04"><label for="d-2026-07-04" title="sábado, 4 de julio de 2026"><span class="vh">4 jul</span><i class="l3"></i><i class="l3"></i><i></i><i></i><i></i><i class="l3"></i><i class="l3"></i><i class="l3"></i><i class="l3"></i></label>
+<input type="radio" name="dia" id="d-2026-07-03"><label for="d-2026-07-03" title="viernes, 3 de julio de 2026"><span class="vh">3 jul</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-07-02"><label for="d-2026-07-02" title="jueves, 2 de julio de 2026"><span class="vh">2 jul</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<input type="radio" name="dia" id="d-2026-07-01"><label for="d-2026-07-01" title="miércoles, 1 de julio de 2026"><b>jul</b><span class="vh">1 jul</span><i class="l4"></i><i class="l4"></i><i></i><i></i><i></i><i class="l4"></i><i class="l4"></i><i class="l4"></i><i class="l4"></i></label>
+<a class="more" href="../historico/2026-1.html" title="marzo–junio de 2026">‹ Antes</a>
+</div>
+</main>
+<section class="day panel" id="p-2026-09-30">
+<h2>Miércoles, 30 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-29">
+<h2>Martes, 29 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-28">
+<h2>Lunes, 28 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-27">
+<h2>Domingo, 27 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-26">
+<h2>Sábado, 26 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-25">
+<h2>Viernes, 25 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-24">
+<h2>Jueves, 24 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-23">
+<h2>Miércoles, 23 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-22">
+<h2>Martes, 22 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-21">
+<h2>Lunes, 21 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-20">
+<h2>Domingo, 20 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-19">
+<h2>Sábado, 19 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-18">
+<h2>Viernes, 18 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-17">
+<h2>Jueves, 17 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta naranja → alerta amarilla (11:17) → abierto (16:24)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta naranja → alerta amarilla (11:17) → abierto (16:24)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta naranja → alerta amarilla (11:17) → abierto (16:24)</small></li><li>Quinta de Torre Arias<br><small>alerta naranja → alerta amarilla (11:17) → abierto (16:24)</small></li><li>Quinta de los Molinos<br><small>alerta naranja → alerta amarilla (11:17) → abierto (16:24)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta naranja → alerta amarilla (11:17) → abierto (16:24)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-09-16">
+<h2>Miércoles, 16 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l4"></i>Alerta naranja</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta naranja (09:22)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta naranja (09:22)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta naranja (09:22)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta naranja (09:22)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta naranja (09:22)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta naranja (09:22)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-09-15">
+<h2>Martes, 15 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-14">
+<h2>Lunes, 14 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-13">
+<h2>Domingo, 13 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-12">
+<h2>Sábado, 12 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-11">
+<h2>Viernes, 11 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-10">
+<h2>Jueves, 10 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (13:42)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (13:42)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (13:42)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (13:42)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (13:42)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-09-09">
+<h2>Miércoles, 9 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:01) → abierto (16:44)</small></li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:01) → abierto (16:44) → alerta amarilla (23:05)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:01) → abierto (16:44) → alerta amarilla (23:05)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:01) → abierto (16:44) → alerta amarilla (23:05)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:01) → abierto (16:44) → alerta amarilla (23:05)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:01) → abierto (16:44) → alerta amarilla (23:05)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-09-08">
+<h2>Martes, 8 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta naranja (13:36) → abierto (18:12)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta naranja (13:36) → abierto (18:12)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta naranja (13:36) → abierto (18:12)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta naranja (13:36) → abierto (18:12)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta naranja (13:36) → abierto (18:12)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta naranja (13:36) → abierto (18:12)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-09-07">
+<h2>Lunes, 7 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (13:51) → abierto (22:45)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (13:51) → abierto (22:45)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (13:51) → abierto (22:45)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (13:51) → abierto (22:45)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (13:51) → abierto (22:45)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (13:51) → abierto (22:45)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-09-06">
+<h2>Domingo, 6 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (18:45) → abierto (23:07)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (18:45) → abierto (23:07)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (18:45) → abierto (23:07)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (18:45) → abierto (23:07)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (18:45) → abierto (23:07)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (18:45) → abierto (23:07)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-09-05">
+<h2>Sábado, 5 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:50) → abierto (22:58)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:50) → abierto (22:58)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:50) → abierto (22:58)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:50) → abierto (22:58)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:50) → abierto (22:58)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:50) → abierto (22:58)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-09-04">
+<h2>Viernes, 4 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-03">
+<h2>Jueves, 3 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:50) → abierto (20:23)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:50) → abierto (20:23)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:50) → abierto (20:23)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:50) → abierto (20:23)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:50) → abierto (20:23)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:50) → abierto (20:23)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-09-02">
+<h2>Miércoles, 2 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-09-01">
+<h2>Martes, 1 de septiembre de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-31">
+<h2>Lunes, 31 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-30">
+<h2>Domingo, 30 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-29">
+<h2>Sábado, 29 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-28">
+<h2>Viernes, 28 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-27">
+<h2>Jueves, 27 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:58) → abierto (22:58)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:58) → abierto (22:58)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:58) → abierto (22:58)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:58) → abierto (22:58)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:58) → abierto (22:58)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:58) → abierto (22:58)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-26">
+<h2>Miércoles, 26 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:36) → abierto (22:36)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:36) → abierto (22:36)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:36) → abierto (22:36)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:36) → abierto (22:36)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:36) → abierto (22:36)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:36) → abierto (22:36)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-25">
+<h2>Martes, 25 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta naranja → abierto (08:50)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta naranja → abierto (08:50)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta naranja → abierto (08:50)</small></li><li>Quinta de Torre Arias<br><small>alerta naranja → abierto (08:50)</small></li><li>Quinta de los Molinos<br><small>alerta naranja → abierto (08:50)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta naranja → abierto (08:50)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-24">
+<h2>Lunes, 24 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l4"></i>Alerta naranja</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:10) → alerta naranja (15:59)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:10) → alerta naranja (15:59)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:10) → alerta naranja (15:59)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:10) → alerta naranja (15:59)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:10) → alerta naranja (15:59)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:10) → alerta naranja (15:59)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-23">
+<h2>Domingo, 23 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:25) → abierto (21:23)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:25) → abierto (21:23)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:25) → abierto (21:23)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:25) → abierto (21:23)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:25) → abierto (21:23)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:25) → abierto (21:23)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-22">
+<h2>Sábado, 22 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-21">
+<h2>Viernes, 21 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (07:33)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (07:33)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (07:33)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (07:33)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (07:33)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (07:33)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-20">
+<h2>Jueves, 20 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>alerta naranja → abierto (08:49) → alerta naranja (15:48) → alerta amarilla (18:36)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta naranja → abierto (08:49) → alerta naranja (15:48) → alerta amarilla (18:36)</small></li><li>Quinta Fuente del Berro<br><small>alerta naranja → abierto (08:49) → alerta naranja (15:48) → alerta amarilla (18:36)</small></li><li>Quinta de Torre Arias<br><small>alerta naranja → abierto (08:49) → alerta naranja (15:48) → alerta amarilla (18:36)</small></li><li>Quinta de los Molinos<br><small>alerta naranja → abierto (08:49) → alerta naranja (15:48) → alerta amarilla (18:36)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta naranja → abierto (08:49) → alerta naranja (15:48) → alerta amarilla (18:36)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-19">
+<h2>Miércoles, 19 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l4"></i>Alerta naranja</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (08:46) → alerta amarilla (10:38) → alerta naranja (17:32)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (08:46) → alerta amarilla (10:38) → alerta naranja (17:32)</small></li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (08:46) → alerta amarilla (10:38) → alerta naranja (17:32)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (08:46) → alerta amarilla (10:38) → alerta naranja (17:32)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (08:46) → alerta amarilla (10:38) → alerta naranja (17:32)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (08:46) → alerta amarilla (10:38) → alerta naranja (17:32)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-18">
+<h2>Martes, 18 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (17:33)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (17:33)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (17:33)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (17:33)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (17:33)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (17:33)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-17">
+<h2>Lunes, 17 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-16">
+<h2>Domingo, 16 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (08:47)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (08:47)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (08:47)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (08:47)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (08:47)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (08:47)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-15">
+<h2>Sábado, 15 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I<br><small>alerta naranja → abierto (09:32)</small></li><li>Juan Pablo II<br><small>alerta naranja → abierto (09:32)</small></li><li>Lineal del Manzanares<br><small>alerta naranja → abierto (09:32)</small></li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>cerrado → alerta amarilla (09:32) → abierto (15:31) → alerta naranja (18:26) → alerta amarilla (21:22)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>cerrado → alerta amarilla (09:32) → abierto (15:31) → alerta naranja (18:26) → alerta amarilla (21:22)</small></li><li>Quinta Fuente del Berro<br><small>cerrado → alerta amarilla (10:30) → abierto (15:31) → alerta naranja (18:26) → alerta amarilla (21:22)</small></li><li>Quinta de Torre Arias<br><small>cerrado → alerta amarilla (10:30) → abierto (15:31) → alerta naranja (18:26) → alerta amarilla (21:22)</small></li><li>Quinta de los Molinos<br><small>alerta naranja → cerrado (09:32) → alerta amarilla (10:30) → abierto (15:31) → alerta naranja (18:26) → alerta amarilla (21:22)</small></li><li>Rosaleda del Parque del Oeste<br><small>cerrado → alerta amarilla (09:32) → abierto (15:31) → alerta naranja (18:26) → alerta amarilla (21:22)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-14">
+<h2>Viernes, 14 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l4"></i>Alerta naranja</h3><ul><li>Juan Carlos I<br><small>abierto → alerta naranja (18:54)</small></li><li>Juan Pablo II<br><small>abierto → alerta naranja (18:54)</small></li><li>Lineal del Manzanares<br><small>abierto → alerta naranja (18:54)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (09:37) → alerta amarilla (16:30) → alerta naranja (18:54)</small></li></ul>
+<h3><i class="l5"></i>Cerrados</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (09:37) → alerta amarilla (16:30) → cerrado (17:53)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (09:37) → alerta amarilla (16:30) → cerrado (18:54)</small></li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (09:37) → alerta amarilla (16:30) → cerrado (18:54)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (09:37) → alerta amarilla (16:30) → cerrado (18:54)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (09:37) → alerta amarilla (16:30) → cerrado (18:54)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-13">
+<h2>Jueves, 13 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (15:14)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (15:14)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (15:14)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (15:14)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (15:14)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (15:14)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-12">
+<h2>Miércoles, 12 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-11">
+<h2>Martes, 11 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-10">
+<h2>Lunes, 10 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:43) → abierto (17:59)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:43) → abierto (17:59)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:43) → abierto (17:59)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:43) → abierto (17:59)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:43) → abierto (17:59)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:43) → abierto (17:59)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-09">
+<h2>Domingo, 9 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (08:08) → alerta amarilla (15:07) → alerta naranja (16:07) → abierto (21:33)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (08:08) → alerta amarilla (15:07) → alerta naranja (16:07) → abierto (21:33)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (08:08) → alerta amarilla (15:07) → alerta naranja (16:07) → abierto (21:33)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (08:08) → alerta amarilla (15:07) → alerta naranja (16:07) → abierto (21:33)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (08:08) → alerta amarilla (15:07) → alerta naranja (16:07) → abierto (21:33)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (08:08) → alerta amarilla (15:07) → alerta naranja (16:07) → abierto (21:33)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-08">
+<h2>Sábado, 8 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (09:50) → alerta amarilla (12:34)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (09:50) → alerta amarilla (12:34)</small></li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (09:50) → alerta amarilla (12:34)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (09:50) → alerta amarilla (12:34)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (09:50) → alerta amarilla (12:34)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (09:50) → alerta amarilla (12:34)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-07">
+<h2>Viernes, 7 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:52)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:52)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:52)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:52)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:52)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:52)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-06">
+<h2>Jueves, 6 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-05">
+<h2>Miércoles, 5 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-04">
+<h2>Martes, 4 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-03">
+<h2>Lunes, 3 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (08:26) → alerta amarilla (12:24) → abierto (22:11)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (08:26) → alerta amarilla (12:24) → abierto (22:11)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (08:26) → alerta amarilla (12:24) → abierto (22:11)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (08:26) → alerta amarilla (12:24) → abierto (22:11)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (08:26) → alerta amarilla (12:24) → abierto (22:11)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (08:26)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-08-02">
+<h2>Domingo, 2 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-08-01">
+<h2>Sábado, 1 de agosto de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>alerta naranja → abierto (09:27) → alerta naranja (13:16) → alerta amarilla (21:45)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta naranja → abierto (09:27) → alerta naranja (13:16) → alerta amarilla (21:45)</small></li><li>Quinta Fuente del Berro<br><small>alerta naranja → abierto (09:27) → alerta naranja (13:16) → alerta amarilla (21:45)</small></li><li>Quinta de Torre Arias<br><small>alerta naranja → abierto (09:27) → alerta naranja (13:16) → alerta amarilla (21:45)</small></li><li>Quinta de los Molinos<br><small>alerta naranja → abierto (09:27) → alerta naranja (13:16) → alerta amarilla (21:45)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta naranja → abierto (09:27) → alerta naranja (13:16) → alerta amarilla (21:45)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-31">
+<h2>Viernes, 31 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l4"></i>Alerta naranja</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → alerta naranja (12:05)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → alerta naranja (12:05)</small></li><li>Quinta Fuente del Berro<br><small>alerta amarilla → alerta naranja (12:05)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → alerta naranja (12:05)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → alerta naranja (12:05)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → alerta naranja (12:05)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-30">
+<h2>Jueves, 30 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (09:12) → alerta amarilla (13:57)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (09:12) → alerta amarilla (13:57)</small></li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (09:12) → alerta amarilla (13:57)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (09:12) → alerta amarilla (13:57)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (09:12) → alerta amarilla (13:57)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (09:12) → alerta amarilla (13:57)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-29">
+<h2>Miércoles, 29 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:08)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:08)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:08)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:08)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:08)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:08)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-28">
+<h2>Martes, 28 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-07-27">
+<h2>Lunes, 27 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-07-26">
+<h2>Domingo, 26 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (09:41)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (09:41)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (09:41)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (09:41)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (09:41)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (09:41)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-25">
+<h2>Sábado, 25 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (09:18) → alerta amarilla (16:09)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (09:18) → alerta amarilla (16:09)</small></li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (09:18) → alerta amarilla (16:09)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (09:18) → alerta amarilla (16:09)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (09:18) → alerta amarilla (16:09)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (09:18) → alerta amarilla (16:09)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-24">
+<h2>Viernes, 24 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (09:07) → alerta naranja (13:42) → alerta amarilla (19:05)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (09:07) → alerta naranja (13:42) → alerta amarilla (19:05)</small></li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (09:07) → alerta naranja (13:42) → alerta amarilla (19:05)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (09:07) → alerta naranja (13:42) → alerta amarilla (19:05)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (09:07) → alerta naranja (13:42) → alerta amarilla (19:05)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (09:07) → alerta naranja (13:42) → alerta amarilla (19:05)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-23">
+<h2>Jueves, 23 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → alerta naranja (12:24) → alerta amarilla (18:27)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → alerta naranja (12:24) → alerta amarilla (18:27)</small></li><li>Quinta Fuente del Berro<br><small>alerta amarilla → alerta naranja (12:24) → alerta amarilla (18:27)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → alerta naranja (12:24) → alerta amarilla (18:27)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → alerta naranja (12:24) → alerta amarilla (18:27)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → alerta naranja (12:24) → alerta amarilla (18:27)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-22">
+<h2>Miércoles, 22 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (13:56)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (13:56)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (13:56)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (13:56)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (13:56)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (13:56)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-21">
+<h2>Martes, 21 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:01) → abierto (22:44)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:01) → abierto (22:44)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:01) → abierto (22:44)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:01) → abierto (22:44)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:01) → abierto (22:44)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:01) → abierto (22:44)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-20">
+<h2>Lunes, 20 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:12) → abierto (22:21)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:12) → abierto (22:21)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:12) → abierto (22:21)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:12) → abierto (22:21)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:12) → abierto (22:21)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:12) → abierto (22:21)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-19">
+<h2>Domingo, 19 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (12:55) → abierto (21:40)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (12:55) → abierto (21:40)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (12:55) → abierto (21:40)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (12:55) → abierto (21:40)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (12:55) → abierto (21:40)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (12:55) → abierto (21:40)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-18">
+<h2>Sábado, 18 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (14:26) → abierto (21:06)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (14:26) → abierto (21:06)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (14:26) → abierto (21:06)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (14:26) → abierto (21:06)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (14:26) → abierto (21:06)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (14:26) → abierto (21:06)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-17">
+<h2>Viernes, 17 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (10:34)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (10:34)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (10:34)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (10:34)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (10:34)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (10:34)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-16">
+<h2>Jueves, 16 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (13:40)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (13:40)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (13:40)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (13:40)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (13:40)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (13:40)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-15">
+<h2>Miércoles, 15 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (22:33)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (22:33)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (22:33)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (22:33)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (22:33)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (22:33)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-14">
+<h2>Martes, 14 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (10:35) → alerta naranja (16:24) → alerta amarilla (22:13)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta naranja (16:24) → alerta amarilla (22:13)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (10:35) → alerta naranja (16:24) → alerta amarilla (22:13)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (10:35) → alerta naranja (16:24) → alerta amarilla (22:13)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (10:35) → alerta naranja (16:24) → alerta amarilla (22:13)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (10:35) → alerta naranja (16:24) → alerta amarilla (22:13)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-13">
+<h2>Lunes, 13 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro</li><li>Jardín del Capricho de la Alameda de Osuna</li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro</li><li>Quinta de Torre Arias</li><li>Quinta de los Molinos</li><li>Rosaleda del Parque del Oeste</li></ul>
+</section>
+<section class="day panel" id="p-2026-07-12">
+<h2>Domingo, 12 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (08:18) → alerta amarilla (16:03) → abierto (21:38)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (08:18) → alerta amarilla (16:03) → abierto (21:38)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (08:18) → alerta amarilla (16:03) → abierto (21:38)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (08:18) → alerta amarilla (16:03) → abierto (21:38)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (08:18) → alerta amarilla (16:03) → abierto (21:38)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (08:18) → alerta amarilla (16:03) → abierto (21:38)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-11">
+<h2>Sábado, 11 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (09:11) → alerta amarilla (12:41)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (09:11) → alerta amarilla (12:41)</small></li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (09:11) → alerta amarilla (12:41)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (09:11) → alerta amarilla (12:41)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (09:11) → alerta amarilla (12:41)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (09:11) → alerta amarilla (12:41)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-10">
+<h2>Viernes, 10 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (07:36) → alerta naranja (19:18) → alerta amarilla (22:49)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (07:36) → alerta naranja (19:18) → alerta amarilla (22:49)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (07:36) → alerta naranja (19:18) → alerta amarilla (22:49)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (07:36) → alerta naranja (19:18) → alerta amarilla (22:49)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (07:36) → alerta naranja (19:18) → alerta amarilla (22:49)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (07:36) → alerta naranja (19:18) → alerta amarilla (22:49)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-09">
+<h2>Jueves, 9 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (07:43) → alerta amarilla (14:40) → abierto (22:19)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (07:43) → alerta amarilla (14:40) → abierto (22:19)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (07:43) → alerta amarilla (14:40) → abierto (22:19)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (07:43) → alerta amarilla (14:40) → abierto (22:19)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (07:43) → alerta amarilla (14:40) → abierto (22:19)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (07:43) → alerta amarilla (14:40) → abierto (22:19)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-08">
+<h2>Miércoles, 8 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>cerrado → abierto (11:55) → alerta amarilla (13:47)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>cerrado → abierto (11:55) → alerta amarilla (13:47)</small></li><li>Quinta Fuente del Berro<br><small>cerrado → alerta amarilla (13:47)</small></li><li>Quinta de Torre Arias<br><small>cerrado → alerta amarilla (13:47)</small></li><li>Quinta de los Molinos<br><small>cerrado → alerta amarilla (13:47)</small></li><li>Rosaleda del Parque del Oeste<br><small>cerrado → abierto (09:03) → alerta amarilla (16:13)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-07">
+<h2>Martes, 7 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l5"></i>Cerrados</h3><ul><li>Jardines del Buen Retiro<br><small>alerta naranja → abierto (11:44) → alerta amarilla (14:27) → cerrado (17:27)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta naranja → abierto (11:44) → alerta amarilla (14:27) → cerrado (17:27)</small></li><li>Quinta Fuente del Berro<br><small>alerta naranja → abierto (11:44) → alerta amarilla (14:27) → cerrado (17:27)</small></li><li>Quinta de Torre Arias<br><small>alerta naranja → abierto (11:44) → alerta amarilla (14:27) → cerrado (17:27)</small></li><li>Quinta de los Molinos<br><small>alerta naranja → abierto (11:44) → alerta amarilla (14:27) → cerrado (17:27)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → cerrado (17:27)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-06">
+<h2>Lunes, 6 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (11:00)</small></li></ul>
+<h3><i class="l4"></i>Alerta naranja</h3><ul><li>Jardines del Buen Retiro<br><small>alerta naranja → abierto (11:00) → alerta naranja (18:23)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta naranja → abierto (11:00) → alerta naranja (18:23)</small></li><li>Quinta Fuente del Berro<br><small>alerta naranja → abierto (11:00) → alerta naranja (18:23)</small></li><li>Quinta de Torre Arias<br><small>alerta naranja → abierto (11:00) → alerta naranja (18:23)</small></li><li>Quinta de los Molinos<br><small>alerta naranja → abierto (11:00) → alerta naranja (18:23)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-05">
+<h2>Domingo, 5 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (09:27) → alerta amarilla (18:34)</small></li></ul>
+<h3><i class="l4"></i>Alerta naranja</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (09:27) → alerta amarilla (18:34) → alerta naranja (21:51)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (09:27) → alerta amarilla (18:34) → alerta naranja (21:51)</small></li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (09:27) → alerta amarilla (18:34) → alerta naranja (21:51)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (09:27) → alerta amarilla (18:34) → alerta naranja (21:51)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (09:27) → alerta amarilla (18:34) → alerta naranja (21:51)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-04">
+<h2>Sábado, 4 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l3"></i>Alerta amarilla</h3><ul><li>Jardines del Buen Retiro<br><small>abierto → alerta amarilla (09:22) → abierto (13:31) → alerta amarilla (21:44)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>abierto → alerta amarilla (09:22) → abierto (13:31) → alerta amarilla (21:44)</small></li><li>Quinta Fuente del Berro<br><small>abierto → alerta amarilla (09:22) → abierto (13:31) → alerta amarilla (21:44)</small></li><li>Quinta de Torre Arias<br><small>abierto → alerta amarilla (09:22) → abierto (13:31) → alerta amarilla (21:44)</small></li><li>Quinta de los Molinos<br><small>abierto → alerta amarilla (09:22) → abierto (13:31) → alerta amarilla (21:44)</small></li><li>Rosaleda del Parque del Oeste<br><small>abierto → alerta amarilla (09:22) → abierto (13:31) → alerta amarilla (21:44)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-03">
+<h2>Viernes, 3 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Jardines del Buen Retiro<br><small>alerta naranja → alerta amarilla (08:47) → abierto (14:26)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta naranja → alerta amarilla (08:47) → abierto (12:05)</small></li><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li><li>Quinta Fuente del Berro<br><small>alerta naranja → alerta amarilla (08:47) → abierto (14:26)</small></li><li>Quinta de Torre Arias<br><small>alerta naranja → alerta amarilla (08:47) → abierto (14:26)</small></li><li>Quinta de los Molinos<br><small>alerta naranja → alerta amarilla (08:47) → abierto (14:26)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta naranja → alerta amarilla (08:47) → abierto (14:26)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-02">
+<h2>Jueves, 2 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l4"></i>Alerta naranja</h3><ul><li>Jardines del Buen Retiro<br><small>alerta naranja → alerta amarilla (13:07) → alerta naranja (21:26)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta naranja → alerta amarilla (13:07) → alerta naranja (21:26)</small></li><li>Quinta Fuente del Berro<br><small>alerta naranja → alerta amarilla (13:07) → alerta naranja (21:26)</small></li><li>Quinta de Torre Arias<br><small>alerta naranja → alerta amarilla (13:07) → alerta naranja (21:26)</small></li><li>Quinta de los Molinos<br><small>alerta naranja → alerta amarilla (13:07) → alerta naranja (21:26)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta naranja → alerta amarilla (13:07) → alerta naranja (21:26)</small></li></ul>
+</section>
+<section class="day panel" id="p-2026-07-01">
+<h2>Miércoles, 1 de julio de 2026</h2>
+<p class="note">Estado al final del día.</p>
+<h3><i class="l1"></i>Abiertos</h3><ul><li>Juan Carlos I</li><li>Juan Pablo II</li><li>Lineal del Manzanares</li></ul>
+<h3><i class="l4"></i>Alerta naranja</h3><ul><li>Jardines del Buen Retiro<br><small>alerta amarilla → abierto (14:14) → alerta amarilla (19:28) → alerta naranja (21:19)</small></li><li>Jardín del Capricho de la Alameda de Osuna<br><small>alerta amarilla → abierto (14:14) → alerta amarilla (19:28) → alerta naranja (21:19)</small></li><li>Quinta Fuente del Berro<br><small>alerta amarilla → abierto (14:14) → alerta amarilla (19:28) → alerta naranja (21:19)</small></li><li>Quinta de Torre Arias<br><small>alerta amarilla → abierto (14:14) → alerta amarilla (19:28) → alerta naranja (21:19)</small></li><li>Quinta de los Molinos<br><small>alerta amarilla → abierto (14:14) → alerta amarilla (19:28) → alerta naranja (21:19)</small></li><li>Rosaleda del Parque del Oeste<br><small>alerta amarilla → abierto (14:14) → alerta amarilla (19:28) → alerta naranja (21:19)</small></li></ul>
+</section>
+<footer><nav class="actions">
+<a class="btn mastodon" rel="me" href="https://mastodon.social/@ParquesMadridBot"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38.265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041.053.053 0 0 0-.046-.01 20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546.376 0 .75 0 1.125-.01 1.57-.044 3.224-.124 4.768-.422.038-.008.077-.015.11-.024 2.435-.464 4.753-1.92 4.989-5.604.008-.145.03-1.52.03-1.67.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12.696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></svg><span>Síguenos en Mastodon<small>@ParquesMadridBot@mastodon.social</small></span></a>
+<button class="btn install" popovertarget="instalar"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></g></svg><span>Instalar como app<small>iPhone, iPad, Mac y Android</small></span></button>
+</nav>
+<p>Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>.</p>
+<p class="cookies">🍪 Esta web no usa cookies: ni de las que te rastrean ni de las de chocolate. Lamentamos profundamente no poder interrumpirte con un banner gigante pidiéndote permiso para algo que no vamos a hacer.</p></footer>
+</body>
+</html>

@@ -1,6 +1,7 @@
 import Foundation
 
-/// Builds the static website: one radio button per day drives a pure-CSS timeline.
+/// Builds the static website: one radio button per day drives a pure-CSS timeline. The home page shows
+/// this month; earlier days go to one archive page per half-year.
 enum WebsiteGenerator {
     private static let madrid = TimeZone(identifier: "Europe/Madrid")!
 
@@ -27,6 +28,29 @@ enum WebsiteGenerator {
         let parks: [ParkDay]
     }
 
+    /// One HTML file: the home page with this month's days, or the archive of an earlier half-year
+    private struct Page {
+        /// "index.html" or "historico/2026-2.html", relative to the site root
+        let path: String
+        var days: [Day]
+        var older: Page.Link? = nil
+        var newer: Page.Link? = nil
+
+        struct Link {
+            let path: String
+            let text: String
+            let title: String
+        }
+
+        var isHome: Bool { path == "index.html" }
+        /// Prefix that leads from this page back to the site root
+        var root: String { isHome ? "" : "../" }
+
+        func href(_ link: Link) -> String {
+            root + (link.path == "index.html" ? "" : link.path)
+        }
+    }
+
     static func generate(
         into directory: String,
         statePath: String = "estado_parques.json",
@@ -37,9 +61,56 @@ enum WebsiteGenerator {
         let history = loadHistory(from: historyPath)
         let days = buildDays(current: current, history: history, now: now)
         let lastChange = history.last.flatMap { ISO8601DateFormatter().date(from: $0.detectedAt) }
-        let html = render(days: days, lastChange: lastChange)
-        let url = URL(fileURLWithPath: directory).appendingPathComponent("index.html")
-        try html.write(to: url, atomically: true, encoding: .utf8)
+        let root = URL(fileURLWithPath: directory)
+        for page in pages(days, now: now) {
+            let url = root.appendingPathComponent(page.path)
+            try FileManager.default.createDirectory(
+                at: url.deletingLastPathComponent(), withIntermediateDirectories: true
+            )
+            try render(page, lastChange: lastChange).write(to: url, atomically: true, encoding: .utf8)
+        }
+    }
+
+    /// This month on the home page; earlier days in one archive page per half-year (January–June,
+    /// July–December), so closed half-years never change and the open one changes once a month
+    private static func pages(_ days: [Day], now: Date) -> [Page] {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = madrid
+        let monthStart = calendar.dateInterval(of: .month, for: now)!.start
+
+        var pages: [Page] = []
+        for day in days where day.date < monthStart {
+            let date = calendar.dateComponents([.year, .month], from: day.date)
+            let path = "historico/\(date.year!)-\(date.month! <= 6 ? 1 : 2).html"
+            if pages.last?.path == path {
+                pages[pages.count - 1].days.append(day)
+            } else {
+                pages.append(Page(path: path, days: [day]))
+            }
+        }
+        pages.append(Page(path: "index.html", days: days.filter { $0.date >= monthStart }))
+
+        for index in pages.indices {
+            if index > 0 {
+                let older = pages[index - 1]
+                pages[index].older = Page.Link(path: older.path, text: "‹ Antes", title: period(older.days))
+            }
+            if index < pages.count - 1 {
+                let newer = pages[index + 1]
+                pages[index].newer = Page.Link(
+                    path: newer.path, text: newer.isHome ? "Hoy ›" : "Después ›", title: period(newer.days)
+                )
+            }
+        }
+        return pages
+    }
+
+    /// "octubre de 2026", or "julio–septiembre de 2026" across several months (a page never spans two years)
+    private static func period(_ days: [Day]) -> String {
+        guard let first = days.first?.date, let last = days.last?.date else { return "" }
+        let month = formatter("MMMM")
+        let from = month.string(from: first), to = month.string(from: last)
+        return (from == to ? to : "\(from)–\(to)") + " de " + formatter("yyyy").string(from: last)
     }
 
     // MARK: - History reconstruction
@@ -243,11 +314,11 @@ enum WebsiteGenerator {
         """
     }
 
-    // Icons defined once and referenced with <use>: the buttons repeat in every day's footer.
-    // Zero-size and out of flow: SVG ignores `hidden`, and an unsized <svg> takes 300×150 px of the page.
     // Mastodon logo from Simple Icons (CC0)
-    private static let iconSprite = """
-    <svg width="0" height="0" style="position: absolute" aria-hidden="true"><symbol id="i-mastodon" viewBox="0 0 24 24"><path fill="currentColor" d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004\
+    private static let actions = """
+    <nav class="actions">
+    <a class="btn mastodon" rel="me" href="https://mastodon.social/@ParquesMadridBot">\
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004\
     C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127.64 6.412.61 7.837.661 9.143\
     c.074 1.874.088 3.745.26 5.611.118 1.24.325 2.47.62 3.68.55 2.237 2.777 4.098 4.96 4.857 2.336.792 4.849.923 7.256.38\
     .265-.061.527-.132.786-.213.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041\
@@ -257,17 +328,11 @@ enum WebsiteGenerator {
     m-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663\
     c0-1.56-.617-2.35-1.848-2.35-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12\
     .696-.77 1.608-1.164 2.74-1.164 1.311 0 2.302.5 2.962 1.498l.638 1.06.638-1.06c.66-.999 1.65-1.498 2.96-1.498 \
-    1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></symbol>\
-    <symbol id="i-install" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" \
-    stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></g></symbol></svg>
-    """
-
-    private static let actions = """
-    <nav class="actions">
-    <a class="btn mastodon" rel="me" href="https://mastodon.social/@ParquesMadridBot">\
-    <svg aria-hidden="true"><use href="#i-mastodon"/></svg>\
+    1.13 0 2.043.395 2.74 1.164.675.77 1.012 1.81 1.012 3.12z"/></svg>\
     <span>Síguenos en Mastodon<small>@ParquesMadridBot@mastodon.social</small></span></a>
-    <button class="btn install" popovertarget="instalar"><svg aria-hidden="true"><use href="#i-install"/></svg>\
+    <button class="btn install" popovertarget="instalar"><svg viewBox="0 0 24 24" aria-hidden="true">\
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">\
+    <rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></g></svg>\
     <span>Instalar como app<small>iPhone, iPad, Mac y Android</small></span></button>
     </nav>
     """
@@ -279,7 +344,8 @@ enum WebsiteGenerator {
     <path d="M8 10H6.5A1.5 1.5 0 0 0 5 11.5v8A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 17.5 10H16"/></svg>
     """
 
-    private static func render(days: [Day], lastChange: Date?) -> String {
+    private static func render(_ page: Page, lastChange: Date?) -> String {
+        let days = page.days
         let idFormat = formatter("yyyy-MM-dd")
         let longFormat = formatter("EEEE, d 'de' MMMM 'de' yyyy")
         let shortFormat = formatter("d MMM")
@@ -288,40 +354,48 @@ enum WebsiteGenerator {
         let timeFormat = formatter("HH:mm")
 
         let parkNames = days.last?.parks.map { "<li>\(escape(shortName($0.name)))</li>" }.joined() ?? ""
-        // Day blocks are out of the page flow, so each one carries the footer: only the visible day shows it
-        // Repeated per day, but gzip on GitHub Pages makes the copies almost free
-        let footer = """
-        <footer>\(actions)
-        <p>Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. \
-        Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>.</p>
-        <p class="cookies">🍪 Esta web no usa cookies: ni de las que te rastrean ni de las de chocolate. \
-        Lamentamos profundamente no poder interrumpirte con un banner gigante pidiéndote permiso \
-        para algo que no vamos a hacer.</p></footer>
-        """
 
+        // Newest first: the timeline scrolls right-to-left so the newest day is visible without JavaScript.
+        // Day panels sit below it, in the page flow; one rule per day shows the panel of the checked day.
         var timeline: [String] = []
-        // Newest first: the timeline scrolls right-to-left so today is visible without JavaScript
+        var panels: [String] = []
+        var rules: [String] = []
         for day in days.reversed() {
-            let id = "d-" + idFormat.string(from: day.date)
-            let isToday = day.date == days.last?.date
+            let id = idFormat.string(from: day.date)
+            let isNewest = day.date == days.last?.date
             let longDate = longFormat.string(from: day.date)
-            let cells = day.parks.map { "<i class=\"\(levelClass($0.worstCode))\"></i>" }.joined()
+            // Open is the cells' default colour
+            let cells = day.parks.map {
+                $0.worstCode < 3 ? "<i></i>" : "<i class=\"\(levelClass($0.worstCode))\"></i>"
+            }.joined()
             let startsMonth = dayOfMonth.string(from: day.date) == "1" || day.date == days.first?.date
             let month = startsMonth ? "<b>\(monthFormat.string(from: day.date))</b>" : ""
 
             timeline.append("""
-            <input type="radio" name="dia" id="\(id)"\(isToday ? " checked" : "")>\
-            <label for="\(id)" title="\(longDate)">\(month)<span class="vh">\(shortFormat.string(from: day.date))</span>\(cells)</label>
-            <section class="day">
-            <div class="panel">
+            <input type="radio" name="dia" id="d-\(id)"\(isNewest ? " checked" : "")>\
+            <label for="d-\(id)" title="\(longDate)">\(month)<span class="vh">\(shortFormat.string(from: day.date))</span>\(cells)</label>
+            """)
+            panels.append("""
+            <section class="day panel" id="p-\(id)">
             <h2>\(longDate.prefix(1).uppercased() + longDate.dropFirst())</h2>
-            \(isToday ? "" : "<p class=\"note\">Estado al final del día.</p>")
+            \(isNewest && page.isHome ? "" : "<p class=\"note\">Estado al final del día.</p>")
             \(renderGroups(day.parks, timeFormat: timeFormat))
-            </div>
-            \(footer)
             </section>
             """)
+            rules.append("body:has(#d-\(id):checked) #p-\(id){display:block}")
         }
+        if let newer = page.newer {
+            timeline.insert(
+                "<a class=\"more\" href=\"\(page.href(newer))\" title=\"\(newer.title)\">\(newer.text)</a>", at: 0
+            )
+        }
+        if let older = page.older {
+            timeline.append("<a class=\"more\" href=\"\(page.href(older))\" title=\"\(older.title)\">\(older.text)</a>")
+        }
+
+        let title = page.isHome ? "Parques de Madrid" : "Parques de Madrid · \(period(days))"
+        let historyTitle = page.isHome ? "Registro histórico" : "Registro histórico: \(period(days))"
+        let root = page.root
 
         return """
         <!doctype html>
@@ -329,23 +403,25 @@ enum WebsiteGenerator {
         <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-        <title>Parques de Madrid</title>
+        <title>\(title)</title>
         <meta name="description" content="Estado de las alertas meteorológicas de los parques de Madrid, día a día.">
         <meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)">
         <meta name="theme-color" content="#161614" media="(prefers-color-scheme: dark)">
         <meta name="apple-mobile-web-app-title" content="Parques">
         <meta name="mobile-web-app-capable" content="yes">
         <link rel="me" href="https://mastodon.social/@ParquesMadridBot">
-        <link rel="manifest" href="manifest.webmanifest">
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <link rel="icon" href="icon-192.png" type="image/png">
-        <link rel="stylesheet" href="style.css">
+        <link rel="manifest" href="\(root)manifest.webmanifest">
+        <link rel="apple-touch-icon" href="\(root)apple-touch-icon.png">
+        <link rel="icon" href="\(root)icon-192.png" type="image/png">
+        <link rel="stylesheet" href="\(root)style.css">
+        <style>
+        \(rules.joined(separator: "\n"))
+        </style>
         </head>
         <body>
-        \(iconSprite)
         <header>
-        <img class="banner" src="parques.webp" alt="" width="1536" height="810">
-        <h1>Parques de Madrid</h1>
+        <img class="banner" src="\(root)parques.webp" alt="" width="1536" height="810">
+        <h1>\(page.isHome ? "Parques de Madrid" : "<a href=\"\(root)\">Parques de Madrid</a>")</h1>
         <p>Alertas meteorológicas de los parques vigilados por el Ayuntamiento de Madrid.</p>
         </header>
         <div id="instalar" popover>
@@ -358,9 +434,9 @@ enum WebsiteGenerator {
         <p>Sin tienda, sin cuenta y sin permisos: es esta misma web, a pantalla completa y con su icono.</p>
         <button class="btn install" popovertarget="instalar" popovertargetaction="hide">Entendido</button>
         </div>
-        \(days.last.map { renderNow($0, lastChange: lastChange) } ?? "")
+        \(page.isHome ? days.last.map { renderNow($0, lastChange: lastChange) } ?? "" : "")
         <section class="history" aria-labelledby="history-title">
-        <h2 id="history-title">Registro histórico</h2>
+        <h2 id="history-title">\(historyTitle)</h2>
         <p class="legend"><span><i class="l1"></i>Abierto</span><span><i class="l3"></i>Alerta amarilla</span>\
         <span><i class="l4"></i>Alerta naranja</span><span><i class="l5"></i>Cerrado</span></p>
         <p class="hint">Elige un día en la línea de tiempo.</p>
@@ -371,6 +447,13 @@ enum WebsiteGenerator {
         \(timeline.joined(separator: "\n"))
         </div>
         </main>
+        \(panels.joined(separator: "\n"))
+        <footer>\(actions)
+        <p>Datos: <a href="https://www.madrid.es/">Ayuntamiento de Madrid</a>. \
+        Código: <a href="https://github.com/kikeenrique/ParquesMadridBot">ParquesMadridBot</a>.</p>
+        <p class="cookies">🍪 Esta web no usa cookies: ni de las que te rastrean ni de las de chocolate. \
+        Lamentamos profundamente no poder interrumpirte con un banner gigante pidiéndote permiso \
+        para algo que no vamos a hacer.</p></footer>
         </body>
         </html>
 

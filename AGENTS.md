@@ -9,7 +9,7 @@ Done and pending work: [ROADMAP.md](ROADMAP.md).
 ```bash
 swift build
 swift run EstadoParques                    # fetch the API, update state files, print the post
-swift run EstadoParques --website website  # only regenerate website/index.html (no API call, no post)
+swift run EstadoParques --website website  # only regenerate the website's pages (no API call, no post)
 ```
 
 Set `PRODUCTION=true`, `MASTODON_INSTANCE`, and `MASTODON_ACCESS_TOKEN` to post to Mastodon.
@@ -27,6 +27,7 @@ files (legacy formats included), API parsing, and the website's hours, dates and
 
 - Only the raw network calls are untested. Coverage: `swift test --enable-code-coverage`, then
   `xcrun llvm-cov report` on `.build/debug/EstadoParquesTests.xctest` with `.build/debug/codecov/default.profdata`.
+  CI prints the same report (without `Tests/` and `.build/`) in the log and the run summary.
 - `busiestPostFits` is a known issue: posts with many mixed schedules exceed Mastodon's 500 characters until
   posts are shortened to fit (ROADMAP item 1).
 - Networking types (`HTTPURLResponse`, `URLError`) need `import FoundationNetworking` on Linux, behind
@@ -63,13 +64,16 @@ files (legacy formats included), API parsing, and the website's hours, dates and
 - `Sources/EstadoParques/WebsiteGenerator.swift` — Rebuilds per-day history from the change log and writes the
   static site
 - `website/` — Static site published to GitHub Pages:
-  - `index.html` — generated, and committed by CI alongside the state files
+  - `index.html` (this month) and `historico/<year>-<1|2>.html` (earlier days, one page per half-year:
+    January–June, July–December) — generated, and committed by CI alongside the state files. Closed half-years
+    never change; the open one changes once a month. Each timeline ends in links to the neighbouring pages
   - `style.css`, `manifest.webmanifest`, icons, `parques.webp` (header banner) — hand-made
   - `parks/*.webp` — one picture per park for the status cards: the whole illustrated circle, cut flat above
     its name label, transparent around it (WebP with alpha)
-  - Zero JavaScript: an "Ahora" section of status cards, then a timeline with one radio button per day; a single
-    CSS rule (`input:checked + label + .day`) shows the selected day. Each day block carries the page footer,
-    since day blocks sit outside the page flow. Installable as a Home Screen web app
+  - Zero JavaScript: an "Ahora" section of status cards (home page only), then a timeline with one radio button
+    per day. Day panels follow the timeline in the page flow, and each page's `<style>` has one rule per day
+    (`body:has(#d-…:checked) #p-…`) that shows the checked day's panel, so the footer appears once. Installable
+    as a Home Screen web app
 - `resources/` — Source images: `parques madrid grande.png` (banner), `ParquesMadridBot.png` (app icons),
   `ParquesMadridBot_avatar.png` (Mastodon avatar), and `parks/<slug>.png`: one AI-generated illustration per
   park, named like its `website/parks/` picture, licensed CC BY-SA 4.0 (`parks/LICENSE.md`)
@@ -91,10 +95,11 @@ files (legacy formats included), API parsing, and the website's hours, dates and
 
 `.github/workflows/check-parks.yml` runs every 30 minutes (and on push) in the `swift` container:
 
-0. **test** — on push and manual runs only: `swift test` (own debug build cache). The other jobs wait for it
+0. **test** — on push and manual runs only: `swift test` with code coverage (own debug build cache), then the
+   coverage report in the log and the run summary. The other jobs wait for it
    and don't run if it fails; on a schedule it is skipped and they run without it.
 1. **check** — builds (binary and SPM caches), runs the park check, regenerates the website, and commits state
-   and `website/index.html` back to the repo. If the site's content hash has no deploy marker in the cache, it
+   and the website's pages back to the repo. If the site's content hash has no deploy marker in the cache, it
    uploads the Pages artifact. The page changes at least once a day (a new timeline day), so it deploys then.
 2. **deploy** — publishes to GitHub Pages (Settings → Pages → Source: GitHub Actions; custom domain
    `parques.lemambo.com`) and only then saves the deploy marker, so a failed deploy is retried next run.
