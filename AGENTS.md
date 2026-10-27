@@ -71,7 +71,8 @@ files (legacy formats included), API parsing, and the website's hours, dates and
     CSS rule (`input:checked + label + .day`) shows the selected day. Each day block carries the page footer,
     since day blocks sit outside the page flow. Installable as a Home Screen web app
 - `resources/` — Source images: `parques madrid grande.png` (banner), `ParquesMadridBot.png` (app icons),
-  `ParquesMadridBot_avatar.png` (Mastodon avatar)
+  `ParquesMadridBot_avatar.png` (Mastodon avatar), and `parks/<slug>.png`: one AI-generated illustration per
+  park, named like its `website/parks/` picture, licensed CC BY-SA 4.0 (`parks/LICENSE.md`)
 
 ## Key Dependencies
 
