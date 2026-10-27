@@ -236,6 +236,9 @@ enum WebsiteGenerator {
         <ul class="cards">
         \(cards)
         </ul>
+        <p class="credit">Ilustraciones generadas con IA, con licencia \
+        <a href="https://github.com/kikeenrique/ParquesMadridBot/blob/main/resources/parks/LICENSE.md" \
+        rel="license">CC BY-SA 4.0</a>.</p>
         </section>
         """
     }

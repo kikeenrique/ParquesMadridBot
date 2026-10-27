@@ -26,8 +26,8 @@ What has been done and what is still open. Pending items are in recommended orde
 - Static site on GitHub Pages with the custom domain and HTTPS; **no JavaScript**, no cookies.
 - **Ahora**: last-change note, summary chips, and one card per park, two per row (one on phones), with the park's
   picture, status, name and dated hours (e.g. "Dom 18, 18:00 – lun 19, 09:00").
-- A picture for each of the nine parks; Juan Carlos I has its own high-resolution badge showing its landmark,
-  the steel frame over the canal.
+- A picture for each of the nine parks; eight are sharp 450 px cuts of one AI-generated illustration per park
+  (`resources/parks/`, CC BY-SA 4.0, credited once under the cards).
 - **Registro histórico**: a timeline with one column per day since March 2026; choosing a day shows that day's
   status, hours and changes. Past days show the hours recorded in the change log (confirmed with real data on
   18 October).
@@ -41,7 +41,7 @@ What has been done and what is still open. Pending items are in recommended orde
 
 - GitHub Actions on the latest action versions and the `swift:6.4` image, with build caches keyed by toolchain.
 - Pages deploys only when the page changes (about once a day otherwise), and a failed deploy is retried.
-- **55 Swift Testing tests, 90% line coverage**; only the raw network calls are untested.
+- **56 Swift Testing tests, 90% line coverage**; only the raw network calls are untested.
 - Tests run on every push before the bot and the deploy; scheduled runs skip them and still deploy when the page
   changes (confirmed on 19 October).
 - Project documentation: README, AGENTS.md and this roadmap.
@@ -55,10 +55,11 @@ rejects (the run then fails). The `busiestPostFits` test records it as a known i
 Mastodon does and shorten it when needed (e.g. a shorter header line). Once that guard exists, posts can also show
 dates with the hours, like the website cards.
 
-### 2. Sharper park pictures
+### 2. Lineal del Manzanares picture
 
-Eight of the nine pictures come from a shared illustration whose circles are only about 300 px. One badge per
-park, like Juan Carlos I's (930 px), would make them as sharp; then replace their `website/parks/*.webp`.
+The only park still on the old ~300 px picture from the shared illustration. It needs its own illustration like
+the others in `resources/parks/` (its landmark: the Dama del Manzanares); then cut it the same way (whole circle, transparent around it, flat at 86%,
+450 px).
 
 ### 3. Header illustration
 

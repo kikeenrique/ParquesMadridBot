@@ -160,7 +160,7 @@ header p, .history p { margin: .25rem 0; color: var(--muted); }
    A fixed frame, bottom-aligned, since each picture is cut just above its own label */
 .card .photo {
   flex: none;
-  width: 9rem; /* 144px: the ~300px source covers 2x screens */
+  width: 9rem; /* 144px: the 450px source covers 3x screens */
   height: 7.75rem;
   object-fit: contain;
   object-position: center bottom;
@@ -190,6 +190,7 @@ header p, .history p { margin: .25rem 0; color: var(--muted); }
 /* Each end of a range ("Dom 18, 18:00") stays on one line; the range breaks after the dash */
 .card .when span { white-space: nowrap; }
 .now .note { margin: -.25rem 0 .75rem; color: var(--muted); font-size: .875rem; }
+.now .credit { margin: .5rem 0 0; color: var(--muted); font-size: .75rem; text-align: right; }
 a { color: inherit; }
 
 .vh {

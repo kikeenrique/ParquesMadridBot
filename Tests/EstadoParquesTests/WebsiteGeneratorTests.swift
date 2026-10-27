@@ -117,6 +117,16 @@ struct WebsiteGeneratorTests {
         #expect(saturday.contains("abierto → abierto") == false)
     }
 
+    @Test("The AI-generated park pictures and their licence are credited once, under the cards")
+    func pictureLicenceUnderTheCards() throws {
+        let html = try GeneratedPage().html
+        let credit = #"resources/parks/LICENSE.md" rel="license">CC BY-SA 4.0</a>"#
+        #expect(html.components(separatedBy: credit).count - 1 == 1)
+        let cardsEnd = try #require(html.range(of: "</ul>\n<p class=\"credit\">Ilustraciones generadas con IA"))
+        let history = try #require(html.range(of: "class=\"history\""))
+        #expect(cardsEnd.lowerBound < history.lowerBound)
+    }
+
     @Test func friday() throws {
         let friday = try GeneratedPage().day("2026-10-16")
         #expect(friday.contains(#"Jardines del Buen Retiro <span class="horario">18:00–09:00</span>"#))
