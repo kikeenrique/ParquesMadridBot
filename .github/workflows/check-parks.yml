@@ -34,12 +34,20 @@ jobs:
       - name: Test
         run: swift test --enable-code-coverage
 
-      # Coverage of the bot's own sources, in the log and the run summary
+      # Coverage of the bot's own sources, in the log and the run summary. Informational: a failure here must not
+      # block the bot or the deploy. The profile sits next to the JSON SwiftPM reports; the test binary's name and
+      # place depend on the build system, so every executable test product is passed to llvm-cov.
       - name: Coverage
+        continue-on-error: true
         run: |
-          bin_path="$(swift build --show-bin-path)"
-          report="$(llvm-cov report "$(ls -d "$bin_path"/*.xctest)" \
-            -instr-profile="$bin_path/codecov/default.profdata" -ignore-filename-regex='(\.build|Tests)/')"
+          profdata="$(dirname "$(swift test --show-codecov-path)")/default.profdata"
+          set -- $(find .build/out/Products .build/*/debug -type f -perm -u+x -name 'EstadoParquesTests*' 2>/dev/null)
+          echo "Test binaries: $*"
+          binary="$1"; shift
+          objects=""
+          for object in "$@"; do objects="$objects -object $object"; done
+          report="$(llvm-cov report "$binary" $objects -instr-profile="$profdata" \
+            -ignore-filename-regex='(\.build|Tests)/')"
           echo "$report"
           printf '### Coverage\n\n```\n%s\n```\n' "$report" >> "$GITHUB_STEP_SUMMARY"
 
