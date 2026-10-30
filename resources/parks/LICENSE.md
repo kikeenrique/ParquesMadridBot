@@ -15,13 +15,14 @@ Suggested attribution: *"<Park> illustration" (AI-generated) by Estado Parques M
 
 Versions derived from these files (such as the card pictures in `website/parks/`) are under the same licence.
 
-| File                   | Park                                       |
-|------------------------|--------------------------------------------|
-| `capricho.png`         | Jardín del Capricho de la Alameda de Osuna |
-| `fuente-del-berro.png` | Parque Quinta Fuente del Berro             |
-| `juan-carlos-i.png`    | Parque Juan Carlos I                       |
-| `juan-pablo-ii.png`    | Parque Juan Pablo II                       |
-| `quinta-molinos.png`   | Parque Quinta de los Molinos               |
-| `retiro.png`           | Jardines del Buen Retiro                   |
-| `rosaleda.png`         | Rosaleda del Parque del Oeste              |
-| `torre-arias.png`      | Parque Quinta de Torre Arias               |
+| File                    | Park                                       |
+|-------------------------|--------------------------------------------|
+| `capricho.png`          | Jardín del Capricho de la Alameda de Osuna |
+| `fuente-del-berro.png`  | Parque Quinta Fuente del Berro             |
+| `juan-carlos-i.png`     | Parque Juan Carlos I                       |
+| `juan-pablo-ii.png`     | Parque Juan Pablo II                       |
+| `lineal-manzanares.png` | Parque Lineal del Manzanares               |
+| `quinta-molinos.png`    | Parque Quinta de los Molinos               |
+| `retiro.png`            | Jardines del Buen Retiro                   |
+| `rosaleda.png`          | Rosaleda del Parque del Oeste              |
+| `torre-arias.png`       | Parque Quinta de Torre Arias               |

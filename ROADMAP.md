@@ -32,7 +32,7 @@ What has been done and what is still open. Pending items are in recommended orde
   the footer.
 - **Ahora**: last-change note, summary chips, and one card per park, two per row (one on phones), with the park's
   picture, status, name and dated hours (e.g. "Dom 18, 18:00 – lun 19, 09:00").
-- A picture for each of the nine parks; eight are sharp 450 px cuts of one AI-generated illustration per park
+- A picture for each of the nine parks: sharp 450 px cuts of one AI-generated illustration per park
   (`resources/parks/`, CC BY-SA 4.0, credited once under the cards).
 - **Registro histórico**: a timeline with one column per day since March 2026; choosing a day shows that day's
   status, hours and changes. Past days show the hours recorded in the change log (confirmed with real data on
@@ -58,13 +58,7 @@ What has been done and what is still open. Pending items are in recommended orde
 
 ## Pending
 
-### 1. Lineal del Manzanares picture
-
-The only park still on the old ~300 px picture from the shared illustration. It needs its own illustration like
-the others in `resources/parks/` (its landmark: the Dama del Manzanares); then cut it the same way (whole circle,
-transparent around it, flat at 86%, 450 px).
-
-### 2. App icon
+### 1. App icon
 
 The Home Screen icon is a round scene on a white square, which stands out in dark mode. It needs a designed
 icon; nothing to do in code until one exists.
