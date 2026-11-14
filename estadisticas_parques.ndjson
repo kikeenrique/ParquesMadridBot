@@ -1823,3 +1823,9 @@
 {"detected_at":"2026-11-13T15:58:21Z","from_code":1,"from_horario":"00:00 a 12:00","from_open":true,"parque":"Jardines del Buen Retiro","to_code":1,"to_open":true}
 {"detected_at":"2026-11-13T15:58:21Z","from_code":1,"from_horario":"00:00 a 12:00","from_open":true,"parque":"Parque Quinta de los Molinos","to_code":1,"to_open":true}
 {"detected_at":"2026-11-13T15:58:21Z","from_code":1,"from_horario":"00:00 a 12:00","from_open":true,"parque":"Parque Quinta de Torre Arias","to_code":1,"to_open":true}
+{"detected_at":"2026-11-14T15:38:24Z","from_code":1,"from_open":true,"parque":"Rosaleda del Parque del Oeste","to_code":3,"to_horario":"De 15:00 h a 18:00 h","to_open":true}
+{"detected_at":"2026-11-14T15:38:24Z","from_code":1,"from_open":true,"parque":"Parque Quinta Fuente del Berro","to_code":3,"to_horario":"De 15:00 h a 18:00 h","to_open":true}
+{"detected_at":"2026-11-14T15:38:24Z","from_code":1,"from_open":true,"parque":"Jardines del Buen Retiro","to_code":3,"to_horario":"De 15:00 h a 18:00 h","to_open":true}
+{"detected_at":"2026-11-14T15:38:24Z","from_code":1,"from_open":true,"parque":"Parque Quinta de los Molinos","to_code":3,"to_horario":"De 15:00 h a 18:00 h","to_open":true}
+{"detected_at":"2026-11-14T15:38:24Z","from_code":1,"from_open":true,"parque":"Jardín del Capricho de la Alameda de Osuna","to_code":3,"to_horario":"De 15:00 h a 18:00 h","to_open":true}
+{"detected_at":"2026-11-14T15:38:24Z","from_code":1,"from_open":true,"parque":"Parque Quinta de Torre Arias","to_code":3,"to_horario":"De 15:00 h a 18:00 h","to_open":true}
