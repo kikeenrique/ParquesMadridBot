@@ -2,12 +2,12 @@
   "Jardines del Buen Retiro" : {
     "code" : 1,
     "fecha" : "18\/11\/2026",
-    "horario" : "De 06:00 a 12:00 horas"
+    "horario" : "De 12:00 a 15:00 horas"
   },
   "Jardín del Capricho de la Alameda de Osuna" : {
     "code" : 1,
     "fecha" : "18\/11\/2026",
-    "horario" : "De 06:00 a 12:00"
+    "horario" : "De 12:00 a 15:00"
   },
   "Parque Juan Carlos I" : {
     "code" : 1,
@@ -24,21 +24,21 @@
   "Parque Quinta Fuente del Berro" : {
     "code" : 1,
     "fecha" : "18\/11\/2026",
-    "horario" : "De 06:00 a 12:00 horas"
+    "horario" : "De 12:00 a 15:00 horas"
   },
   "Parque Quinta de Torre Arias" : {
     "code" : 1,
     "fecha" : "18\/11\/2026",
-    "horario" : "De 06:00 a 12:00 horas"
+    "horario" : "De 12:00 a 15:00 horas"
   },
   "Parque Quinta de los Molinos" : {
     "code" : 1,
     "fecha" : "18\/11\/2026",
-    "horario" : "De 06:00 a 12:00 horas"
+    "horario" : "De 12:00 a 15:00 horas"
   },
   "Rosaleda del Parque del Oeste" : {
     "code" : 1,
     "fecha" : "18\/11\/2026",
-    "horario" : "De 06:00 a 12:00 horas"
+    "horario" : "De 12:00 a 15:00 horas"
   }
 }
