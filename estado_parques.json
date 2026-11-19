@@ -1,41 +1,39 @@
 {
   "Jardines del Buen Retiro" : {
     "code" : 7,
-    "fecha" : "18\/11\/2026"
+    "fecha" : "19\/11\/2026"
   },
   "Jardín del Capricho de la Alameda de Osuna" : {
     "code" : 7,
-    "fecha" : "18\/11\/2026"
+    "fecha" : "19\/11\/2026"
   },
   "Parque Juan Carlos I" : {
-    "code" : 3,
-    "fecha" : "18\/11\/2026",
-    "horario" : "de 21 a 24 horas"
+    "code" : 1,
+    "fecha" : "19\/11\/2026"
   },
   "Parque Juan Pablo II" : {
-    "code" : 3,
-    "fecha" : "18\/11\/2026",
-    "horario" : "de 21 a 24 horas"
+    "code" : 1,
+    "fecha" : "19\/11\/2026"
   },
   "Parque Lineal del Manzanares" : {
-    "code" : 3,
+    "code" : 1,
     "fecha" : "18\/11\/2026",
     "horario" : "de 21 a 24 horas"
   },
   "Parque Quinta Fuente del Berro" : {
     "code" : 7,
-    "fecha" : "18\/11\/2026"
+    "fecha" : "19\/11\/2026"
   },
   "Parque Quinta de Torre Arias" : {
     "code" : 7,
-    "fecha" : "18\/11\/2026"
+    "fecha" : "19\/11\/2026"
   },
   "Parque Quinta de los Molinos" : {
     "code" : 7,
-    "fecha" : "18\/11\/2026"
+    "fecha" : "19\/11\/2026"
   },
   "Rosaleda del Parque del Oeste" : {
     "code" : 5,
-    "fecha" : "18\/11\/2026"
+    "fecha" : "19\/11\/2026"
   }
 }
