@@ -1884,3 +1884,9 @@
 {"detected_at":"2026-11-19T16:43:21Z","from_code":1,"from_horario":"de 21 a 24 horas","from_open":true,"parque":"Parque Lineal del Manzanares","to_code":1,"to_open":true}
 {"detected_at":"2026-11-19T16:43:21Z","from_code":7,"from_open":false,"parque":"Jardín del Capricho de la Alameda de Osuna","to_code":1,"to_open":true}
 {"detected_at":"2026-11-19T16:43:21Z","from_code":5,"from_open":false,"parque":"Rosaleda del Parque del Oeste","to_code":1,"to_open":true}
+{"detected_at":"2026-11-25T08:59:22Z","from_code":1,"from_open":true,"parque":"Parque Quinta de Torre Arias","to_code":3,"to_horario":"09:00-18:00","to_open":true}
+{"detected_at":"2026-11-25T08:59:22Z","from_code":1,"from_open":true,"parque":"Jardines del Buen Retiro","to_code":3,"to_horario":"09:00-18:00","to_open":true}
+{"detected_at":"2026-11-25T08:59:22Z","from_code":1,"from_open":true,"parque":"Jardín del Capricho de la Alameda de Osuna","to_code":3,"to_horario":"09:00-18:00","to_open":true}
+{"detected_at":"2026-11-25T08:59:22Z","from_code":1,"from_open":true,"parque":"Rosaleda del Parque del Oeste","to_code":3,"to_horario":"09:00-18:00","to_open":true}
+{"detected_at":"2026-11-25T08:59:22Z","from_code":1,"from_open":true,"parque":"Parque Quinta de los Molinos","to_code":3,"to_horario":"09:00-18:00","to_open":true}
+{"detected_at":"2026-11-25T08:59:22Z","from_code":1,"from_open":true,"parque":"Parque Quinta Fuente del Berro","to_code":3,"to_horario":"09:00-18:00","to_open":true}
